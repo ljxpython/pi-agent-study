@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=22.19.0"
   },
+  "scripts": {
+    "start": "node sdk-chat.mjs"
+  },
   "dependencies": {
     "@earendil-works/pi-coding-agent": "0.85.1"
   }

@@ -1,0 +1,22 @@
+{
+  "providers": {
+    "xiaok": {
+      "baseUrl": "https://xiaok.lol/v1",
+      "api": "openai-completions",
+      "apiKey": "$XIAOK_PROXY_API_KEY",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false
+      },
+      "models": [
+        {
+          "id": "deepseek-v4.1-flash",
+          "name": "DeepSeek V4.1 Flash (XiaoK)",
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 8192
+        }
+      ]
+    }
+  }
+}
