@@ -6,7 +6,10 @@
     "node": ">=22.19.0"
   },
   "scripts": {
-    "start": "node sdk-chat.mjs"
+    "start": "node 03-session-persistence.mjs",
+    "demo:01": "node 01-minimal-chat.mjs",
+    "demo:02": "node 02-tool-dispatch.mjs",
+    "demo:03": "node 03-session-persistence.mjs"
   },
   "dependencies": {
     "@earendil-works/pi-coding-agent": "0.85.1"
