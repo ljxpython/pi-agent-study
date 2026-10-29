@@ -10,7 +10,7 @@
  * ==============================================================================
  */
 
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 // 自动加载 .env 环境变量
@@ -57,8 +57,12 @@ await resourceLoader.reload();
 // ------------------------------------------------------------------------------
 // 🎯 核心演进：创建真实磁盘持久化管理器 (SessionManager.create)
 // ------------------------------------------------------------------------------
-// 传入 process.cwd()，Pi 会自动计算当前项目目录哈希，在 ~/.pi/agent/sessions/ 下建仓！
-const sessionManager = SessionManager.create(process.cwd());
+// 💡 重点：显式传入第 2 个参数 sessionDir，将存盘目录锁定在当前项目本地的 .sessions/！
+// 这样在 IDE 左侧目录树中就能直接点开、肉眼查看真实的 .jsonl 文件！
+const projectSessionDir = resolve(process.cwd(), ".sessions");
+mkdirSync(projectSessionDir, { recursive: true });
+
+const sessionManager = SessionManager.create(process.cwd(), projectSessionDir);
 const sessionFile = sessionManager.getSessionFile();
 
 console.log("\n==================================================");

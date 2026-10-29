@@ -26,6 +26,8 @@ build/
 *.log
 .coverage
 .pytest_cache/
+.sessions/
+*.jsonl
 
 # Raw study materials (ignore copyrighted, private or large courseware, keep dir via .gitkeep)
 01-resources/raw/*
