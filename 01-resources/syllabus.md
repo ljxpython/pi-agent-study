@@ -12,7 +12,7 @@
 
 | 阶段 | 模块主题 | 核心实战沙盒 | 原材料精准映射 | 预计耗时 | 状态 | 交付成果 |
 |---|---|---|---|---|---|---|
-| **Part 1** | **上手 Pi Agent：原理架构与四大内置工具** | `02-labs/milestones/part1-basics/sdk-demo` | `Part 1.ipynb §1-§6` + `sdk-demo/` | 2.5h | 🔄 正在进行 | 面试卡：Agent Loop 机制；时序架构图 |
+| **Part 1** | **上手 Pi Agent：原理架构与四大内置工具** | `02-labs/milestones/part1-basics/sdk-demo` | `Part 1.ipynb §1-§6` + `sdk-demo/` | 2.5h | ✅ 已完成 | 渐进式 4 阶段实战脚本；Agent Loop 机制；时序架构图；Event Sourcing 状态剖析 |
 | **Part 2** | **组装 Pi Agent：Harness 全景与 MCP 生态适配** | `02-labs/milestones/part2-harness` | `Part 2.ipynb §1-§6` + `pi-mcp-adapter` | 2.5h | ⬜ 未开始 | 事实核对表：生态选配矩阵；MCP 源码剖析 |
 | **Part 3** | **定制 Pi Agent：从 Prompt 模板到 TUI 扩展包** | `02-labs/milestones/part3-extensions` | `Part 3.ipynb §1-§7` + `上下文底栏插件` | 3.0h | ⬜ 未开始 | 实操代码：可安装的 npm 扩展包 |
 | **Part 4** | **交付 Pi 应用：从双端 Spec 到生产业务迁移** | `02-labs/milestones/part4-spec-app` | `Part 4.ipynb §1-§6` + `工单问答助手` | 3.0h | ⬜ 未开始 | 深度博客底稿；生产适配架构方案 |
@@ -23,29 +23,32 @@
 
 ### 1. 核心心智模型与技术事实（带精准原材料映射）
 
-- [ ] **1.1 框架动机与六项取舍** ➔ `对应 Part 1.ipynb §1.1-§1.5`
+- [x] **1.1 框架动机与六项取舍** ➔ `对应 Part 1.ipynb §1.1-§1.5`
   - 传统 Agent 痛点（过度抽象、黑盒嵌套、状态转义失效）；
   - 六项取舍哲学：模型决定下一步、工具原子化、纯文件会话、单轮多工具并发、显式资源加载。
-- [ ] **1.2 运行时底座与组件分工** ➔ `对应 Part 1.ipynb §2.1, packages/agent/src/agent-loop.ts:156`
+- [x] **1.2 运行时底座与组件分工** ➔ `对应 Part 1.ipynb §2.1, packages/agent/src/agent-loop.ts:156`
   - 核心职责：模型调用 ➔ 工具分发 ➔ 结果聚合 ➔ 终止判定；
   - 关键状态机：`idle ➔ executing_tools ➔ waiting_for_model`。
-- [ ] **1.3 四大内置工具的物理边界** ➔ `对应 Part 1.ipynb §2.2, packages/coding-agent/src/core/tools/`
+- [x] **1.3 四大内置工具的物理边界** ➔ `对应 Part 1.ipynb §2.2, packages/coding-agent/src/core/tools/`
   - `read`：大文件按行分页与截断保护（`read.ts`）；
   - `write`：全量写入与覆盖前安全校验（`write.ts`）；
   - `edit`：唯一行精确定位，拒绝正则模糊匹配，`edits[].oldText` 重名报错（`edit.ts:21`, `edit-diff.ts`）；
   - `bash`：超时控制、环境隔离与退出码捕获（`bash.ts`）。
-- [ ] **1.4 规则优先级与会话分支存储** ➔ `对应 Part 1.ipynb §2.3-§2.6, docs/sessions.md`
+- [x] **1.4 规则优先级与会话分支存储** ➔ `对应 Part 1.ipynb §2.3-§2.6, docs/sessions.md`
   - 上下文加载级联：当前目录 `AGENTS.md` ➔ 父目录 ➔ 全局目录；`AGENTS.override.md` 强覆盖；`.pi/SYSTEM.md` 与 `APPEND_SYSTEM.md`；
   - 会话物理持久化：`~/.pi/agent/sessions/` 文件树，支持会话快照与类 Git 分支（`/session` 命令）。
-- [ ] **1.5 三大调用入口选型与首次调用** ➔ `对应 Part 1.ipynb §3.1-§4.5`
+- [x] **1.5 三大调用入口选型与首次调用** ➔ `对应 Part 1.ipynb §3.1-§4.5`
   - CLI（终端 TUI 交互 / `pi -p` 批处理单次运行）；
   - SDK（Node/Python 进程内深度嵌入）；
   - RPC（跨进程守护服务，标准 JSON-RPC 通信）。
-- [ ] **1.6 官方示例与取消分支验证** ➔ `对应 Part 1.ipynb §5.1-§6.4`
+- [x] **1.6 官方示例与取消分支验证** ➔ `对应 Part 1.ipynb §5.1-§6.4`
   - 加载 `question` 与 `todo` 示例；组合任务中的“取消分支”机制与防御性提示词设计；资源热重载（`reload-handler`）。
 
 ### 2. 对应实操沙盒代码
-- 📂 `02-labs/milestones/part1-basics/sdk-demo/sdk-chat.mjs`（43行极简进程内 SDK 调用）
+- 📂 `02-labs/milestones/part1-basics/sdk-demo/01-minimal-chat.mjs`（阶段 1：纯文本对话流式透传）
+- 📂 `02-labs/milestones/part1-basics/sdk-demo/02-tool-dispatch.mjs`（阶段 2：内置原子工具装配与生命周期监听）
+- 📂 `02-labs/milestones/part1-basics/sdk-demo/03-session-persistence.mjs`（阶段 3：本地 .sessions 磁盘持久化与 JSONL 状态树解密）
+- 📂 `02-labs/milestones/part1-basics/sdk-demo/04-custom-extension.mjs`（阶段 4：Extension 扩展体系、自定义 Tool 与 Event Sourcing 状态回溯）
 - 📄 `02-labs/milestones/part1-basics/01-第一节课-看懂Pi-Agent-单文件版.html`
 
 ---
