@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import DocCard from '../components/DocCard.astro';
+import SectionGroups from '../components/SectionGroups.astro';
+import CopyButton from '../components/CopyButton.astro';
+import { site, withBase, getCollectionConfig } from '../lib/site';
+
+const docs = (await getCollection('docs', ({ data }) => data.published))
+  .sort((a, b) => {
+    const colA = getCollectionConfig(a.data.collection);
+    const colB = getCollectionConfig(b.data.collection);
+    return colA.order - colB.order || a.data.order - b.data.order;
+  });
+
+const collections = site.collections.slice().sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout>
+  <Header />
+  <main data-pagefind-body>
+    <section class="hero">
+      <p class="hero-kicker">轻量级 Markdown 知识库</p>
+      <h1>{site.title}</h1>
+      <p class="hero-copy">{site.description}</p>
+      <div class="hero-actions">
+        <a class="button-primary" href="#notes">浏览笔记 <span aria-hidden="true">↓</span></a>
+        <a class="button-secondary" href={site.links.github} target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="quick-start">
+        <code>npm run dev</code>
+        <CopyButton value="npm run dev" />
+      </div>
+    </section>
+
+    <section id="notes" class="notes">
+      {collections.map((collection) => (
+        <div class="section-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">合集</p>
+              <h2><a class="collection-link" href={withBase(`/collections/${collection.id}/`)}>{collection.title}</a></h2>
+              <p>{collection.description}</p>
+            </div>
+            <a class="collection-count" href={withBase(`/collections/${collection.id}/`)}>
+              {docs.filter((doc) => doc.data.collection === collection.id).length} 篇
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          {collection.sectionMode === 'collapsible' ? (
+            <details class="collection-documents">
+              <summary>展开笔记</summary>
+              <SectionGroups docs={docs.filter((doc) => doc.data.collection === collection.id)} />
+            </details>
+          ) : (
+            <div class="card-grid">
+              {docs.filter((doc) => doc.data.collection === collection.id).map((doc) => (
+                <DocCard collection={doc.data.collection} id={doc.id} title={doc.data.title} description={doc.data.description} order={doc.data.order} />
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

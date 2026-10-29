@@ -1,0 +1,105 @@
+id: comic-strip-story
+name: 垂直多格剧情故事条漫
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: narrative-story
+  style: anime-webtoon
+  subject: vertical-comic-strip
+
+tags:
+  - webtoon-strip
+  - sequential-storytelling
+  - multi-panel-comic
+  - dramatic-contrast
+  - character-dialogue
+
+description: 垂直布局的三格/多格连续叙事故事条漫模板。通过严格界定顶格铺垫、中格转折冲突、底格戏剧高潮，精确控制人物微表情、对话气泡与信息卡片，适合两难抉择、戏剧反差与教学博弈故事。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "Vertical 3-panel narrative comic strip showing dilemma, conflict, or dramatic contrast"
+  - "Story-driven psychological or workplace case study with dialogue bubbles"
+  - "Humorous or insightful comparison strip between two states, decisions, or mindsets"
+
+parameters:
+  aspect_ratio: "9:16"
+  recommended_size: "1024x1792"
+  quality: "high"
+  layout_type: "vertical-stacked-panels"
+
+variables:
+  - name: title
+    description: 漫画条总标题
+    default: "《抉择时刻：当诱惑来敲门》"
+    example: "《体验 Opus 5.5 后的两难抉择》"
+  - name: panel_1_title
+    description: 第 1 格（顶部）阶段描述
+    default: "第 1 格（顶部）：初见倾心与激情"
+  - name: panel_1_scene
+    description: 第 1 格画面主体、动作与环境
+    default: "一名留着凌乱短发、双眼闪烁光芒的年轻职场人，正兴奋地注视着代表革新技术的光芒，周围环绕着温暖明亮的色彩"
+  - name: panel_1_bubble
+    description: 第 1 格角色台词（双引号文字）
+    default: "“这也太强了……！以前怎么从没见过这种解法！！”"
+  - name: panel_1_box
+    description: 第 1 格说明标签或旁白卡
+    default: "【新工具 / 诱惑】: “带来全新视界与澎湃算力，令人欲罢不能”"
+  - name: panel_2_title
+    description: 第 2 格（中间）冲突转折描述
+    default: "第 2 格（中间）：现实羁绊与内心愧疚"
+  - name: panel_2_scene
+    description: 第 2 格画面主体、微表情与环境（色调转为冷暗）
+    default: "同一名男子双手抱头，额头渗出冷汗，身旁浮现出原本一直陪伴他的严谨老系统身影，神情冰冷而注视着他"
+  - name: panel_2_bubble
+    description: 第 2 格角色台词（双引号文字）
+    default: "“糟了……如果换了这个，以前辛辛苦苦积累的系统该怎么办……”"
+  - name: panel_2_box
+    description: 第 2 格说明标签或旁白卡
+    default: "【既有羁绊 / 责任】: “虽然沉重复杂，但承载着过去全部的基石”"
+  - name: panel_3_title
+    description: 第 3 格（底部）戏剧性结局描述
+    default: "第 3 格（底部）：尴尬妥协与戏剧收尾"
+  - name: panel_3_scene
+    description: 第 3 格画面主体与结局场景
+    default: "在现实的工作站角落，男子偷偷打开两个屏幕切换使用，眼神躲闪，背景中既有系统发出提示音"
+  - name: panel_3_bubble_left
+    description: 第 3 格左侧对话
+    default: "“嘘……白天用老系统应付审查，私下用新工具干活，千万别露馅！”"
+  - name: panel_3_bubble_right
+    description: 第 3 格右侧对话
+    default: "“系统日志：正在静静地看着你的一切操作。”"
+  - name: visual_style
+    description: 整体画风与光影控制
+    default: "干净清晰的现代数码条漫风格，第一格色彩鲜明充满阳光感，第二格色调收敛偏向冷灰，第三格采用戏剧性写实电影光影"
+
+negative_prompt_block: |
+  NEGATIVE CONSTRAINTS:
+  - Do NOT merge the three panels into one confusing scene; keep borders distinct and panels vertically stacked.
+  - Do NOT generate random garbled pseudo-text; all visible Chinese text must strictly match the quoted strings.
+  - Do NOT clutter facial expressions with unnatural anime distortions.
+  - No watermarks, no ugly compression artifacts, no duplicate stray characters.
+
+prompt_skeleton: |
+  目标：创作一幅垂直布局的三格动漫风格漫画条，总标题为《${title}》。
+  
+  画布与版式：采用 9:16 垂直布局，三个独立的矩形画面沿垂直方向上下堆叠排列，格线干净利落。
+
+  ${panel_1_title}：
+  - 主体与场景：${panel_1_scene}。
+  - 对话气泡：${panel_1_bubble}。
+  - 旁白/信息框：${panel_1_box}。
+
+  ${panel_2_title}：
+  - 主体与场景：${panel_2_scene}。
+  - 对话气泡：${panel_2_bubble}。
+  - 旁白/信息框：${panel_2_box}。
+
+  ${panel_3_title}：
+  - 主体与场景：${panel_3_scene}。
+  - 对话气泡 1：${panel_3_bubble_left}。
+  - 对话气泡 2：${panel_3_bubble_right}。
+
+  视觉艺术风格：${visual_style}。所有对话气泡内的文字必须工整清晰，严禁乱码。

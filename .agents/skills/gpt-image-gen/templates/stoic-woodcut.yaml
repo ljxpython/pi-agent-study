@@ -1,0 +1,42 @@
+id: stoic-woodcut
+name: 古典木刻与羊皮纸手稿
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: editorial-article
+  style: vintage-woodcut
+  subject: abstract-concept
+category: vintage-woodcut
+tags:
+  - woodcut-engraving
+  - renaissance
+  - monochrome
+  - philosophy
+  - classical-manuscript
+description: 中世纪复古木刻版画与文艺复兴哲学手稿风格，细腻黑白蚀刻排线与仿旧纸质纹理，适用于哲学先哲、古典文学、冥想沉思与历史文献配图
+author: gpt-image-gen-core
+
+use_cases:
+  - "Classical philosophy essays, stoic quotes, and reflective meditation cards"
+  - "Historical literature frontispiece and antique book illustrations"
+  - "Monochrome editorial graphics with authentic vintage craftsmanship"
+
+parameters:
+  aspect_ratio: "1:1 or 4:5"
+  recommended_size: "1024x1024 or 896x1152"
+  quality: "high"
+  layout_type: "vintage-woodcut"
+
+variables:
+  - name: philosophical_scene
+    description: 古典历史或哲理场景（先哲沉思、风暴中的坚守、生死审视、古希腊/古罗马先哲）
+    example: "A resolute stoic philosopher standing calmly amidst a turbulent sea storm, looking upward with unyielding inner peace"
+
+prompt_skeleton: |
+  Vintage stoic woodcut engraving illustration.
+  {philosophical_scene}.
+  Artistic technique: Detailed hatched linework, medieval etching aesthetic, antique parchment paper background, monochrome sepia tone, classic Renaissance frontispiece style. No modern elements.
+
+strict_negative: |
+  STRICT NEGATIVE: Absolutely NO text, NO words, NO modern objects, NO color, NO photorealism.

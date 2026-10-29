@@ -1,0 +1,77 @@
+id: sketchnote-knowledge-map
+name: 学霸手绘手账知识地图 (2xN 宫格)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: handdrawn-studygram
+  style: japanese-stationery-sketchnote
+  subject: structured-knowledge-grid
+
+tags:
+  - sketchnote
+  - bullet-journal
+  - studygram
+  - 8-grid-concept-map
+  - handwritten-knowledge-card
+  - high-density-zero-error
+
+description: 采用深蓝手绘大外框与 2xN 宫格网格系统的学霸手绘手账知识地图。平整纯净米白横线纸底衬，红色双圈序号，工整手写体与原子化图文互锁，彻底杜绝背景发灰、错别字与排版散架。
+
+author: antigravity-laowang
+
+use_cases:
+  - "AI 核心技术与基础概念速记全景图（如：AI 8大核心概念、RAG 6大步骤）"
+  - "大厂技术面试考点与知识地图一网打尽"
+  - "小红书/掘金爆款手绘干货卡第 1 页或核心总结页"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "2xN-rounded-grid-poster"
+
+variables:
+  - name: title_black
+    description: 顶部大标题黑色手写部分
+    default: "一图看懂 AI 的"
+    example: "一图吃透 RAG 的"
+  - name: title_red
+    description: 顶部大标题红色加粗强调部分
+    default: "8 个概念"
+    example: "6 大步骤"
+  - name: subtitle
+    description: 顶部副标题（两旁带蓝色发散射线）
+    default: "从基础到应用，帮你快速建立 AI 知识地图"
+  - name: compartments
+    description: 宫格单元列表（按 2xN 排布，每个含序号、标题、定义、微插画、要点列表）
+    default: []
+  - name: footer_text
+    description: 底部总结黑色文字
+    default: "记住：这 8 个概念是理解和使用 AI 的"
+  - name: footer_highlight
+    description: 底部总结红色双下划线核心词
+    default: "核心基础。"
+
+prompt_skeleton: |
+  A super clean, authentic Japanese stationery style hand-drawn sketchnote knowledge poster, 2:3 vertical aspect ratio. 
+  The background is a flat, pristine warm cream-white paper with faint horizontal notebook lines, completely flat without any binder rings, spiral coils, or harsh shadows. 
+  Surrounding the entire content is a crisp, hand-drawn navy blue rounded border, cleanly divided inside by hand-drawn navy blue grid lines into exactly {grid_cols} columns and {grid_rows} rows ({total_modules} organized rectangular compartments).
+
+  [HEADER SECTION]
+  Centered at the top above the grid:
+  Large bold handwritten title: `{title_black}` in bold black ink, followed by `{title_red}` in prominent crimson red bold hand-drawn brush lettering.
+  Directly beneath it, subtitle text in neat handwriting: `{subtitle}`, flanked on both left and right sides by three hand-drawn blue radiant accent rays.
+
+  [COMPARTMENTS IN 2xN GRID]
+  {compartments_prompt_block}
+
+  [FOOTER BANNER]
+  At the bottom spanning across both columns, a clean rounded horizontal card. On the far left, a bright yellow hand-drawn lightbulb doodle `💡`. 
+  In the center, prominent black and red handwritten text: `{footer_text}` followed by `{footer_highlight}` with two bold red underlines.
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Crisp pen-and-paper illustration, cobalt blue hand-drawn ink outlines, warm crimson red badges and underlines, bright yellow accents, clean handwritten Chinese characters, spacious white margins, flat 2D vector sketchnote.
+
+strict_negative: |
+  NO 3D rendering, NO photorealistic objects, NO metallic gloss, NO shadows, NO hole punchers, NO binder rings, NO spiral notebook coils, NO blurry text, NO dirty stains, NO dark backgrounds, NO cluttered overlap.

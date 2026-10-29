@@ -1,0 +1,33 @@
+{
+  "now": "2026-09-17T12:00:00Z",
+  "policy": {
+    "urgentHours": 4,
+    "normalHours": 24
+  },
+  "tickets": [
+    {
+      "id": "C01",
+      "title": "历史数据导入故障已修复",
+      "team": "平台",
+      "priority": "urgent",
+      "status": "closed",
+      "createdAt": "2026-09-16T08:00:00Z"
+    },
+    {
+      "id": "C02",
+      "title": "工单详情页错位已修复",
+      "team": "前端",
+      "priority": "normal",
+      "status": "closed",
+      "createdAt": "2026-09-16T10:00:00Z"
+    },
+    {
+      "id": "C03",
+      "title": "消息推送积压已处理",
+      "team": "平台",
+      "priority": "normal",
+      "status": "closed",
+      "createdAt": "2026-09-17T07:30:00Z"
+    }
+  ]
+}

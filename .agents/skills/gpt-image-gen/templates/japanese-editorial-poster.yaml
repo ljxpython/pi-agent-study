@@ -1,0 +1,68 @@
+id: japanese-editorial-poster
+name: 极简日式编辑杂志与展出海报
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: editorial-poster
+  style: japanese-editorial
+  subject: product-concept
+
+tags:
+  - japanese-editorial
+  - minimalist-poster
+  - museum-catalog
+  - negative-space
+  - typography-design
+
+description: 采用现代日本博物馆出版物与独立设计展览视觉语言的极简编辑风格海报。吸纳 Case 10 咖啡海报精髓，运用克制留白（間/Ma）、非对称网格、高辨识度无衬线排版与高级温润色彩，呈现极致生活美学。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "Japanese modern editorial posters for exhibitions or museum catalogs"
+  - "Artisanal coffee, tea, ceramics, or lifestyle brand conceptual posters"
+  - "High-end minimalist graphic design with elegant negative space"
+
+parameters:
+  aspect_ratio: "9:16"
+  recommended_size: "1024x1792"
+  quality: "high"
+  layout_type: "minimalist-asymmetric-editorial"
+
+variables:
+  - name: topic_title
+    description: 海报主题或品牌核心
+    default: "静谧的手冲咖啡哲学"
+  - name: subject_visual
+    description: 画面中心微观主体与光影事件
+    default: "一个极简质朴的深灰色手工粗陶滤杯，上方正注入细如银丝的清澈水流，深褐色的咖啡液缓缓滴落入透明玻璃壶，伴随着微弱的蒸汽"
+  - name: editorial_text_top
+    description: 顶部极简展出标题或副标
+    default: "“COFFEE & SPACE / 珈琲の余白”"
+  - name: editorial_text_bottom
+    description: 底部克制说明文字
+    default: "“一滴の深み、日常の静寂。一杯咖啡里的时间与留白。”"
+  - name: color_palette
+    description: 色调与材质基底
+    default: "素雅米白亚麻纸质感底色，搭配温暖深焦糖色、深灰与柔和侧面自然漫反射光"
+
+negative_prompt_block: |
+  STRICT NEGATIVE: NO busy clutter, NO chaotic neon lights, NO overly dramatic commercial 3D renders, NO garish gradient colors, serene minimalist Japanese editorial layout only.
+
+prompt_skeleton: |
+  目标：创作一张现代“日式编辑设计风格”（Japanese Editorial Poster），主题为【${topic_title}】。
+
+  版面与构图：采用 9:16 垂直布局。继承日本当代博物馆出版物与高端设计年鉴的克制视觉语言，拥有大量的优雅留白（Negative Space）与非对称平衡。
+
+  画面核心元素：
+  1. 视觉事件中心：
+  - ${subject_visual}。材质真实细腻，光影纯净克制。
+
+  2. 顶部编辑排版：
+  - 极简无衬线字体优雅排版：${editorial_text_top}。
+
+  3. 底部版式注解：
+  - 小字号工整文字区块：${editorial_text_bottom}。
+
+  整体美学质感：${color_palette}。通透、从容、高级，兼具平面设计与生活静物的诗意。

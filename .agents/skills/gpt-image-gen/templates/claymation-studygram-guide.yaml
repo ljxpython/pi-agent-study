@@ -1,0 +1,54 @@
+id: claymation-studygram-guide
+name: 治愈系彩泥定格手账指南 (Claymation Plasticine Studygram)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-hardware
+  style: claymation-plasticine
+  subject: cute-tech-guide-poster
+
+tags:
+  - claymation
+  - polymer-clay
+  - plasticine-art
+  - stop-motion-aesthetic
+  - cute-bear-mascot
+  - pastel-macaron-colors
+  - social-media-carousel
+
+description: 采用纯手工捏制黏土/彩泥定格动画质感（Claymation / Polymer Clay）的社媒极高赞技术手账套图。包含圆润温润的捏痕、治愈系小熊/小兔吉祥物、立体泥塑徽章、彩色黏土滚边框与对比卡片，极度吸睛，适合小红书首图与技术爆款技巧轮播。
+
+author: antigravity-laowang
+
+use_cases:
+  - "小红书、即刻、朋友圈爆款技术干货与玩法指南套图"
+  - "AI 工具/开发技巧从 0 到 1 极简趣味科普"
+  - "高亲和力、反冰冷、治愈系技术内容封面与正文轮播"
+
+parameters:
+  aspect_ratio: "3:4"
+  recommended_size: "1024x1365"
+  quality: "high"
+  layout_type: "clay-studygram-card"
+
+variables:
+  - name: page_type
+    description: 页面类型 (cover_p1 / content_p2)
+    default: "cover_p1"
+  - name: main_title
+    description: 主题标题
+    default: "Codex 8个玩法"
+
+prompt_skeleton: |
+  An ultra charming, authentic handcrafted claymation plasticine art tutorial poster, 3:4 vertical aspect ratio, aesthetic stop-motion animation studio setting.
+  The entire artwork is sculpted from soft, matte, tactile polymer clay and colorful plasticine with gentle handmade fingerprints and soft rounded bevel edges.
+  The background is a flat, cozy cream-yellow grid table mat bordered by a thick rolled yellow clay rope frame with rounded corners.
+  Palette: Vibrant pastel clay colors including buttercup yellow, soft pink, sky blue, lavender purple, tangerine orange, grass green, and rich chocolate brown.
+
+  [CONTENT SPECIFIC LAYOUT]
+  {content_block}
+
+  [ARTISTIC STYLE & LIGHTING]
+  Genuine stop-motion miniature photography, soft studio directional lighting casting delicate warm clay drop shadows, matte tactile clay textures, zero glossy reflections, perfectly legible bold clay-embossed Chinese characters.
+  STRICT NEGATIVE: NO 2D flat drawing, NO glossy plastic, NO harsh metal textures, NO digital vector lines, NO photorealistic humans, NO dark backgrounds, NO blurry text, NO distorted text.

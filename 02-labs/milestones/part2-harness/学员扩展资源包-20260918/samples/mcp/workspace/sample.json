@@ -1,0 +1,57 @@
+{
+  "now": "2026-09-17T12:00:00Z",
+  "policy": {
+    "urgentHours": 4,
+    "normalHours": 24
+  },
+  "tickets": [
+    {
+      "id": "T01",
+      "title": "登录 API 报错",
+      "team": "平台",
+      "priority": "urgent",
+      "status": "open",
+      "createdAt": "2026-09-17T07:00:00Z"
+    },
+    {
+      "id": "T02",
+      "title": "登录样式错位",
+      "team": "前端",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-16T10:00:00Z"
+    },
+    {
+      "id": "T03",
+      "title": "支付超时",
+      "team": "平台",
+      "priority": "urgent",
+      "status": "closed",
+      "createdAt": "2026-09-16T00:00:00Z"
+    },
+    {
+      "id": "T04",
+      "title": "API 导出",
+      "team": "平台",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-17T10:00:00+08:00"
+    },
+    {
+      "id": "T05",
+      "title": "API 边界",
+      "team": "前端",
+      "priority": "urgent",
+      "status": "open",
+      "createdAt": "2026-09-17T08:00:00Z"
+    },
+    {
+      "id": "T06",
+      "title": "将来任务",
+      "team": "平台",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-18T12:00:00Z"
+    }
+  ]
+}

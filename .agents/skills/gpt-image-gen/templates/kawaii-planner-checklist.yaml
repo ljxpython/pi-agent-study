@@ -1,0 +1,71 @@
+id: kawaii-planner-checklist
+name: 萌系马卡龙手账清单 (Kawaii Pastel Planner Checklist)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-hardware
+  style: kawaii-planner-checklist
+  subject: cute-studygram-planner-guide
+
+tags:
+  - kawaii-studygram
+  - pastel-macaron-palette
+  - grid-paper-planner
+  - spiral-binder-holes
+  - washi-tape-stickers
+  - cute-mascot-bear-bunny
+  - 8-grid-card-matrix
+  - procreate-marker-illustration
+
+description: 采用米白温润方格手账底纸、左侧活页装订打孔、马卡龙和纸胶带与萌系小熊白兔贴纸的治愈系高密度手账清单。顶部为圆润立体卡通大字，主体采用 2x4 共 8 宫格色彩矩阵卡片，每个卡片配备胶囊标题徽章、彩色圆点清单与对应手绘小物件插画。
+
+author: antigravity-laowang
+
+use_cases:
+  - "极简生活、断舍离、日常习惯自律清单"
+  - "AI 知识点整理、高频面试题考点速记、工具避坑清单"
+  - "小红书/即刻爆款手账笔记封面与长图"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "pastel-8-grid-planner-poster"
+
+variables:
+  - name: main_title
+    description: 顶部 3D 泡泡立体大标题
+    default: "断舍离超全清单"
+  - name: subtitle
+    description: 缝线飘带副标题
+    default: "照着扔就对了"
+  - name: grid_cards
+    description: 8 宫格卡片内容与插画定义
+    default: "8 个色彩分区清单与手绘小插画"
+
+prompt_skeleton: |
+  An authentic Korean-Japanese pastel planner studygram checklist poster (手账清单), vertical 2:3 composition, flat lay view of a cute stationery notebook page.
+
+  [Paper Background & Border]:
+  Warm off-white cream grid paper texture with subtle faint beige grid lines. The far left edge features authentic punched spiral notebook binder ring holes. Top left corner has a decorative strip of pastel blue gingham plaid washi tape. Top right corner has a strip of mint green gingham plaid washi tape. Cute decorative stickers, ribbon bows, and tiny flowers around the edges.
+
+  [Header Section]:
+  At the top center, a large prominent cute 3D bubble title in bold chocolate brown with a thick creamy white outline and soft drop shadow: "{main_title}".
+  Directly below the title, a cute coral-pink scalloped banner with white dashed stitch borders displaying the subtitle in bold rounded font: "{subtitle}".
+  Flanking the title:
+  - Top-left: A cute fluffy smiling cartoon bear cub sticker with blushing pink cheeks and a tiny flower.
+  - Top-right: A cute fluffy white cartoon bunny rabbit hugging a red heart sticker.
+  - Sprinkled around: Mini floating pastel hearts, yellow sparkle stars, strawberries, and flower doodles.
+
+  [Main Body: 2 Columns x 4 Rows, 8 Pastel Color-Coded Card Boxes]:
+  The page is organized into an 8-card grid layout with rounded pastel card containers. Each section features a colored pill badge header with an icon and Chinese title, neat bullet list items with colored circular dots, and a charming cluster of hand-drawn spot illustrations:
+  {grid_cards_block}
+
+  [Bottom Footer]:
+  - Bottom left: A cute white cartoon bunny peeking up holding a pink heart, surrounded by pastel cherry blossoms and strawberry stickers.
+  - Bottom right: Cute small mint green trash can sticker, pink ribbon bows.
+
+  [Art Style & Quality]:
+  2D digital stationery planner illustration, cozy and healing hand-drawn art, Procreate watercolor marker texture with clean crisp vector outlines. High typography legibility, crystal-clear Chinese characters, charming sticker-book aesthetic, balanced macaron color palette, ultra-high resolution, 8k render, masterpiece quality.
+  NO blurry text, NO distorted Chinese characters, NO ugly photorealistic 3D render, NO dark grunge, NO watermark.

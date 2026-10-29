@@ -1,0 +1,65 @@
+id: anime-character-sheet
+name: 动漫与游戏角色设定分解表
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: concept-art
+  style: anime-sketch
+  subject: character-sheet
+
+tags:
+  - character-sheet
+  - model-sheet
+  - costume-breakdown
+  - turnaround-view
+  - concept-art
+
+description: 标准工业级动漫与游戏角色设定分解表（Model Sheet）。吸纳 Case 6 精髓，采用垂直多视角版面，包含正面全身立绘、头部微表情特写、服装剪裁与关键配饰拆解，专为建模、同人二创与人设参考提供基准资产。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "Character design sheet with turnaround and costume breakdown"
+  - "Cosplay reference sheet detailing accessories, hair, and footwear"
+  - "Game asset conceptual model sheet for 3D modeling"
+
+parameters:
+  aspect_ratio: "9:16"
+  recommended_size: "1024x1792"
+  quality: "high"
+  layout_type: "character-model-sheet-grid"
+
+variables:
+  - name: character_name
+    description: 角色名称与来源/设定
+    default: "冷酷优雅的黑发女剑士"
+  - name: full_body_desc
+    description: 正面全身立绘姿态与服饰
+    default: "正面全身立绘，身穿剪裁利落的黑色风衣与皮靴，腰佩长刀，神色清冷"
+  - name: expression_closeups
+    description: 面部特写与多角度表情
+    default: "右上角展示三个头部微表情：从容微笑、冷峻凝视、专注拔刀特写"
+  - name: costume_breakdown
+    description: 服装细节与关键配饰分解
+    default: "右下角详细拆解服饰配件：金属刀镡花纹、皮质刀鞘暗扣、领口刺绣纹样与手套缝线"
+
+negative_prompt_block: |
+  STRICT NEGATIVE: NO messy background, NO cluttered environment, NO extra stray characters, NO distorted fingers, clean off-white parchment paper background only.
+
+prompt_skeleton: |
+  目标：为【${character_name}】创建专业的动漫角色设计表和服装分解图（Character Design Sheet）。
+
+  画布与背景：采用 9:16 垂直肖像布局，背景为略带细腻纹理的纯净米白纸张，画风干净、专业，类似官方概念艺术画册。
+
+  版面分区规划：
+  1. 左侧主体（全身立绘）：
+  - ${full_body_desc}。线条利落，色彩分层清晰。
+
+  2. 右上区域（面部与表情研究）：
+  - ${expression_closeups}。清晰展示眼瞳色彩与发丝流向。
+
+  3. 右下区域（服装与配饰分解）：
+  - ${costume_breakdown}。带有清晰的引线和组件特写，适合作为工艺参考。
+
+  视觉艺术风格：高品质日系概念设计原画，工整铅笔手绘线条与细腻数字赛璐璐上色，极具专业参考价值。

@@ -1,0 +1,6 @@
+node_modules/
+.course-evidence/
+.course-memory/
+.pi/sessions/
+.pi/cache/
+.pi/mcp-cache.json

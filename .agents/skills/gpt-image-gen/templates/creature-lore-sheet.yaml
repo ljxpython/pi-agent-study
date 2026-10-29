@@ -1,0 +1,68 @@
+id: creature-lore-sheet
+name: 哥特暗黑奇幻生物图鉴
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: concept-art
+  style: gothic-infographic
+  subject: creature-lore-sheet
+
+tags:
+  - monster-manual
+  - creature-design
+  - dark-fantasy
+  - lore-sheet
+  - gothic-infographic
+
+description: 采用模块化哥特图鉴版式的高沉浸感奇幻生物设定表。吸纳 Case 8 地狱犬精髓，在羊皮纸与黑框网格中集成生物全身姿态、骨骼解剖、六维战斗属性与守护誓言，适合 RPG 游戏手册与世界观设定。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "Fantasy creature lore and stat block sheet for RPG manuals"
+  - "Monster anatomical research notes with sketches and runic callouts"
+  - "Gothic dark fantasy bestiary illustration poster"
+
+parameters:
+  aspect_ratio: "9:16"
+  recommended_size: "1024x1792"
+  quality: "high"
+  layout_type: "bestiary-lore-grid"
+
+variables:
+  - name: creature_name
+    description: 生物或魔兽名称
+    default: "地狱双头犬 (Hellhound Guardian)"
+  - name: creature_desc
+    description: 生物核心形态与动作
+    default: "身披黑曜石骨甲、双眼燃烧着暗红幽火的凶悍双头犬，利爪扣住碎石，低吼威慑"
+  - name: anatomical_details
+    description: 解剖学与生理学特征拆解
+    default: "展示脊背骨刺特写、淬火獠牙与耐高温肉垫的素描细节"
+  - name: lore_seal_text
+    description: 底部铭刻誓言或背景印章
+    default: "“永镇冥渊，以血肉为盾，誓死守卫此契约”"
+
+negative_prompt_block: |
+  STRICT NEGATIVE: NO modern neon elements, NO casual cartoon vectors, NO blurry textures, dark gothic vintage bestiary aesthetic only.
+
+prompt_skeleton: |
+  目标：创作一张垂直布局的高精度奇幻生物图鉴信息图（Bestiary Lore Sheet），描绘生物【${creature_name}】。
+
+  画布与基底：采用 9:16 垂直布局，带有深色边框的复古中世纪厚羊皮纸质感，氛围黑暗神秘。
+
+  版面各区域划分：
+  1. 头部标题区：
+  - 醒目的哥特式古典字体标题：“${creature_name}”，下方带有铭文符文装饰。
+
+  2. 中央核心区（全身震撼姿态）：
+  - ${creature_desc}。光影深沉，肌肉与骨骼质感逼真。
+
+  3. 侧边解剖与特征研究框：
+  - ${anatomical_details}。带有手绘铅笔素描感与编号引线。
+
+  4. 底部誓言与图腾印章：
+  - 一个深红色火漆印章与古典手写体誓言文字：${lore_seal_text}。
+
+  视觉艺术风格：高度精细的暗黑奇幻数字概念原画与中世纪博物志图鉴融合，极具沉浸感与厚重史诗感。

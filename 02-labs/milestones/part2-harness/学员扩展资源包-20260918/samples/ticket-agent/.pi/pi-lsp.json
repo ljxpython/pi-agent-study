@@ -1,0 +1,13 @@
+{
+  "typescript": {
+    "command": [
+      "node",
+      "./node_modules/typescript-language-server/lib/cli.mjs",
+      "--stdio"
+    ],
+    "extensions": [
+      ".ts"
+    ],
+    "timeout": 20000
+  }
+}

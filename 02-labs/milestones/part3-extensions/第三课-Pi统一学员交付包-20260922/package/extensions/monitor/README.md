@@ -1,0 +1,3 @@
+# monitor 扩展完整源码
+
+本目录包含真实源码，入口是 `extensions/index.ts`。可使用 /monitor on、/monitor off、/monitor。通过统一包根目录的 package.json 安装，不要另装本目录。安装步骤见[统一安装说明](../../README.md)。代码只引用本包内相对模块和目标Pi宿主依赖，不需要作者电脑的原始目录。

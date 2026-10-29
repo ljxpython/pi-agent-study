@@ -1,0 +1,522 @@
+{
+  "created": "2026-09-18",
+  "scope": "Pinned direct packages and teaching resources, not offline transitive dependencies",
+  "packages": [
+    {
+      "name": "@earendil-works/pi-coding-agent",
+      "version": "0.85.1",
+      "kind": "core",
+      "archive": "packages/earendil-works-pi-coding-agent-0.85.1.tgz",
+      "sourceDir": "sources/earendil-works-pi-coding-agent-0.85.1",
+      "registry": "https://registry.npmjs.org/%40earendil-works%2Fpi-coding-agent/0.85.1",
+      "tarball": "https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-0.85.1.tgz",
+      "integrity": "sha512-FGRN+OHbWaefBPGaTggAdLjrIHW+s2PzLyglz/5dfLzb9of7uuXMXYC0fJIeZTw+shS32o2cuQ9jF7YSDuL/oQ==",
+      "sha256": "1f498729649bdce647d1160993b4d92bf3c614cc819213bee2f91dd34f2a7af4",
+      "bytes": 6986356,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/earendil-works/pi.git",
+        "type": "git",
+        "directory": "packages/coding-agent"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=22.19.0"
+      }
+    },
+    {
+      "name": "@earendil-works/pi-ai",
+      "version": "0.85.1",
+      "kind": "core",
+      "archive": "packages/earendil-works-pi-ai-0.85.1.tgz",
+      "sourceDir": "sources/earendil-works-pi-ai-0.85.1",
+      "registry": "https://registry.npmjs.org/%40earendil-works%2Fpi-ai/0.85.1",
+      "tarball": "https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-0.85.1.tgz",
+      "integrity": "sha512-+VgVIJDkDO2efYJKEEqvPTH4zmnIaXdAppGbO+vKFA9qy5PdhFiAenuFAkU+oiCSfOC4dMHDyrjdQeL4ZoC5CQ==",
+      "sha256": "af7d11986179445ce6fe88b37d57de22f823c0ffd3a65cae31c555b7f5e99253",
+      "bytes": 798833,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/earendil-works/pi.git",
+        "type": "git",
+        "directory": "packages/ai"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=22.19.0"
+      }
+    },
+    {
+      "name": "@earendil-works/pi-agent-core",
+      "version": "0.85.1",
+      "kind": "core",
+      "archive": "packages/earendil-works-pi-agent-core-0.85.1.tgz",
+      "sourceDir": "sources/earendil-works-pi-agent-core-0.85.1",
+      "registry": "https://registry.npmjs.org/%40earendil-works%2Fpi-agent-core/0.85.1",
+      "tarball": "https://registry.npmjs.org/@earendil-works/pi-agent-core/-/pi-agent-core-0.85.1.tgz",
+      "integrity": "sha512-hIXIP3eAWueAYiAl8aMvWCvvZ8Q5gT3Dip5bE5uJyIGh4+YlWRjtMLI4BaeoXoSs93zndjue61u1B/vhefLnuA==",
+      "sha256": "4a579c49ca343dcf73417891191acca8db085cffb9859cfdc794d8cb28a4adfe",
+      "bytes": 656407,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/earendil-works/pi.git",
+        "type": "git",
+        "directory": "packages/agent"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=22.19.0"
+      }
+    },
+    {
+      "name": "@earendil-works/pi-tui",
+      "version": "0.85.1",
+      "kind": "core",
+      "archive": "packages/earendil-works-pi-tui-0.85.1.tgz",
+      "sourceDir": "sources/earendil-works-pi-tui-0.85.1",
+      "registry": "https://registry.npmjs.org/%40earendil-works%2Fpi-tui/0.85.1",
+      "tarball": "https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-0.85.1.tgz",
+      "integrity": "sha512-OIzw9efInmO4WOBnD4TxcTdBjmzvYJpzslkgoUro946nEGoYWg5rwv1p4fDt3/JvMx9QybryUCUwlm7j8Dreig==",
+      "sha256": "00f007c8e761e4e54a353e8f804e7b295bfeb511cca216b873bcbcee3fbac41e",
+      "bytes": 558259,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/earendil-works/pi.git",
+        "type": "git",
+        "directory": "packages/tui"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=22.19.0"
+      }
+    },
+    {
+      "name": "pi-memory",
+      "version": "0.4.2",
+      "kind": "extension",
+      "archive": "packages/pi-memory-0.4.2.tgz",
+      "sourceDir": "sources/pi-memory-0.4.2",
+      "registry": "https://registry.npmjs.org/pi-memory/0.4.2",
+      "tarball": "https://registry.npmjs.org/pi-memory/-/pi-memory-0.4.2.tgz",
+      "integrity": "sha512-voH+1MalADyVN23p79g4atdtPxzr1bDcfk1y0uCJL0xfodiSzNA5V5CcmODBTtHlrQzDT+AgasYPlgNWg8YPRQ==",
+      "sha256": "ac4826a4b16bb75e81871aa4ccaccb7701fd09cbd7ed6bf785ad99bd3ca60e3f",
+      "bytes": 32124,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/jayzeng/pi-memory.git",
+        "type": "git"
+      },
+      "pi": {
+        "extensions": [
+          "./index.ts"
+        ]
+      },
+      "engines": {
+        "node": ">=22.19.0"
+      }
+    },
+    {
+      "name": "pi-web-access",
+      "version": "0.29.0",
+      "kind": "extension",
+      "archive": "packages/pi-web-access-0.29.0.tgz",
+      "sourceDir": "sources/pi-web-access-0.29.0",
+      "registry": "https://registry.npmjs.org/pi-web-access/0.29.0",
+      "tarball": "https://registry.npmjs.org/pi-web-access/-/pi-web-access-0.29.0.tgz",
+      "integrity": "sha512-1l4sAWYkFhiBynJf/mXuxmCHxjhiAyWJ4rfQVFu8UPa0JQhCS9oXAmNXcL0Q1SfrO00plmb6L4IkypJ3n1Q4Kg==",
+      "sha256": "ca8a0fb438255a5aa9ff1d544486a31fe6b100e30e02081cfcabdaa2a1635d09",
+      "bytes": 6597522,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/nicobailon/pi-web-access.git",
+        "type": "git"
+      },
+      "pi": {
+        "extensions": [
+          "./index.ts"
+        ],
+        "video": "https://github.com/nicobailon/pi-web-access/raw/refs/heads/main/pi-web-fetch-demo.mp4"
+      },
+      "engines": {}
+    },
+    {
+      "name": "pi-mcp-adapter",
+      "version": "2.34.0",
+      "kind": "extension",
+      "archive": "packages/pi-mcp-adapter-2.34.0.tgz",
+      "sourceDir": "sources/pi-mcp-adapter-2.34.0",
+      "registry": "https://registry.npmjs.org/pi-mcp-adapter/2.34.0",
+      "tarball": "https://registry.npmjs.org/pi-mcp-adapter/-/pi-mcp-adapter-2.34.0.tgz",
+      "integrity": "sha512-3YzoYQlxwKQjk4co0MMnRrhTNWzw5XsoCKCuhfZkIa9XSRBbrOLbi32yu7KOn6Unyk/K0rTof1lX/7cSLobudg==",
+      "sha256": "5cca900df597299e39facbe3b78ff27bdaaee9103057700774541bf9cfb2602c",
+      "bytes": 1606495,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/nicobailon/pi-mcp-adapter.git",
+        "type": "git"
+      },
+      "pi": {
+        "extensions": [
+          "./index.ts"
+        ],
+        "skills": [
+          "./skills"
+        ],
+        "video": "https://github.com/nicobailon/pi-mcp-adapter/raw/refs/heads/main/pi-mcp.mp4"
+      },
+      "engines": {
+        "node": ">=20"
+      }
+    },
+    {
+      "name": "pi-subagents",
+      "version": "0.68.0",
+      "kind": "extension",
+      "archive": "packages/pi-subagents-0.68.0.tgz",
+      "sourceDir": "sources/pi-subagents-0.68.0",
+      "registry": "https://registry.npmjs.org/pi-subagents/0.68.0",
+      "tarball": "https://registry.npmjs.org/pi-subagents/-/pi-subagents-0.68.0.tgz",
+      "integrity": "sha512-sfUKoSIegyCwnD0Y9dDE2sPm/kDmx3P85CQqRpuShv77iSWJXeEc3mDQUK1rZNbhHPnIdQSeFcK+G66hczQSgg==",
+      "sha256": "ef2436e3b8f2f1fd32088c1e3652271414380275580e2eeea95d7e70c90ff935",
+      "bytes": 1368494,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/nicobailon/pi-subagents.git",
+        "type": "git"
+      },
+      "pi": {
+        "extensions": [
+          "./index.ts"
+        ],
+        "skills": [
+          "./skills"
+        ],
+        "prompts": [
+          "./prompts"
+        ]
+      },
+      "engines": {}
+    },
+    {
+      "name": "@narumitw/pi-lsp",
+      "version": "0.49.7",
+      "kind": "extension",
+      "archive": "packages/narumitw-pi-lsp-0.49.7.tgz",
+      "sourceDir": "sources/narumitw-pi-lsp-0.49.7",
+      "registry": "https://registry.npmjs.org/%40narumitw%2Fpi-lsp/0.49.7",
+      "tarball": "https://registry.npmjs.org/@narumitw/pi-lsp/-/pi-lsp-0.49.7.tgz",
+      "integrity": "sha512-P/4qJV5j/PkxI/B63HPjUyFEv1trGFg1txKBFTtBsdiFYdcxzQH2O6Fu/yJJudJknPnRwk6azZpJaLxTsWrlVg==",
+      "sha256": "10b4c63d84692e890b6793bb4653c5b00cd24c03bbe879f2dc31af8769d9eb11",
+      "bytes": 63505,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/narumiruna/pi-extensions.git",
+        "type": "git",
+        "directory": "packages/pi-lsp"
+      },
+      "pi": {
+        "extensions": [
+          "./dist/index.ts"
+        ]
+      },
+      "engines": {}
+    },
+    {
+      "name": "@kkkiio/pi-web-ui",
+      "version": "0.1.1",
+      "kind": "extension",
+      "archive": "packages/kkkiio-pi-web-ui-0.1.1.tgz",
+      "sourceDir": "sources/kkkiio-pi-web-ui-0.1.1",
+      "registry": "https://registry.npmjs.org/%40kkkiio%2Fpi-web-ui/0.1.1",
+      "tarball": "https://registry.npmjs.org/@kkkiio/pi-web-ui/-/pi-web-ui-0.1.1.tgz",
+      "integrity": "sha512-Jia2QDOTm10jUgixqO0GrmYSL22Uv3NFiot1rATmSV1nNfAppo2hK3FSe9huowVd8B/wluhLzXLjPNLNk3z5bw==",
+      "sha256": "c25b37a087dd827913c4b44c68101e21012279a3a71d415d617b0066a10e94a6",
+      "bytes": 4084562,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/kkkiio/pi-web-ui.git",
+        "type": "git"
+      },
+      "pi": {
+        "extensions": [
+          "./extensions/mirror-server.ts"
+        ]
+      },
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    {
+      "name": "typescript",
+      "version": "5.9.3",
+      "kind": "support",
+      "archive": "packages/typescript-5.9.3.tgz",
+      "sourceDir": "sources/typescript-5.9.3",
+      "registry": "https://registry.npmjs.org/typescript/5.9.3",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+      "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+      "sha256": "10e108c9cf7d5f2879053dff18515fb405abf2ccef63eaaf017d9c571687a1d3",
+      "bytes": 4377468,
+      "license": "Apache-2.0",
+      "repository": {
+        "url": "git+https://github.com/microsoft/TypeScript.git",
+        "type": "git"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=14.17"
+      }
+    },
+    {
+      "name": "typescript-language-server",
+      "version": "5.1.3",
+      "kind": "support",
+      "archive": "packages/typescript-language-server-5.1.3.tgz",
+      "sourceDir": "sources/typescript-language-server-5.1.3",
+      "registry": "https://registry.npmjs.org/typescript-language-server/5.1.3",
+      "tarball": "https://registry.npmjs.org/typescript-language-server/-/typescript-language-server-5.1.3.tgz",
+      "integrity": "sha512-r+pAcYtWdN8tKlYZPwiiHNA2QPjXnI02NrW5Sf2cVM3TRtuQ3V9EKKwOxqwaQ0krsaEXk/CbN90I5erBuf84Vg==",
+      "sha256": "d2c9caee7fe712144adcc9439d85f2a2751a5c10efc21e63f6ac2ccc337d310c",
+      "bytes": 503836,
+      "license": "Apache-2.0",
+      "repository": {
+        "url": "https://github.com/typescript-language-server/typescript-language-server.git",
+        "type": "git"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=20"
+      }
+    },
+    {
+      "name": "tsx",
+      "version": "4.21.0",
+      "kind": "support",
+      "archive": "packages/tsx-4.21.0.tgz",
+      "sourceDir": "sources/tsx-4.21.0",
+      "registry": "https://registry.npmjs.org/tsx/4.21.0",
+      "tarball": "https://registry.npmjs.org/tsx/-/tsx-4.21.0.tgz",
+      "integrity": "sha512-5C1sg4USs1lfG0GFb2RLXsdpXqBSEhAaA/0kPL01wxzpMqLILNxIxIOKiILz+cdg/pLnOUxFYOR5yhHU666wbw==",
+      "sha256": "d403b8208816de76eddbbe5642bfefbbfe7c8c2109fa886e3710e0a1907f33a5",
+      "bytes": 154267,
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/privatenumber/tsx.git",
+        "type": "git"
+      },
+      "pi": {},
+      "engines": {
+        "node": ">=18.0.0"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "file": "official-examples/todo.ts",
+      "origin": "Pi 0.85.1 npm examples/extensions/todo.ts",
+      "sha256": "e46824d00217e25242c186d41837cc84ca81b23f978500323448502a9a424ee2"
+    },
+    {
+      "file": "official-examples/protected-paths.ts",
+      "origin": "Pi 0.85.1 npm examples/extensions/protected-paths.ts",
+      "sha256": "9ca66b1f3b1b9a61cc5ddc660f92cca2ea66c4264a1bdb6b00e0da5844399fe2"
+    },
+    {
+      "file": "official-examples/input-transform.ts",
+      "origin": "Pi 0.85.1 npm examples/extensions/input-transform.ts",
+      "sha256": "cf0f65d610631ca75d18aae1c8f1408139702f674cb2835f8c009b943776474b"
+    },
+    {
+      "file": "official-examples/LICENSE",
+      "origin": "Pi repository MIT license",
+      "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+    },
+    {
+      "file": "samples/mvp/AGENTS.md",
+      "origin": "Existing lesson MVP AGENTS.md",
+      "sha256": "41e4a4e94f886c071c192629b31ca2e7d389d94ecb7e759dad24c51395c3b907"
+    },
+    {
+      "file": "samples/mvp/package.json",
+      "origin": "Existing lesson MVP package.json",
+      "sha256": "1057e32bfc182cd15347c4eb26b00e3f620efa717bcf86be1fff2a657b697f45"
+    },
+    {
+      "file": "samples/mvp/src/filter.js",
+      "origin": "Existing lesson MVP src/filter.js",
+      "sha256": "ee24bf891f9c9c55db2c2782915c0dbab784585ff1403d516d154eec03b8edaa"
+    },
+    {
+      "file": "samples/mvp/src/tasks.js",
+      "origin": "Existing lesson MVP src/tasks.js",
+      "sha256": "786f62d6dc9dc0b8eb76627cf36958e76b94a9ba90da4fd5a2785b01081736b3"
+    },
+    {
+      "file": "samples/mvp/test/filter.test.mjs",
+      "origin": "Existing lesson MVP test/filter.test.mjs",
+      "sha256": "7b1e9cd8dd831a4184baa220ca5efe312d55ff30b9d9987f1fd2f8ff1a483c8e"
+    },
+    {
+      "file": "samples/mvp/.pi/prompts/implement.md",
+      "origin": "Existing lesson MVP .pi/prompts/implement.md",
+      "sha256": "7815a7f75cdb7c1fed8e1659cffae9950f4cc79227cddbcc51b6396b8984e98b"
+    },
+    {
+      "file": "samples/mvp/.pi/skills/coding-verification/SKILL.md",
+      "origin": "Existing lesson MVP .pi/skills/coding-verification/SKILL.md",
+      "sha256": "05ade973037623bd4c867de7b92ba4aa6668c0e673a36eb10b8c811f96c00caf"
+    },
+    {
+      "file": "samples/mvp/.pi/extensions/todo.ts",
+      "origin": "Existing lesson MVP .pi/extensions/todo.ts",
+      "sha256": "e46824d00217e25242c186d41837cc84ca81b23f978500323448502a9a424ee2"
+    },
+    {
+      "file": "samples/mvp-initial/filter.js",
+      "origin": "Existing MVP initial implementation; copy into a fresh exercise only",
+      "sha256": "a603fac9eac3d231a55014b79eaf08565601ebaec9cc9c8fa47536f8c89532f9"
+    },
+    {
+      "file": "samples/mcp/mcp-server.py",
+      "origin": "Existing synthetic read-only teaching MCP server",
+      "sha256": "1f49c6ec9e6e5a8600a2058dc1522fb246eb6173c17b9a489414e1dba84ebddd"
+    },
+    {
+      "file": "samples/mcp/workspace/sample.json",
+      "origin": "Synthetic six-ticket course fixture",
+      "sha256": "cbbe451e4cf33efef80c947532e6ebb46fe816288d5592f5d8b8e37ee1c69650"
+    },
+    {
+      "file": "samples/ticket-agent/.gitignore",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "95eaa676a45677fa35ae8b11ef729046aa46cdef76458cb8facc133ce5dc5cdb"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/agents/course-reviewer.md",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "13eac385df771eb9f956dfb36e97fa2bda0de4ea0844d5da5db70e99354b8602"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/agents/course-scout.md",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "81fe92b0c8787c9f9c2508558c6b66f0a4962f97c0757ac7c9be0c14a58d5192"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/extensions/course-check.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "0ded605b8a2f1fd43b5e7a4bf993ea6a54cad2b19c29029a854d7b9d61f43a62"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/mcp.json",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "2b7de28453eab831950ab674667359e4088a0049d73c768829eb4440c41990dc"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/pi-lsp.json",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "4168c830ff7a0ae4b21f94ae367782ee161df8ccb2f765cfa81bb12899606d70"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/prompts/ticket-implement.md",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "b7fe8c9d6e3f9bf0c7b932033a59855c6eb52d512b4598ebc4ea1d7a88dab350"
+    },
+    {
+      "file": "samples/ticket-agent/.pi/prompts/ticket-investigate.md",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "778140d4c9e42662ab257e53bd85fc4e2542645380634cdcfa526e461b535689"
+    },
+    {
+      "file": "samples/ticket-agent/AGENTS.md",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "3aa92ba0bfb434418103008215737913a42e0e584ac09b7ff078c79b81ba800a"
+    },
+    {
+      "file": "samples/ticket-agent/README.md",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "cd8f1a5e783211df67f6bec0d139cd4d055a00d0618386a14ac25e99c1467187"
+    },
+    {
+      "file": "samples/ticket-agent/course-env.sh",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "56659bde0a1c362d1fd148f4cfffc4e1b2f490cd388a81c550c020d7a759c3b1"
+    },
+    {
+      "file": "samples/ticket-agent/package-lock.json",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "c4de0d7669c866f648edec26dd02ed63cc742aaea7175ef0d33dfa3ac0b6bbcd"
+    },
+    {
+      "file": "samples/ticket-agent/package.json",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "f68356758fd8e0fd3ca1101d89e3afcb08d8798135c0dfdf6d0332befa641e2c"
+    },
+    {
+      "file": "samples/ticket-agent/sample.json",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "cbbe451e4cf33efef80c947532e6ebb46fe816288d5592f5d8b8e37ee1c69650"
+    },
+    {
+      "file": "samples/ticket-agent/src/cli.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "c78217b6b0205a5410146c21635621481f7bf7c626ec54ec303e013c309e0891"
+    },
+    {
+      "file": "samples/ticket-agent/src/report.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "99296806ef2c64d0cd324ccecf439d61d32ea9ea2a2feb38f1a3fdaf6357ded5"
+    },
+    {
+      "file": "samples/ticket-agent/src/search.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "f7f88d87be9472805e00de8b81925ce56a68c88e3cf3ff959432117bafc704df"
+    },
+    {
+      "file": "samples/ticket-agent/src/sla.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "df793ab9e5313bdc6605c2d5a12b4c75e1710c8685702990111b4fe57657498a"
+    },
+    {
+      "file": "samples/ticket-agent/src/types.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "8cf9562aae0ce5f95ec75f8a1718a23949f234e5ffdcef49240b02b74054e63c"
+    },
+    {
+      "file": "samples/ticket-agent/test/adversarial.test.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "4cd3ca5ab02d03de1a91804db908ac849e12af085430593089e4256875707740"
+    },
+    {
+      "file": "samples/ticket-agent/test/report.test.ts",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "04f9df924e268660b7bb83c8ee9b71b89b1c0bbef5900eaa5b2b800a514f801e"
+    },
+    {
+      "file": "samples/ticket-agent/tools/check-protected.mjs",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "706fed4eeeb5bb1870e8725f27c361d06fcca99b9b0f48cceebd24cc5f41dc58"
+    },
+    {
+      "file": "samples/ticket-agent/tools/mcp-server.py",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "81f2432d259865b30861f31accf926110821c7584bc34b823a39fce45671005c"
+    },
+    {
+      "file": "samples/ticket-agent/tools/preflight.mjs",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "cdaaf0f242c8df1e07161cdeaade36de77c25ebec48f7a580c2b9f8211ec070a"
+    },
+    {
+      "file": "samples/ticket-agent/tsconfig.json",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "5ef45738d6da8d33ce011943bc1f37283e3e864d00d8cf2b2ac3ba360790f5a1"
+    },
+    {
+      "file": "scripts/prepare-ticket-demo.mjs",
+      "origin": "Chapter 4 portable teaching project; derived from archived ticket case or course setup helpers",
+      "sha256": "9e2ed2614e06ec9b2aa994abe63c4c65ba7f4d1c4ff88e62e409f8d14f561b37"
+    }
+  ],
+  "updated": "2026-09-18",
+  "validationBoundary": "Chapter 4 CLI registration and direct tools checked; reference solution tests passed. New model run blocked by HTTP 401; readable web fetch failed; full TUI rehearsal unverified."
+}

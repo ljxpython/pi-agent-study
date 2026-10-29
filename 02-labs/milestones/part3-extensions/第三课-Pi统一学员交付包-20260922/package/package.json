@@ -1,0 +1,52 @@
+{
+  "name": "pi-lesson3-bundle",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "Pi lesson 3: project-map, monitor, concise activity, messenger course variant",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "files": [
+    "extensions/",
+    "prompts/",
+    "README.md",
+    "THIRD_PARTY.md",
+    "provenance.json",
+    "!extensions/*/tests/**"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions/monitor/extensions/index.ts",
+      "./extensions/activity/index.ts",
+      "./extensions/messenger/index.ts"
+    ],
+    "prompts": [
+      "./prompts/project-map.md"
+    ],
+    "skills": [
+      "./extensions/messenger/skills"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-agent-core": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.85.1",
+    "@earendil-works/pi-tui": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "typebox": "1.0.62",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "@types/node": "26.6.2"
+  },
+  "scripts": {
+    "test": "tsx --test extensions/monitor/tests/*.test.ts extensions/activity/tests/*.test.ts",
+    "verify:load": "tsx scripts/verify-load.ts"
+  }
+}

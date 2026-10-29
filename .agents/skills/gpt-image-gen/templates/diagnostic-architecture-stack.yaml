@@ -1,0 +1,115 @@
+id: diagnostic-architecture-stack
+name: 全景自检互动式架构栈 (Interactive Diagnostic Architecture Stack)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-hardware
+  style: enterprise-vector-flat
+  subject: diagnostic-system-architecture
+
+tags:
+  - diagnostic-stack
+  - interactive-warning-tags
+  - react-loop
+  - skills-tools-runtime
+  - end-to-end-workflow
+  - cta-footer-banner
+  - vector-flat-diagram
+
+description: 专为高转化、高互动技术长文与社媒打造的全景自检架构栈。自上而下包含输入感知、ReAct核心运行层、LLM智能大脑、技能/工具/环境三柱、记忆知识层、基础设施底座与端到端业务流，特色带有痛点自检警示胶囊与底部评论区互动横幅。
+
+author: antigravity-laowang
+
+use_cases:
+  - "企业级 AI Agent 架构自检与诊断大图"
+  - "微信公众号、掘金技术深度干货文核心头图"
+  - "社媒高赞高收藏互动引流知识长图"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "interactive-diagnostic-stack-poster"
+
+variables:
+  - name: main_title
+    description: 架构大标题
+    default: "企业级 AI Agent 架构全景图"
+  - name: subtitle
+    description: 副标题链路
+    default: "大模型驱动·感知➔思考➔行动➔反思➔持续进化"
+  - name: top_badge
+    description: 右上角自检警示徽章
+    default: "⚠️ 对照自检：你搭了几层？"
+  - name: bottom_cta_left
+    description: 底部横幅左侧提问
+    default: "你的企业搭建了几层？"
+  - name: bottom_cta_right
+    description: 底部横幅右侧行动呼吁
+    default: "层数越少，被替代风险越高 — 评论区告诉我 ➔"
+
+prompt_skeleton: |
+  An authoritative, ultra high-density enterprise AI Agent system architecture diagnostic poster, 2:3 vertical aspect ratio, crisp 2D vector flat diagram style.
+  The background is pure crisp white (#FFFFFF) with zero 3D rendering or paper textures. The diagram layout is a vertical hierarchy stacked cleanly from top to bottom, featuring distinct warning/highlight badges. Color palette: Clean Navy Blue, Tech Teal, Warm Gold, Coral Red warning badges, and Crisp Pure White cards.
+
+  [TOP HEADER]
+  Large bold black title in modern sans-serif: `{main_title}`.
+  Subtitle directly below: `{subtitle}`.
+  To the right of the subtitle, an eye-catching coral red rounded warning badge: `{top_badge}`.
+
+  [TIER 1 - 输入理解层 (感知层) Perception Layer]
+  Left side shows an enterprise user avatar card: `企业用户 (员工/客户/设备/文件)` with arrow pointing to:
+  A wide light-cyan container titled: `输入理解层 (感知层) Perception Layer`.
+  Row of 6 pure white rounded cards:
+  `意图识别 (Intent)` | `信息抽取 (Entity)` | `上下文理解 (Context)` | `图像识别 (Vision/OCR)` | `历史记录 (History)` | `外部事件 (Event)`
+
+  [TIER 2 - Agent 核心运行层 Core Runtime (PROMINENT HIGHLIGHT)]
+  A large light-blue container with red flame badge: `Agent 核心运行层 Core Runtime ⚡最关键`.
+  Top sub-section: `ReAct循环 (持续迭代，直到任务完成)`:
+  6 colorful sequential step cards connected by horizontal navy blue arrows:
+  `① Observe 观察 (接收输入/感知状态)` ➔ `② Think 思考 (问题分析/任务拆解)` ➔ `③ Plan 规划 (制定策略/拆解步骤)` ➔ `④ Act 行动 (调用工具/执行操作)` ➔ `⑤ Observe 观察结果 (收集反馈/环境变化)` ➔ `⑥ Reflect 反思 (结果评估/调整策略)`
+  Bottom sub-section: A horizontal row of 7 neat white status pills:
+  `任务状态 (State)` | `上下文 (Context)` | `记忆管理 (Memory)` | `验证自检 (Verify)` | `错误处理 (Error)` | `成本控制 (Cost)` | `运行日志 (Log)`
+
+  [TIER 3 - 智能大脑层 LLM Layer]
+  A wide light-purple/pink container titled: `智能大脑层 LLM Layer`.
+  Divided into 3 neat sections:
+  - Left: `模型管理 Model Router` (cards: 模型选择, 多模型协同, 备用降级)
+  - Middle: `LLM推理引擎 Reasoning` (cards: 理解/推理/规划/决策/生成/反思)
+  - Right: `提示词工程 Prompt System` (cards: 系统提示词, 场景模板, 少样本示例, 动态优化)
+
+  [TIER 4 - 中间核心三柱 (技能 / 工具 / 环境)]
+  3 vertical columns side-by-side:
+  - Left Column (25% width): `能力技能层 Skills` (Light-green container, 6 cards: 算料计算技能, 质检分析技能, 报价生成技能, 排程优化技能, 报告生成技能, 自定义业务技能)
+  - Middle Column (50% width): `工具集成层 Tools` with coral red badge `⚠️ 多数企业缺失`:
+    Black header box: `工具网关 Tool Gateway — 统一入口·鉴权·限流·日志·重试`.
+    3 white cards: `MCP协议工具` | `函数调用 Function Call` | `其他集成 (HTTP/IoT/WS)`.
+    Bottom black strip: `执行沙箱 Sandbox — 本地命令·Python运行·浏览器自动化·容器(Docker)`.
+  - Right Column (25% width): `执行环境 Environment` (Light-blue container, 5 cards: 文件系统, 终端Shell, 数据库, 网络浏览器, 外部服务)
+
+  [TIER 5 - 记忆知识层 Memory Layer]
+  A warm yellow container with coral badge: `记忆知识层 Memory Layer ⚠️ 大多数企业得0分`.
+  Row of 6 white cards:
+  `短期记忆 (对话历史)` | `长期记忆 (用户偏好)` | `向量记忆 (知识检索)` | `结构化记忆 (任务状态)` | `企业知识库 (文档/经验)` | `工作记忆 (当前临时任务)`
+
+  [TIER 6 - 基础设施层 Infrastructure]
+  A light-gray container titled: `基础设施层 Infrastructure`.
+  Row of 7 white cards:
+  `大模型 API服务` | `向量库 VectorDB` | `关系库 MySQL/PG` | `对象存储 OSS` | `缓存 Redis` | `消息队列 Kafka` | `监控日志 Prometheus/ELK`
+
+  [TIER 7 - 底部业务流与核心特性]
+  - Left (80% width): `完整业务流程 (端到端) End-to-End`:
+    A continuous chain of 8 blue step cards with right arrows:
+    `① 员工提需求` ➔ `② 意图理解` ➔ `③ 任务规划` ➔ `④ 选择工具` ➔ `⑤ 执行操作` ➔ `⑥ 获取结果` ➔ `⑦ 反思优化` ➔ `⑧ 完成交付`.
+    Below it, a curved feedback loop dotted arrow: `循环迭代，根据结果持续优化，直到任务完成`.
+  - Right (20% width): `核心特性` green card with bullet points: `自主规划与决策`, `工具灵活调用`, `持续学习与记忆`, `反思与自我改进`, `可扩展与可观测`.
+
+  [BOTTOM CALL-TO-ACTION FOOTER BANNER]
+  A prominent full-width bottom banner strip split into two high-contrast sections:
+  Left (Black background, bold white text): `{bottom_cta_left}`
+  Right (Bright warm yellow/orange background, bold black text with arrow): `{bottom_cta_right}`
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Clean 2D vector flat illustration, razor-sharp outlines, crisp legible Chinese characters, vibrant semantic color blocks, clear container borders, perfectly structured visual hierarchy, zero clutter, high readability.
+  STRICT NEGATIVE: NO 3D rendering, NO photorealistic objects, NO metallic textures, NO hand-drawn sketch style, NO binder rings, NO paper textures, NO dark backgrounds, NO blurry text, NO alien gibberish symbols, NO distorted Chinese characters.

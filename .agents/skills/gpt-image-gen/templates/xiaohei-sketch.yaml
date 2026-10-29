@@ -1,0 +1,53 @@
+id: xiaohei-sketch
+name: 小黑怪诞手绘正文配图
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: editorial-article
+  style: sketch-line-art
+  subject: character-interaction
+category: editorial-sketch
+tags:
+  - white-background
+  - minimalist-lineart
+  - xiaohei-ip
+  - conceptual-action
+  - absurd-metaphor
+description: 16:9 纯白底、极简黑色手绘微抖线条、小黑 IP 角色深度参与系统运作，附带微量中文手写批注，适合中文深度文章与方法论的认知解释配图
+author: ian-neoh-concept
+
+use_cases:
+  - "Article narrative visual beats and cognitive turning points"
+  - "Absurd physical metaphor for abstract business, communication, or mental models"
+  - "Clean hand-drawn sketches for technical workflows, mindset shifts, and decision trees"
+
+parameters:
+  aspect_ratio: "16:9"
+  recommended_size: "1024x576"
+  quality: "high"
+  layout_type: "minimalist-hand-drawn"
+  whitespace_ratio: "at least 35% empty white space, subject occupies 40%-60%"
+
+variables:
+  - name: core_idea
+    description: 这张图要表达的唯一核心观点或认知转折点
+    example: "老好人试图用借口逃避责任，结果反被借口绑架"
+  - name: composition_action
+    description: 小黑具体在做什么荒诞而认真的动作、主要物理道具与空间动态
+    example: "小黑满头大汗地用细线把巨大的借口杠杆绑在自己身上，杠杆另一端挂着千斤重担"
+  - name: handwritten_labels
+    description: 3-5个简短中文手写批注词（橙色流动路径、红色警告、蓝色状态）
+    example: "“老借口” / “责任穿透” / “反噬”"
+
+prompt_skeleton: |
+  Generate one standalone 16:9 horizontal editorial illustration.
+  Visual DNA: Pure white background. Minimalist black hand-drawn line art with slightly wobbly pen lines. Lots of empty white space (subject occupies 40%-60%). Sparse colored handwritten Chinese annotations. Clean absurd product-sketch aesthetic. No gradients, no shadows, no paper texture, no 3D render, no commercial vector art, no PPT look.
+  Recurring IP Character: 小黑, a small solid-black absurd creature with white dot eyes, tiny thin legs, blank serious deadpan expression. 小黑 must perform the core conceptual action.
+  Core Idea: {core_idea}.
+  Scene & Composition: {composition_action}.
+  Annotations: Include sparse handwritten Chinese text annotations: {handwritten_labels}. (Black for line art, orange for paths, red only for warnings/pitfalls, blue for notes).
+  Constraints: One image explains only one core structure. Do NOT write a top-left title. Keep it strange, clean, and intellectually evocative, never childish or cute.
+
+strict_negative: |
+  STRICT NEGATIVE: No background color, no grey background, no paper texture, no drop shadows, no PPT diagram boxes, no 3D shading, no cute fluffy mascot, no top-left header title.

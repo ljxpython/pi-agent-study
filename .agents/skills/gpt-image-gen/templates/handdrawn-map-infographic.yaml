@@ -1,0 +1,87 @@
+id: handdrawn-map-infographic
+name: 手绘城市与美食导览地图
+version: 1.0.0
+prompt_mode: structured-json
+
+taxonomy:
+  scene: editorial-travel
+  style: vintage-watercolor
+  subject: map-infographic
+
+tags:
+  - travel-map
+  - food-guide
+  - handdrawn-watercolor
+  - illustrated-landmarks
+  - json-prompt
+
+description: 采用结构化 JSON 驱动的复古水彩墨水手绘城市与美食导览地图。吸纳 Case 2 成都美食地图精髓，通过地标、编号美食点、罗盘与图例的离散数组定义，彻底杜绝地图地名乱码。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "City travel guide map with numbered food locations and landmarks"
+  - "Themed exploration map (Coffee tour, historical walk, campus map)"
+  - "Charming watercolor vintage travel infographic poster"
+
+parameters:
+  aspect_ratio: "1:1"
+  recommended_size: "1024x1024"
+  quality: "high"
+  layout_type: "illustrated-map-with-numbered-pins"
+
+variables:
+  - name: city_name
+    description: 城市或区域名称
+    default: "成都"
+  - name: map_title
+    description: 地图主标题
+    default: "吃货暴走地图"
+  - name: border_style
+    description: 装饰边框风格
+    default: "绿叶与红辣椒藤蔓环绕边框"
+  - name: landmarks_list
+    description: 核心地标建筑与标签
+    default:
+      - "传统凉亭: 人民公园"
+      - "传统寺院: 文殊院"
+      - "爬墙熊猫摩天大楼: IFS"
+      - "高耸电视塔: 339电视塔"
+      - "古风牌坊: 宽窄巷子"
+  - name: food_spots_list
+    description: 编号美食点与菜品
+    default:
+      - "1 陈麻婆豆腐"
+      - "2 钟水饺"
+      - "3 春熙路串串"
+      - "4 宽窄巷子三大炮"
+      - "5 玉林路火锅"
+      - "6 锦里古街冰粉"
+  - name: centerpiece
+    description: 中心吉祥物或核心视觉
+    default: "坐着吃竹子的可爱大熊猫"
+
+negative_prompt_block: |
+  STRICT NEGATIVE: NO modern digital vector lines, NO ugly typos, NO illegible stray characters, clean handdrawn watercolor ink illustration only.
+
+prompt_skeleton: |
+  {
+    "type": "手绘地图信息图",
+    "style": "复古米黄色羊皮纸上的水彩墨水手绘插画，温暖手绘质感与细腻钢笔线条",
+    "title_section": {
+      "text": "${city_name} ${map_title}",
+      "mascot": "戴着墨镜竖大拇指的卡通红辣椒"
+    },
+    "border": "${border_style}",
+    "layout": {
+      "background": "带有浅黄色街道网络、淡蓝色河流与绿色公园色块的纹理米色羊皮纸",
+      "landmarks": ${landmarks_list},
+      "food_locations": ${food_spots_list},
+      "centerpiece": "${centerpiece}",
+      "legend": {
+        "position": "右下角",
+        "items": ["红色圆点: 美食点", "绿色图标: 景点", "蓝色水系: 河流湖泊"]
+      },
+      "compass": "带有东南西北方向的精致复古手绘罗盘"
+    }
+  }

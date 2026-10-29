@@ -1,0 +1,19 @@
+{
+  "name": "course-ticket-agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test test/report.test.ts",
+    "test:edge": "tsx --test test/adversarial.test.ts",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx src/cli.ts",
+    "check:protected": "node tools/check-protected.mjs",
+    "preflight": "node tools/preflight.mjs"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "typescript-language-server": "5.1.3",
+    "tsx": "4.21.0",
+    "@types/node": "22.15.30"
+  }
+}

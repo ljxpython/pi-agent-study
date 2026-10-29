@@ -1,0 +1,219 @@
+{
+  "cliVersion": {
+    "command": [
+      "node",
+      "node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js",
+      "--version"
+    ],
+    "exitCode": 0,
+    "output": "0.85.1\n"
+  },
+  "mvpCompleted": {
+    "command": [
+      "node",
+      "--test",
+      "test/filter.test.mjs"
+    ],
+    "exitCode": 0,
+    "output": "✔ 空条件保留全部任务 (1.543125ms)\n✔ 中文关键词 (0.079791ms)\n✔ 关键词去空白并忽略大小写 (0.050375ms)\n✔ 按状态筛选 (0.045666ms)\n✔ 关键词和状态同时满足 (0.057417ms)\n✔ 无结果返回空数组 (0.045167ms)\n✔ 空白关键词视为无关键词 (0.054167ms)\n✔ 空数据返回空数组 (0.039541ms)\n✔ 不得修改原数组或对象 (0.109041ms)\nℹ tests 9\nℹ suites 0\nℹ pass 9\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 92.05675\n"
+  },
+  "mvpInitial": {
+    "command": [
+      "node",
+      "--test",
+      "test/filter.test.mjs"
+    ],
+    "exitCode": 1,
+    "output": "✔ 空条件保留全部任务 (1.709084ms)\n✖ 中文关键词 (1.330834ms)\n✖ 关键词去空白并忽略大小写 (0.13275ms)\n✖ 按状态筛选 (0.125292ms)\n✖ 关键词和状态同时满足 (0.0925ms)\n✖ 无结果返回空数组 (0.337292ms)\n✖ 空白关键词视为无关键词 (0.08225ms)\n✔ 空数据返回空数组 (0.4725ms)\n✔ 不得修改原数组或对象 (0.120916ms)\nℹ tests 9\nℹ suites 0\nℹ pass 3\nℹ fail 6\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 93.754333\n\n✖ failing tests:\n\ntest at test/filter.test.mjs:7:1\n✖ 中文关键词 (1.330834ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n      1,\n      2,\n  +   3\n    ]\n  \n      at TestContext.<anonymous> (file:///private<INSTALL_TEST_DIR>/samples/mvp/test/filter.test.mjs:7:28)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ 1, 2, 3 ],\n    expected: [ 1, 2 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at test/filter.test.mjs:8:1\n✖ 关键词去空白并忽略大小写 (0.13275ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n  +   1,\n  +   2,\n      3\n    ]\n  \n      at TestContext.<anonymous> (file:///private<INSTALL_TEST_DIR>/samples/mvp/test/filter.test.mjs:8:35)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ 1, 2, 3 ],\n    expected: [ 3 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at test/filter.test.mjs:9:1\n✖ 按状态筛选 (0.125292ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n  +   1,\n      2,\n  +   3\n    ]\n  \n      at TestContext.<anonymous> (file:///private<INSTALL_TEST_DIR>/samples/mvp/test/filter.test.mjs:9:28)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ 1, 2, 3 ],\n    expected: [ 2 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at test/filter.test.mjs:10:1\n✖ 关键词和状态同时满足 (0.0925ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n      1,\n  +   2,\n  +   3\n    ]\n  \n      at TestContext.<anonymous> (file:///private<INSTALL_TEST_DIR>/samples/mvp/test/filter.test.mjs:10:33)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ 1, 2, 3 ],\n    expected: [ 1 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at test/filter.test.mjs:11:1\n✖ 无结果返回空数组 (0.337292ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n  + [\n  +   {\n  +     id: 1,\n  +     status: 'todo',\n  +     title: '修复登录 Bug'\n  +   },\n  +   {\n  +     id: 2,\n  +     status: 'done',\n  +     title: '补充登录测试'\n  +   },\n  +   {\n  +     id: 3,\n  +     status: 'todo',\n  +     title: '更新 API 文档'\n  +   }\n  + ]\n  - []\n  \n      at TestContext.<anonymous> (file:///private<INSTALL_TEST_DIR>/samples/mvp/test/filter.test.mjs:11:31)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ { id: 1, title: '修复登录 Bug', status: 'todo' }, { id: 2, title: '补充登录测试', status: 'done' }, { id: 3, title: '更新 API 文档', status: 'todo' } ],\n    expected: [],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at test/filter.test.mjs:12:1\n✖ 空白关键词视为无关键词 (0.08225ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n      1,\n  +   2,\n      3\n    ]\n  \n      at TestContext.<anonymous> (file:///private<INSTALL_TEST_DIR>/samples/mvp/test/filter.test.mjs:12:34)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ 1, 2, 3 ],\n    expected: [ 1, 3 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n"
+  },
+  "typescript": {
+    "command": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--version"
+    ],
+    "exitCode": 0,
+    "output": "Version 5.9.3\n"
+  },
+  "languageServer": {
+    "command": [
+      "node",
+      "node_modules/typescript-language-server/lib/cli.mjs",
+      "--version"
+    ],
+    "exitCode": 0,
+    "output": "5.1.3\n"
+  },
+  "tsx": {
+    "command": [
+      "node",
+      "node_modules/tsx/dist/cli.mjs",
+      "--version"
+    ],
+    "exitCode": 0,
+    "output": "tsx v4.21.0\nnode v26.0.0\n"
+  },
+  "syntheticMcpProtocol": {
+    "exitCode": 0,
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "protocolVersion": "2024-11-05",
+          "capabilities": {
+            "tools": {}
+          },
+          "serverInfo": {
+            "name": "course-support-readonly",
+            "version": "1.0.0"
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "name": "get_policy",
+              "description": "Read synthetic SLA thresholds and current reporting time",
+              "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            },
+            {
+              "name": "list_tickets",
+              "description": "Read six synthetic support tickets. No write operations exist.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            }
+          ]
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"policy\": {\"urgentHours\": 4, \"normalHours\": 24}, \"now\": \"2026-09-17T12:00:00Z\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"tickets\": [{\"id\": \"T01\", \"title\": \"登录 API 报错\", \"team\": \"平台\", \"priority\": \"urgent\", \"status\": \"open\", \"createdAt\": \"2026-09-17T07:00:00Z\"}, {\"id\": \"T02\", \"title\": \"登录样式错位\", \"team\": \"前端\", \"priority\": \"normal\", \"status\": \"open\", \"createdAt\": \"2026-09-16T10:00:00Z\"}, {\"id\": \"T03\", \"title\": \"支付超时\", \"team\": \"平台\", \"priority\": \"urgent\", \"status\": \"closed\", \"createdAt\": \"2026-09-16T00:00:00Z\"}, {\"id\": \"T04\", \"title\": \"API 导出\", \"team\": \"平台\", \"priority\": \"normal\", \"status\": \"open\", \"createdAt\": \"2026-09-17T10:00:00+08:00\"}, {\"id\": \"T05\", \"title\": \"API 边界\", \"team\": \"前端\", \"priority\": \"urgent\", \"status\": \"open\", \"createdAt\": \"2026-09-17T08:00:00Z\"}, {\"id\": \"T06\", \"title\": \"将来任务\", \"team\": \"平台\", \"priority\": \"normal\", \"status\": \"open\", \"createdAt\": \"2026-09-18T12:00:00Z\"}]}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ],
+    "scope": "Direct stdin/stdout protocol test, not model dispatch"
+  },
+  "resources": {
+    "errors": [],
+    "extensions": [
+      {
+        "file": "official-examples/todo.ts",
+        "tools": [
+          "todo"
+        ]
+      },
+      {
+        "file": "official-examples/protected-paths.ts",
+        "tools": []
+      },
+      {
+        "file": "official-examples/input-transform.ts",
+        "tools": []
+      },
+      {
+        "file": "node_modules/pi-memory/index.ts",
+        "tools": [
+          "memory_write",
+          "scratchpad",
+          "memory_read",
+          "memory_forget",
+          "memory_restore",
+          "memory_search",
+          "memory_status"
+        ]
+      },
+      {
+        "file": "node_modules/pi-web-access/index.ts",
+        "tools": [
+          "web_search",
+          "source_check",
+          "fetch_content",
+          "get_search_content"
+        ]
+      },
+      {
+        "file": "config-examples/mcp-extension.ts",
+        "tools": [
+          "mcpScript",
+          "mcp"
+        ]
+      },
+      {
+        "file": "node_modules/@narumitw/pi-lsp/dist/index.ts",
+        "tools": [
+          "lsp_diagnostics",
+          "lsp_fix"
+        ]
+      },
+      {
+        "file": "node_modules/pi-subagents/index.ts",
+        "tools": [
+          "subagent",
+          "bg_wait"
+        ]
+      },
+      {
+        "file": "node_modules/@kkkiio/pi-web-ui/extensions/mirror-server.ts",
+        "tools": []
+      }
+    ],
+    "prompts": [
+      "implement"
+    ],
+    "skills": [
+      "coding-verification"
+    ],
+    "scope": "Isolated resource loading only; no model requests, no session_start, not tool runtime"
+  },
+  "install": {
+    "command": "npm install --ignore-scripts --no-audit --no-fund",
+    "exitCode": 0,
+    "summary": "npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead\n\nadded 372 packages in 34s",
+    "scope": "Fresh temp directory, local direct tarballs plus registry transitive dependencies; lock copied to bundle"
+  },
+  "notVerified": [
+    "Student-specific model authentication and live agent task",
+    "Windows/Linux execution",
+    "Fully offline installation",
+    "Enterprise authorization",
+    "All optional functions of included packages"
+  ],
+  "environment": {
+    "platform": "Darwin",
+    "architecture": "arm64",
+    "node": "v26.0.0",
+    "npm": "11.12.1"
+  }
+}

@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# IDE & OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Build & Dist
+dist/
+build/
+*.egg-info/
+
+# Logs & Runtime
+*.log
+.coverage
+.pytest_cache/
+
+# Raw study materials (ignore copyrighted, private or large courseware, keep dir via .gitkeep)
+01-resources/raw/*
+!01-resources/raw/.gitkeep
+
+# Large raw packages (if needed to ignore huge models/cache)
+*.tar.gz
+*.ckpt
+*.safetensors

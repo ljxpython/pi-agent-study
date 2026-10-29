@@ -1,0 +1,27 @@
+{
+  "autoRegister": false,
+  "scopeToFolder": true,
+  "autoOverlay": false,
+  "autoOverlayPlanning": false,
+  "contextMode": "minimal",
+  "crew": {
+    "models": {
+      "planner": "YOUR_PROVIDER/YOUR_GLM_MODEL",
+      "worker": "YOUR_PROVIDER/YOUR_DEEPSEEK_MODEL",
+      "reviewer": "YOUR_PROVIDER/YOUR_GLM_MODEL",
+      "analyst": "YOUR_PROVIDER/YOUR_GLM_MODEL"
+    },
+    "dependencies": "strict",
+    "coordination": "minimal",
+    "concurrency": {
+      "workers": 2,
+      "max": 2
+    },
+    "work": {
+      "maxAttemptsPerTask": 2,
+      "maxWaves": 4,
+      "stopOnBlock": true,
+      "noEventTimeoutMs": 120000
+    }
+  }
+}

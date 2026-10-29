@@ -1,0 +1,103 @@
+id: infographic-decision-poster
+name: 教学决策与博弈解剖信息图海报
+version: 1.0.0
+prompt_mode: structured-json
+
+taxonomy:
+  scene: infographic-edu
+  style: sketch-line-art
+  subject: diagram-chart
+
+tags:
+  - decision-tree
+  - comparison-poster
+  - behavioral-breakdown
+  - educational-schematic
+  - json-prompt
+
+description: 采用结构化 JSON 树驱动的教学决策与双栏博弈信息图海报。通过键值对强力约束 Header、左右分栏对抗、中轴分水岭与 Footer 行动落地，模型原生精准排版
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "Side-by-side behavioral decision breakdown poster (Left vs Right)"
+  - "Psychological pitfall vs Master breakthrough comparison schematic"
+  - "Educational infographic with clear header, two comparison columns, and bottom SOP"
+
+parameters:
+  aspect_ratio: "16:9"
+  recommended_size: "1024x576"
+  quality: "high"
+  layout_type: "two-column-infographic-poster"
+
+variables:
+  - name: title
+    description: 海报主标题
+    default: "决策象限与担当模型解剖"
+    example: "经方大师李可的生死决策象限与全责担当模型"
+  - name: subtitle
+    description: 核心误区解剖副标题
+    default: "平庸逃避者生怕担责开温吞药，强势破局者顶格全责力挽狂澜"
+    example: "平庸逃避者生怕担责开温吞药，强势破局者顶格全责力挽狂澜"
+  - name: left_title
+    description: 左栏弱势/错误方案标题
+    default: "规避担责陷阱 · 错失良机"
+  - name: left_scene
+    description: 左侧弱势场景插画描述
+    default: "一位满头大汗的懦弱医生犹犹豫豫地开出温吞中药，病人家属在旁边焦急叹息"
+  - name: left_fatal_flaw
+    description: 左侧致命心理机制诊断
+    default: "⚠️ 伪免责陷阱：为了逃避犯错风险，付出了整个人生毫无建树的代价"
+  - name: right_title
+    description: 右栏强势/破局方案标题
+    default: "强势全责破局 · 起死回生"
+  - name: right_scene
+    description: 右侧破局场景插画描述
+    default: "一位目光坚毅的名医从容手托超常规浓煎救心汤，患者服下后果断转危为安"
+  - name: right_breakthrough_law
+    description: 右侧博弈物理学法则
+    default: "🛡️ 担当吸引力法则：当你敢挑担子、不怕事时，所有阻力反而统统让路"
+  - name: footer_sop
+    description: 底栏大师破局公式与行动 SOP
+    default: "1. 基于事实良知果断决策 ➔ 2. 绝不向外推卸责任 ➔ 3. 从容承担全部后果"
+
+prompt_skeleton: |
+  {
+    "type": "教学决策与双栏博弈解剖信息图海报",
+    "canvas": {
+      "aspect_ratio": "16:9",
+      "background": "纯白极简背景，无纸纹，无渐变，边缘留白清爽",
+      "style": "极简黑色手绘线稿，精炼清晰，少量红橙绿对比标注，现代教科书信息图设计"
+    },
+    "header": {
+      "badge": "认知博弈 · 核心决策模型",
+      "main_title": "{title}",
+      "subtitle": "核心误区解剖：{subtitle}"
+    },
+    "layout": {
+      "type": "左右双栏对比结构 (Two-Column Comparison)",
+      "left_column": {
+        "status_badge": "🔴 逃避陷阱",
+        "title": "{left_title}",
+        "illustration": "{left_scene}",
+        "diagnosis_box": "{left_fatal_flaw}"
+      },
+      "center_divider": {
+        "visual": "垂直纵向虚线分隔带",
+        "badge": "⚡️ 担当跃迁分水岭"
+      },
+      "right_column": {
+        "status_badge": "🟢 强势破局",
+        "title": "{right_title}",
+        "illustration": "{right_scene}",
+        "breakthrough_box": "{right_breakthrough_law}"
+      }
+    },
+    "footer": {
+      "mindset_quote": "🦁 成人世界的终极底气：即使做错了，我也能从容买单！",
+      "action_sop": "🛡️ 现场破局 3 步法：{footer_sop}"
+    }
+  }
+
+strict_negative: |
+  STRICT NEGATIVE: No background color, no grey borders, no complex 3D rendering, no blurred typography, no irrelevant decorative objects. Clean white educational infographic layout only.

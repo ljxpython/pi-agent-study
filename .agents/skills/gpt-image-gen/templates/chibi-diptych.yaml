@@ -1,0 +1,48 @@
+id: chibi-diptych
+name: 超萌双格对垒叙事漫画
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: infographic-edu
+  style: chibi-cartoon
+  subject: character-interaction
+category: comic-strip
+tags:
+  - comparison
+  - chibi-cartoon
+  - split-screen
+  - infographic-friendly
+  - 2d-vector
+description: 左右分屏高反差对比场景，专用于正反对比、老好人 vs 破局者、错误 vs 正确的行为对抗抓拍
+author: gpt-image-gen-core
+
+use_cases:
+  - "Side-by-side behavioral comparison (Naive vs Production, Weak vs Strong)"
+  - "Split-screen infographic assets with clean vertical dividing line"
+  - "Playful two-panel storytelling for educational tutorials and blog articles"
+
+parameters:
+  aspect_ratio: "16:9"
+  recommended_size: "1024x576"
+  quality: "high"
+  layout_type: "horizontal-split"
+  margin_safe_zone: "center 5%-10% gap for lossless slicing"
+
+variables:
+  - name: left_scene
+    description: 弱势/负面/狼狈场景描述（受害者或错误做法视角）
+    example: "a cute chibi clerk sweating profusely, apologizing repeatedly while an aggressive coworker throws a huge pile of documents"
+  - name: right_scene
+    description: 强势/正面/从容场景描述（破局者或正确做法视角）
+    example: "a confident calm chibi master holding a cup of tea, smiling peacefully, pushing the documents firmly back, like an unshakeable elephant"
+
+prompt_skeleton: |
+  An ultra-cute chibi 2D cartoon comic strip split into two distinct panels (Left vs Right).
+  Split composition with a clearly visible vertical dividing line in the exact middle.
+  Left side: {left_scene}.
+  Right side: {right_scene}.
+  Art style: Crisp bold vector outlines, vibrant pastel color palette, minimalist solid background, highly expressive exaggerated facial expressions, 2D flat comic art, clean illustration.
+
+strict_negative: |
+  STRICT NEGATIVE: Absolutely NO text, NO speech bubbles with words, NO letters, NO Chinese characters, NO pseudo-language glyphs, NO labels, NO watermark, NO realistic 3D render.

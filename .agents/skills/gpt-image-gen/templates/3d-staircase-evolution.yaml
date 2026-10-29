@@ -1,0 +1,112 @@
+id: 3d-staircase-evolution
+name: 3D 蜿蜒石阶与层级演化信息图
+version: 1.0.0
+prompt_mode: structured-json
+
+taxonomy:
+  scene: infographic-timeline
+  style: 3d-realistic-infographic
+  subject: architecture-evolution-chart
+
+tags:
+  - 3d-infographic
+  - staircase-timeline
+  - evolution-diagram
+  - hierarchy-levels
+  - structured-json
+  - high-text-density
+
+description: 工业级 3D 蜿蜒阶梯与演化时间轴信息图模板。通过结构化 JSON 解耦视效与字面排版，支持主标题、侧边栏层级（L0~L7）、右上角正负功能图例卡片、底部里程碑剪影轴以及 25 阶 3D 实体演化展示。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "Biological, historical or technological evolution timeline"
+  - "Cognitive growth, mastery progression or capability leveling hierarchy"
+  - "Product roadmap or system architecture evolution on 3D mountain terrain"
+
+parameters:
+  aspect_ratio: "9:16"
+  recommended_size: "1024x1792"
+  quality: "high"
+  layout_type: "3d-staircase-timeline-poster"
+
+variables:
+  - name: main_title
+    description: 顶部核心大标题
+    default: "人类演化"
+    example: "认知主权阶梯"
+  - name: subtitle
+    description: 顶部副标题
+    default: "从一滴水到一个你 —— 38亿年的生命长河"
+    example: "从被动迎合到全权掌控 —— 沟通博弈的五重心智跃迁"
+  - name: background_style
+    description: 画布底色与背景风格
+    default: "复古纹理羊皮纸"
+    example: "复古羊皮纸质感，四周边缘自然轻微泛黄做旧"
+  - name: staircase_material
+    description: 3D 台阶材质与地貌
+    default: "逼真的高质感纹理石块阶梯，盘旋于险峻岩壁之上"
+    example: "逼真的高质感纹理石块阶梯，盘旋于险峻岩壁之上"
+  - name: sidebar_labels
+    description: 左侧边栏层级编号与名称列表（L0~L7）
+    default: '["L0: 单细胞生命", "L1: 多细胞生物", "L2: 动物界", "L3: 脊索动物", "L4: 上陆革命", "L5: 哺乳纲", "L6: 人科演化", "L7: 智人纪元"]'
+  - name: legend_title
+    description: 右上角功能对比卡片标题
+    default: "获得的功能 / 失去的功能"
+  - name: legend_positive
+    description: 右上角获得的正面能力列表
+    default: '["· 细胞分化", "· 运动能力", "· 感知能力", "· 认知与思维", "· 语言与文化"]'
+  - name: legend_negative
+    description: 右上角失去/规避的特征列表
+    default: '["· 体表鳞片/外骨骼", "· 体毛（部分）", "· 尾巴（部分）", "· 本能型行为"]'
+  - name: milestones_title
+    description: 底部时间轴/里程碑区域标题
+    default: "演化关键里程碑"
+  - name: milestones_desc
+    description: 底部时间轴剪影与阶段说明
+    default: "包含 6 个展示演化阶段的剪影图标与时间范围，从灵长类祖先(~6500万年前)、南方古猿(~400万年前)、直立人(~200万年前)、尼安德特人(~40万年前)、智人(~30万年前)到现代人(~现在)"
+  - name: staircase_desc
+    description: 中央 3D 蜿蜒台阶的阶数与演变逻辑
+    default: "蜿蜒盘旋的石阶共有 25 个编号台阶，从山脚原始生物一路演进至山巅。底部为发光单细胞与水母，中部为两栖爬行与灵长类，顶部为直立人，最高阶为带有问号的发光宇宙意识体剪影。"
+
+prompt_skeleton: |
+  {
+    "type": "演化时间轴信息图",
+    "instruction": "将平面设计转化为高度逼真的 3D 信息图。将平滑坡道替换为独特的蜿蜒石阶，并将关键实体升级为照片级真实的 3D 渲染模型。确保所有独立卡片和文字区域具有高清晰度与纯净衬底。",
+    "style": {
+      "background": "{background_style}",
+      "staircase": "{staircase_material}",
+      "subjects": "高度精细的照片级真实 3D 渲染"
+    },
+    "layout": {
+      "main_title": "{main_title}",
+      "subtitle": "{subtitle}",
+      "sections": [
+        {
+          "position": "左侧边栏",
+          "count": 8,
+          "labels": {sidebar_labels}
+        },
+        {
+          "position": "右上角",
+          "title": "{legend_title}",
+          "positive_features": {legend_positive},
+          "negative_features": {legend_negative},
+          "description": "浅色羊皮纸卡片衬底，带有绿色加号图标与红色减号图标的严整图例"
+        },
+        {
+          "position": "底部中心",
+          "title": "{milestones_title}",
+          "description": "{milestones_desc}"
+        }
+      ],
+      "centerpiece": {
+        "description": "{staircase_desc}",
+        "count": 25
+      }
+    }
+  }
+
+strict_negative: |
+  STRICT NEGATIVE: No distorted illegible gibberish text in card boxes, no blurry typography, no flat messy vectors, no overcrowded overlap, clean distinct UI bounding boxes for all text zones.

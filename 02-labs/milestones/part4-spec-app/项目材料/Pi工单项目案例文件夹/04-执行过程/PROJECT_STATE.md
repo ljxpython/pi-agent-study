@@ -1,0 +1,772 @@
+---
+{
+  "schema_version": 2,
+  "method_version": "scene-method-agent-v0.1",
+  "runtime": "codex",
+  "tier": 3,
+  "mode": "resume",
+  "status": "BACKEND_M2_M6_IMPLEMENTED_LOCAL_ACCEPTANCE_COMPLETE",
+  "phase": "DELIVERED_LOCAL_SCOPE",
+  "frontend_v1_8": {
+    "status": "CANDIDATE_VERIFIED_WITH_OPEN_GATES",
+    "evidence_head": "fdcdf6807fdc7d15da87cfde33bcdfc9247b6e30952ed54a389901bad7dda577",
+    "evidence": "06-验收与交付/frontend-v1.8/acceptance.json",
+    "production_5179": "PRE_V1_8_DIST",
+    "native_keyboard": "NOT_RUN",
+    "human_visual_review": "PENDING"
+  },
+  "completed_phases": [
+    "scope",
+    "spec",
+    "M1a",
+    "M1b",
+    "host_validation",
+    "M1c",
+    "M1-v1.7"
+  ],
+  "retry_count": 1,
+  "gate_results": {
+    "scope": "USER_AUTHORIZED",
+    "legacy_fixed_model_review": "BLOCKED_REPLACED_BY_EXPLICIT_USER_APPROVAL",
+    "design": "DEEPSEEK_APPROVE",
+    "fresh_executor": "DEEPSEEK_CLEARED",
+    "glm_design": "APPROVE_CLEARED",
+    "M1a": "DS_GLM_REVIEWED_HOST_TESTED",
+    "M1b_DeepSeek": "APPROVE_WITH_DELTAS",
+    "M1b_GLM": "APPROVE_FINAL_SOURCE",
+    "host_validation": "20_UNIT_20_BROWSER_PASS",
+    "user_visual": "USER_ACCEPTS_FRONTEND_PHASE_CLOSE_NOT_FULL_ACCEPTANCE",
+    "current_independent_reviews": "V1_7_DEEPSEEK_GLM_APPROVE",
+    "historical_review_scope": "M1a/M1b review entries refer to older snapshots, not v1.2",
+    "M1c_host_validation": "23_UNIT_32_BROWSER_CHECK_BUILD_PASS",
+    "M1c_independent_review": "INCOMPLETE_402",
+    "v1_5_independent_review": "NOT_RUN_prior_402_not_retried",
+    "v1_5_host_validation": "23_UNIT_CHECK_BUILD_36_BROWSER_PASS",
+    "v1_6_host_validation": "24_UNIT_CHECK_BUILD_37_BROWSER_PASS",
+    "v1_6_independent_review": "NOT_RUN_prior_402_not_retried",
+    "v1_7_design": "DEEPSEEK_GLM_APPROVE_FRESH_CLEARED",
+    "v1_7_host_validation": "27_UNIT_CHECK_BUILD_50_BROWSER_PASS",
+    "v1_7_independent_review": "DEEPSEEK_GLM_APPROVE_CURRENT_SOURCE",
+    "v1_7_user_visual": "USER_ACCEPTED",
+    "backend_execution_readiness": "USER_AUTHORIZED_STAGED_IMPLEMENTATION"
+  },
+  "artifacts": {
+    "spec": "03-方案与设计/frontend-spec.md",
+    "plan": "04-执行过程/PLAN.md",
+    "writer_transfer": "04-执行过程/审核与协作记录.md",
+    "evidence": "06-验收与交付/验收记录.md",
+    "multi_model_receipt": "04-执行过程/阶段审核回执.json",
+    "backend_planning_spec": "03-方案与设计/backend-spec.md",
+    "m1c_browser": "06-验收与交付/m1c-browser-results.json",
+    "no_data_browser": "06-验收与交付/help-browser-results.json"
+  },
+  "last_updated": "2026-09-23T10:50:00+00:00",
+  "model_runs": [
+    {
+      "role": "readonly-reviewer",
+      "requested_model": "teamRouter/deepseek-v4-flash-free",
+      "child_thread_id": "01a0c263-6c2f-70c1-8193-cc62b9ccdc30",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": false,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "failure": "402 quota exhausted",
+      "attempt": 1,
+      "adopted_by_gate": false,
+      "evidence_head": "UNVERIFIED_NO_REVIEW_OUTPUT",
+      "state": "errored"
+    },
+    {
+      "role": "readonly-reviewer",
+      "requested_model": "teamRouter/glm-5.3-flash-free",
+      "child_thread_id": "01a0c263-6be0-7210-891e-8c9bb3e5e770",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": false,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "failure": "402 free route busy",
+      "attempt": 1,
+      "adopted_by_gate": false,
+      "evidence_head": "UNVERIFIED_NO_REVIEW_OUTPUT",
+      "state": "errored"
+    },
+    {
+      "requested_model": "Tongba/deepseek-v4.1-flash",
+      "child_thread_id": "01a0c360-e358-7cf2-887f-6195075e12ff",
+      "role": "design-fresh-reviewer",
+      "status": "APPROVE_CLEARED",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "state": "completed",
+      "evidence_head": "0264acb24a6785548163ef06fbe6028f0af6601a535d525dbd582d98725e0132",
+      "adopted_by_gate": true
+    },
+    {
+      "requested_model": "Tongba/glm-5.3-flash",
+      "child_thread_id": "01a0c360-e3aa-7690-8f10-cda26ed747d4",
+      "role": "design-reviewer",
+      "status": "APPROVE_CLEARED",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "state": "completed",
+      "evidence_head": "0264acb24a6785548163ef06fbe6028f0af6601a535d525dbd582d98725e0132",
+      "adopted_by_gate": true
+    },
+    {
+      "role": "readonly-implementation-reviewer",
+      "requested_model": "Tongba/deepseek-v4.1-flash",
+      "child_thread_id": "01a0c360-e358-7cf2-887f-6195075e12ff",
+      "verdict": "APPROVE",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "output_complete": true,
+      "contract_valid": true,
+      "completion_limit_hit": false,
+      "missing_fields": [],
+      "evidence_head": "afd8a01d560284616bea740c659d82c34021588f8dd49f20993ff085f628972d",
+      "state": "completed",
+      "adopted_by_gate": true,
+      "attempt": 2
+    },
+    {
+      "role": "readonly-implementation-reviewer",
+      "requested_model": "Tongba/glm-5.3-flash",
+      "child_thread_id": "01a0c360-e3aa-7690-8f10-cda26ed747d4",
+      "verdict": "APPROVE",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "output_complete": true,
+      "contract_valid": true,
+      "completion_limit_hit": false,
+      "missing_fields": [],
+      "evidence_head": "afd8a01d560284616bea740c659d82c34021588f8dd49f20993ff085f628972d",
+      "state": "completed",
+      "adopted_by_gate": true,
+      "attempt": 1
+    },
+    {
+      "role": "state-contract-reviewer",
+      "requested_model": "Tongba/deepseek-v4.1-flash",
+      "requested_reasoning_effort": "high",
+      "child_thread_id": "01a0c3a6-a655-7223-9cb9-806cb128a2c0",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "state": "completed",
+      "verdict": "NOT_READY",
+      "evidence_head": "4a1855363c231ab30221d6ad012cf166afb14e07d897b5a73e7d93a20affe6e9",
+      "output_complete": true,
+      "contract_valid": true,
+      "completion_limit_hit": false,
+      "missing_fields": [],
+      "adopted_by_gate": false,
+      "usage": "unavailable",
+      "cost": "unavailable"
+    },
+    {
+      "role": "isolated-spec-reviewer",
+      "requested_model": "Tongba/glm-5.3-flash",
+      "requested_reasoning_effort": "high",
+      "child_thread_id": "01a0c3a6-a6aa-7050-81dc-ae58f07526fa",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "state": "completed",
+      "verdict": "READY_FOR_PLANNING_ONLY",
+      "evidence_head": "4a1855363c231ab30221d6ad012cf166afb14e07d897b5a73e7d93a20affe6e9",
+      "output_complete": true,
+      "contract_valid": true,
+      "completion_limit_hit": false,
+      "missing_fields": [],
+      "adopted_by_gate": false,
+      "usage": "unavailable",
+      "cost": "unavailable"
+    },
+    {
+      "role": "contract-reviewer",
+      "requested_model": "Tongba/deepseek-v4.1-flash",
+      "child_thread_id": "01a0c3c5-5c06-7741-be13-af4cbe39f2f5",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "state": "completed",
+      "verdict": "NOT_READY",
+      "output_complete": true,
+      "contract_valid": true,
+      "adopted_by_gate": false,
+      "evidence_head": "40f77ba9cbd37970228f83b985549bf630fde00de6e9789360c88280e8aaa816"
+    },
+    {
+      "role": "isolated-fresh-reviewer",
+      "requested_model": "Tongba/glm-5.3-flash",
+      "child_thread_id": "01a0c3c5-5ca9-7692-9a0d-4bcfaa0acd87",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "provider_success_scope": "read-tool interaction only; final review absent",
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "submissions": 2,
+      "state": "shutdown",
+      "verdict": "INCOMPLETE",
+      "output_complete": false,
+      "contract_valid": false,
+      "adopted_by_gate": false,
+      "evidence_head": "40f77ba9cbd37970228f83b985549bf630fde00de6e9789360c88280e8aaa816",
+      "reason": "Long wait after last read; host interrupted once requesting bounded final output, still no verdict, then closed while running. Not a reported 401/402 or provider timeout."
+    }
+  ],
+  "write_set": [
+    "05-工作产物/backend/package.json",
+    "05-工作产物/backend/package-lock.json",
+    "05-工作产物/backend/tsconfig.json",
+    "05-工作产物/backend/.gitignore",
+    "05-工作产物/backend/src/contracts.ts",
+    "05-工作产物/backend/tests/contracts.test.ts"
+  ],
+  "delivery_profile": "demo",
+  "top_risk": {
+    "statement": "选择、来源与成果状态不一致",
+    "evidence_required": "U01与基线对照、取消停止及真实浏览器断言"
+  },
+  "writer_lock": null,
+  "mock_ledger": [
+    {
+      "purpose": "M1 UI interactions",
+      "replacement_boundary": "demo adapter -> HTTP/SSE backend",
+      "owner": "future backend implementer",
+      "status": "replaced_by_HTTP_SSE_runtime; historical demo tests retained"
+    }
+  ],
+  "current_spec": "backend v0.15 implemented; current production reviewed by DeepSeek and GLM; local acceptance complete",
+  "planning_update": {
+    "date": "2026-09-21",
+    "scope": "M2-M6 authorized implementation",
+    "status": "M2_IMPLEMENTING",
+    "backend_spec": "v0.13 M3 delta; M2 unchanged",
+    "independent_review": "v0.12 complete; v0.13 delta to be verified in M3",
+    "sdk_baseline": "@earendil-works/pi-coding-agent@0.85.1; not installed in project",
+    "test_model": "tongba/glm-5.3",
+    "test_protocol": "openai-completions",
+    "standards": "dev-team spec-template, architecture-design-checklist, review-protocol; requirement discussion; no implementation dispatch"
+  },
+  "backend_spec_review": {
+    "date": "2026-09-21T07:38:45.570533+00:00",
+    "level": "L2",
+    "scope": "backend Spec only; no code review or implementation",
+    "status": "INCOMPLETE_402",
+    "reviewed_sha256": "1e05410d226594f22167f21b4c2187b5e8cd8d05d20961efbd99d87fcc4e9e7e",
+    "final_document_sha256": "4dbd83314dae15d0e438163ace872c8436c7fd64b17cd97bfb87b271a46b0e69",
+    "host_check": "DOCUMENT_CONTRACT_CONSISTENCY_ONLY",
+    "metadata_lookup": "Exact child IDs not found in ~/.opencodex/usage.jsonl; no resolved identity claimed",
+    "runs": [
+      {
+        "role": "state-recovery-reviewer",
+        "requested_model": "teamRouter/deepseek-v4-flash-free",
+        "child_thread_id": "01a0c2e2-f19b-74d1-987a-3c9527cfd0ce",
+        "roster_selected": true,
+        "spawn_accepted": true,
+        "provider_succeeded": false,
+        "resolved_model": "unverified",
+        "attribution": "requested_only",
+        "failure": "402 free quota exhausted",
+        "attempt": 1,
+        "adopted_by_gate": false,
+        "state": "errored"
+      },
+      {
+        "role": "contract-minimality-reviewer",
+        "requested_model": "teamRouter/glm-5.3-flash-free",
+        "child_thread_id": "01a0c2e2-f1ef-7ac3-a108-4c4962e512e7",
+        "roster_selected": true,
+        "spawn_accepted": true,
+        "provider_succeeded": false,
+        "resolved_model": "unverified",
+        "attribution": "requested_only",
+        "failure": "402 free route busy",
+        "attempt": 1,
+        "adopted_by_gate": false,
+        "state": "errored"
+      }
+    ]
+  },
+  "tongba_connectivity": {
+    "date": "2026-09-21T08:00:20.123713+00:00",
+    "level": "L2",
+    "mode": "verification",
+    "scope": "Tongba text connectivity only; not Spec review",
+    "roster_source": "ocx_runtime",
+    "roster_checked_at": "2026-09-21T07:57:21.747308Z",
+    "status": "FAILED_401",
+    "runs": [
+      {
+        "role": "connectivity-probe",
+        "requested_model": "Tongba/deepseek-v4.1-flash",
+        "child_thread_id": "01a0c2f8-9764-7e73-afbc-5bf9b74482a9",
+        "roster_selected": true,
+        "spawn_accepted": true,
+        "provider_succeeded": false,
+        "resolved_model": "unverified",
+        "attribution": "requested_only",
+        "failure": "401 Invalid token",
+        "attempt": 1
+      },
+      {
+        "role": "connectivity-probe",
+        "requested_model": "Tongba/glm-5.3-flash",
+        "child_thread_id": "01a0c2f8-97b2-7550-b8ec-79629664817e",
+        "roster_selected": true,
+        "spawn_accepted": true,
+        "provider_succeeded": false,
+        "resolved_model": "unverified",
+        "attribution": "requested_only",
+        "failure": "401 Invalid token",
+        "attempt": 1
+      }
+    ],
+    "metadata_lookup": "No exact child ID match in usage.jsonl",
+    "fallbacks": "none",
+    "application_sdk_probe": "NOT_RUN"
+  },
+  "backend_document_sha256": "b8a137450c56d3628a247ec30636e8cd207c3238bf2faffa3239ceb3b089304e",
+  "backend_spec_v0_4_review": {
+    "status": "REVIEWED_WITH_FINDINGS_FINAL_DELTA_HOST_CHECKED_NOT_REREVIEWED",
+    "reviewed_sha256": "93373350fe1ad62d8b02643a80e1b7ee6fe2da6a4c3e6defdc0a86f7262fda86",
+    "final_document_sha256": "b4c71ee1e34e75d7729a03e767b96fcfc2c46d9df444e6d0989c8e44639f9b52",
+    "receipt": "04-执行过程/阶段审核回执.json#backend_spec_v0_4",
+    "date": "2026-09-21T09:23:27.547375+00:00",
+    "application_sdk_probe": "NOT_RUN",
+    "implementation": "NOT_STARTED"
+  },
+  "handoff_connectivity_update": {
+    "source": "user current handoff, not a new tool probe",
+    "DeepSeek": "Subsequent historical text probe SUBAGENT_PROBE_OK; requested_only",
+    "GLM": "No new connectivity verification in preceding window after absence from chosen/tool surface",
+    "historical_tongba_connectivity": "Preserved original 401 record; not current health"
+  },
+  "current_write_set": [
+    "00-项目入口.md",
+    "03-方案与设计/backend-spec.md",
+    "04-执行过程/PLAN.md",
+    "04-执行过程/PROJECT_STATE.md",
+    "04-执行过程/阶段审核回执.json",
+    "04-执行过程/审核与协作记录.md",
+    "06-验收与交付/backend-contract-results.json",
+    "06-验收与交付/验收记录.md"
+  ],
+  "backend_decisions": {
+    "conversation_analysis_rules": "USER_CONFIRMED_ANALYSIS_SCOPED_NO_DATASET_MUTATION",
+    "other_v0_4_contracts": "RECOMMENDED_PENDING_FREEZE_AND_PROBES",
+    "report_tool_count": "USER_CONFIRMED_THREE_VISIBLE_TOOLS_PREPARE_REPORT_HAS_NO_FILE_WRITE",
+    "one_local_package_one_extension": "HOST_MINIMAL_DESIGN; SDK_WIRING_PENDING_PROBE",
+    "extension_loading": "USER_CONFIRMED_NO_AUTO_DISCOVERY_EXPLICIT_PROJECT_EXTENSION_ONLY",
+    "time_policy": "USER_CONFIRMED_OPEN_ONLY_STRICT_GT_FUTURE_ANOMALY_CLOSED_NA_MISSING_NOT_EVALUATED",
+    "confirmation_ttl": "USER_CONFIRMED_10_MIN_SERVER_CREATED_NO_REFRESH_EXTENSION_KEEP_PREVIEW",
+    "expired_draft_reapproval": "USER_CONFIRMED_EXPLICIT_REAPPLY_UNCHANGED_VALID_UNSAVED_DRAFT_NO_MODEL_NEW_10_MIN_ACTION",
+    "analysis_continuation_boundary": "USER_CONFIRMED_SAME_RESULT_CONTINUES_NEW_QUERY_OR_DATASET_NEW_ANALYSIS_NO_DIALOG_RULE_INHERITANCE",
+    "explicit_now_phrase": "USER_CONFIRMED_FIXED_SERVER_MESSAGE_RECEIPT_TIME_WITH_TIMEZONE_AND_PROVENANCE",
+    "normal_run_limits": "USER_CONFIRMED_NO_FIXED_CONVERSATION_TURN_TASK_DURATION_MODEL_OR_TOOL_COUNTS; CANCEL_SINGLE_REQUEST_TIMEOUT_NO_PROGRESS_STOP",
+    "earlier_180s_6_model_6_tool_2048_output_proposal": "WITHDRAWN_NOT_IMPLEMENTED",
+    "normal_run_guard_parameters": "SINGLE_REQUEST_TIMEOUT_AND_NO_PROGRESS_CRITERIA_PENDING_CONTRACT_TEST",
+    "persistence": "USER_CONFIRMED_LOCAL_BACKEND_DATA_CUSTOM_STARTUP_ROOT_NO_CAPACITY_UI"
+  },
+  "baseline_recheck": {
+    "frontend_manifest_files": 15,
+    "mismatches": 0,
+    "browser_recorded_pass": 37,
+    "browser_rerun": false,
+    "backend_directory_exists": false,
+    "pi_version": "0.85.1",
+    "node_version": "v26.0.0",
+    "method_agent_version": "v0.3",
+    "method_agent_sha256": "83e2f91cf051d6ef87d7af1cc029bbd90cc3106f3aca8ae6e41e8e1b0be0afd0"
+  },
+  "capability_library_update": {
+    "requirements": "v1.8",
+    "frontend_design_spec": "v1.7",
+    "frontend_implementation": "v1.7",
+    "backend_spec": "v0.12",
+    "plan": "v1.4",
+    "editable": [
+      "template"
+    ],
+    "readonly": [
+      "skill",
+      "tool",
+      "extension",
+      "package",
+      "attached documents"
+    ],
+    "relations": "read-only navigation, no automatic execution or permission change",
+    "visual_candidate": "TWO_IMAGES_USER_APPROVED_SAVED",
+    "implementation": "COMPLETED_FRONTEND_SCOPE",
+    "independent_review": "DEEPSEEK_GLM_APPROVE_CURRENT_SOURCE"
+  },
+  "final_verification_v1_7": {
+    "source_manifest_files": 21,
+    "mismatches": 0,
+    "unit_pass": 27,
+    "browser_groups_pass": 50,
+    "backend_exists": false,
+    "clean_environment": "NOT_RUN",
+    "receipt": "04-执行过程/阶段审核回执.json#frontend_v1_7"
+  },
+  "backend_spec_v0_7_review": {
+    "receipt": "04-执行过程/阶段审核回执.json#backend_spec_v0_7_review",
+    "reviewed_sha256": "4a1855363c231ab30221d6ad012cf166afb14e07d897b5a73e7d93a20affe6e9",
+    "final_document_sha256": "3d0c7307f4ed9ebbd102ba270e87b1eb5ebc28f4a047d3e890431816843f60a4",
+    "status": "NOT_READY_FOR_EXECUTION",
+    "fresh_executor_host": "NOT_CLEARED_FOR_EXECUTION",
+    "reviewer_fresh_result": "GLM_CLEARED_PLANNING_SCOPE",
+    "final_delta_review": "NOT_RUN"
+  },
+  "backend_contract_verification": {
+    "kind": "OFFLINE_CONTRACT_ONLY",
+    "spec_sha256": "94405ff6eb4c472c81e2f0a56f88a1e9662b8961ac8c752a519f7135c948a9a7",
+    "test_sha256": "04d627b647cd3cef58bb4248f57ff6b37ee5aca3f8230211d8f226b00531cff7",
+    "passed": 52,
+    "failed": 0,
+    "layers": {
+      "document": 1,
+      "limitation": 3,
+      "reference_only": 18,
+      "schema": 30
+    },
+    "validator": "typebox@1.3.7",
+    "result": "06-验收与交付/backend-contract-results.json",
+    "backend_runtime": "NOT_IMPLEMENTED",
+    "real_sdk": "NOT_RUN",
+    "browser": "NOT_RUN",
+    "independent_review": "v0.12 reviewed; v0.13 M3 delta not yet reviewed"
+  },
+  "backend_spec_v0_11_review": {
+    "receipt": "04-执行过程/阶段审核回执.json#backend_spec_v0_11_review",
+    "reviewed_sha256": "40f77ba9cbd37970228f83b985549bf630fde00de6e9789360c88280e8aaa816",
+    "current_sha256": "a697b3101780ab0d9831cf2802da2e836df1e874dc447c8115017a87803a0ce5",
+    "status": "INCOMPLETE",
+    "fresh_executor": "INCOMPLETE_NO_VERDICT"
+  },
+  "backend_spec_v0_12_review": {
+    "reviewed_sha256": "a697b3101780ab0d9831cf2802da2e836df1e874dc447c8115017a87803a0ce5",
+    "current_sha256": "dfc5ecffa1b751948f291f48c261c028fc70266dcab7f411c415fc60bbd26804",
+    "contract_body_unchanged": true,
+    "host_verdict": "READY_FOR_STAGED_IMPLEMENTATION",
+    "fresh_executor": "CLEARED_FOR_STAGED_IMPLEMENTATION",
+    "implementation": "NOT_STARTED_NOT_AUTHORIZED",
+    "receipt": "04-执行过程/阶段审核回执.json#backend_spec_v0_12_review"
+  },
+  "backend_execution": {
+    "authorized": "User goal M2 through M6, implementation and required validation",
+    "stages": {
+      "M2": "real_resources_templates_skill_and_both_model_test_modes_pass",
+      "M3": "17_browser_fixture_groups_pass",
+      "M4": "positive_negative_rules_no_data_and_report_followup_real_pass",
+      "M5": "real_browser_confirm_disk_download_restart_baseline_pass",
+      "M6": "local_recovery_clean_install_and_independent_agent_handoff_pass; human_learner_not_verified"
+    },
+    "writer_selection": {
+      "selector": "multi-model-orchestrator",
+      "roster_source": "ocx_runtime",
+      "roster_hash": "292c289afb5ecaf11072fcae8e2a8216ff74885d54ed6b4e58cd305551d0e896",
+      "selected_model": "gpt-5.6-luna",
+      "effort": "max",
+      "role": "domain-producer",
+      "stage_id": "M2-contracts",
+      "evidence_head": "94405ff6eb4c472c81e2f0a56f88a1e9662b8961ac8c752a519f7135c948a9a7",
+      "write_set": [
+        "05-工作产物/backend/package.json",
+        "05-工作产物/backend/package-lock.json",
+        "05-工作产物/backend/tsconfig.json",
+        "05-工作产物/backend/.gitignore",
+        "05-工作产物/backend/src/contracts.ts",
+        "05-工作产物/backend/tests/contracts.test.ts"
+      ],
+      "attempt": 1,
+      "selection_basis": "default_deputy",
+      "eligibility": {
+        "chosen": true,
+        "registered": true,
+        "calibrated": true,
+        "development_eligible": true,
+        "non_restricted": true
+      }
+    },
+    "pre_spawn_validated": true,
+    "reviewers": "User-designated DeepSeek and GLM; prior fixed reviewer override retained",
+    "baseline": "non-Git source manifest; no git actions",
+    "application_probe": "M2 short batch per Spec budget; no secret output or global mutation",
+    "m3_contract_delta": {
+      "spec": "v0.14",
+      "sha256": "c30dd41232b6e05347f7a3957110a7636bec3fc5f9075e0d812aa96ce6091412",
+      "M2_semantics_changed": false,
+      "independent_review": "PENDING_M3",
+      "scope": "v0.13 DTO additions plus v0.14 clientRequestId lookup and readonly snapshot resync"
+    },
+    "writer_owner": "current host only",
+    "dispatch_mode": "direct host under user authorization; no active dev-team embedded writer",
+    "host_progress": {
+      "stage": "M3-M6 implementation and acceptance hardening",
+      "verification": "75 backend tests PASS; check PASS. New existing-main isolation test; production unchanged. Prior build and browser evidence retain their hashes.",
+      "write_set": [
+        "05-工作产物/backend/src/model.ts",
+        "05-工作产物/backend/src/session.ts",
+        "05-工作产物/backend/tests/model.test.ts",
+        "05-工作产物/backend/tests/session.test.ts",
+        "05-工作产物/backend/tests/sdk-probe.ts"
+      ],
+      "note": "Extends existing contracts/resources M2 scope; host sole writer. writer_selection records historical delegation, not current execution.",
+      "m3_parallel": [
+        "src/access.ts",
+        "tests/access.test.ts",
+        "src/events.ts",
+        "tests/events.test.ts"
+      ],
+      "independent_modules": [
+        "src/storage.ts",
+        "src/business.ts",
+        "src/datasets.ts",
+        "src/reports.ts",
+        "tests/storage.test.ts",
+        "tests/business.test.ts",
+        "tests/datasets.test.ts",
+        "tests/reports.test.ts"
+      ],
+      "next": "No required development work remains in M2-M6 local scope",
+      "frontend_adapter": "src/api.ts and src/runtime.ts replace DemoRuntime in main.ts; resources and templates backend-owned",
+      "browser_evidence": "06-验收与交付/backend-browser-results.json",
+      "source_sha256": "fc479f2f4f0a63dccb60ed9c058a5c684b81282fcc6dcb5a67951dafffbe91c2",
+      "resource_hardening_review": "04-执行过程/阶段审核回执.json#backend_resource_hardening_review",
+      "remaining": "Human learner, cross-platform and power-loss verification not performed; no deployment",
+      "report_recovery_revision": {
+        "sha256": "3578427fe7e526b633a2b8c384c8ff9da7e5889e804cf6621216499d79b0f247",
+        "files": [
+          "src/reports.ts",
+          "tests/reports.test.ts",
+          "tests/recovery.test.ts",
+          "tests/report-crash-fixture.ts"
+        ],
+        "crash_cases": 5,
+        "metadata_mutations": 7,
+        "independent_review": "PENDING",
+        "power_loss": "NOT_VERIFIED"
+      },
+      "recovery_browser_evidence": "06-验收与交付/backend-browser-recovery-results.json",
+      "recovery_browser_source_sha256": "924a042e782424ccbe9db77932a485bf2878a7b99d416a70b8241545c23faaf5",
+      "recovery_review": "Historical d91cc7c5 scope: GLM READY, DeepSeek429 incomplete; app hash changed after review",
+      "clean_reproduction_evidence": "06-验收与交付/clean-environment-results.json",
+      "latest_revision": {
+        "scope": "Strict inline model input schema and evaluate-first Skill clarification",
+        "spec_sha256": "0d6fc925995b4a03cc31e605b4ef09c9a15fb55c7aa374231c26ea49a54c76af",
+        "tests": 74,
+        "independent_review": "BOTH_READY_CURRENT_PRODUCTION_SCOPE",
+        "production_sha256": "c2512e24576d4a84f0a853824acd48c5aa2cf358775600936287c495841da078",
+        "final_spec_document_sha256": "b8a137450c56d3628a247ec30636e8cd207c3238bf2faffa3239ceb3b089304e"
+      },
+      "clean_reproduction": "Independent agent same-host copy: backend75/frontend33/check/build; clean helper9steps and recovery5groups; corrected README isolated browser17groups PASS"
+    },
+    "m2_reviews": {
+      "source_sha256": "cc98dbdd9a1bc658c3db54af7b1ed4b078b56b9da0307377b214641f8ddfd017",
+      "status": "TARGETED_REVISION_READY_BOTH",
+      "exclude_new_m3": [
+        "src/access.ts",
+        "tests/access.test.ts",
+        "src/events.ts",
+        "tests/events.test.ts",
+        "src/storage.ts",
+        "src/business.ts",
+        "src/datasets.ts",
+        "src/reports.ts",
+        "tests/storage.test.ts",
+        "tests/business.test.ts",
+        "tests/datasets.test.ts",
+        "tests/reports.test.ts"
+      ],
+      "agents": [
+        {
+          "id": "01a0c48e-e691-7692-a908-34d86ebd2c6e",
+          "requested_model": "Tongba/deepseek-v4.1-flash",
+          "attribution": "requested_only"
+        },
+        {
+          "id": "01a0c48e-e6f0-72a2-b008-474ec5b6b0e4",
+          "requested_model": "Tongba/glm-5.3-flash",
+          "attribution": "requested_only"
+        }
+      ],
+      "revision_source_sha256": "79aba093a198e0d889f6431bb7f14a6c808a062d7bfe751201861ea4b5f110d7",
+      "original_source_status": "superseded by review corrections; original 20-file hash retained for history"
+    },
+    "business_probe": {
+      "status": "PASS_SCOPED_BASELINE_RULES_RESOURCES_NEGATIVE_MODEL_TESTS_CONVERSATION",
+      "evidence": "06-验收与交付/sdk-business-results.json",
+      "latest_scenario": "conversation",
+      "latest_requests": 7,
+      "latest_tools": 3,
+      "history_runs": 18,
+      "rules": "8 requests/4 tools/105.013s; explicit receivedAt and same analysis; new query resets",
+      "baseline": "Historical production baseline pass in previous_runs; no save",
+      "scope": "Temporary data only. Previous failures retained. No final whole-product acceptance.",
+      "identity": "requested_only",
+      "negative_rules": "Three negative forms preserve null basis/revision0;7 requests/3 tools/92.383s PASS",
+      "application_model_tests": "3 requests/1 tool/21.821s PASS; main context and selection unchanged",
+      "conversation": "B04/B13 actual no-data and /report followup PASS;114.488s; bound tasks2048 only"
+    },
+    "glm_profile": {
+      "spec": "v0.15",
+      "spec_sha256": "0d6fc925995b4a03cc31e605b4ef09c9a15fb55c7aa374231c26ea49a54c76af",
+      "source": "https://docs.z.ai/guides/llm/glm-5.3",
+      "scope": "host tongba/glm-5.3 openai-completions only; process model clone with SDK low; global files untouched",
+      "wire_validation": "local HTTP before/after reload and actual production-profile business probe",
+      "review": "BOTH_READY_IMPLEMENTATION_SCOPE"
+    },
+    "real_browser_probe": {
+      "status": "PASS_SCOPED_REAL_BROWSER_CHAIN",
+      "evidence": "06-验收与交付/backend-browser-real-results.json",
+      "requests": 4,
+      "tools": 3,
+      "elapsedMs": 33875,
+      "download_sha256": "2a973d4e68d6c8f9970056ffdac1ec8dc3f842855f1326bb633d8f2fc2427821",
+      "restart_model_requests": 0,
+      "historical_batches": 3,
+      "temporary_data_removed": true,
+      "children_reaped": true,
+      "visual_checked": true,
+      "new_test_script_independent_review": "NOT_REVIEWED"
+    },
+    "fresh_executor": {
+      "status": "PASS_TARGETED_HANDOFF_HOST_ACCEPTED_WITH_DISCLOSED_PROCESS_DEVIATIONS",
+      "agent_id": "01a0c731-d632-79f1-845f-2d427f8bb324",
+      "requested_model": "Tongba/glm-5.3-flash",
+      "roster_source": "ocx_runtime",
+      "roster_checked_at": "2026-09-22T03:38:19.910377Z",
+      "fork_context": false,
+      "scope": "README-only independent agent clean reproduction, no paid application calls; not human learner proof",
+      "followup_submission_id": "01a0c747-a8a7-7f50-a363-91334ae9f1e0",
+      "README_delta": "Complete layout, script-local output,5189 foreground lifecycle corrected and independently rechecked; final first-paragraph status update only",
+      "findings": "Spec directory dependency; script-relative writes;5189 foreground lifecycle. README corrected.",
+      "source_hash_adjudication": "No drift; omitted path prefix exactly explains263f9601 vs c2512e24",
+      "boundary_violation": "First executor invoked original-path scripts, replacing clean and recovery evidence. Preserved as disclosed; not accepted as fully isolated manual-browser proof."
+    },
+    "delivery_manifest": {
+      "path": "06-验收与交付/final-source-manifest.json",
+      "files": 73,
+      "sha256": "07fc1aa3f1a2f292de61c4b4df2ab42608d3d3253dddb33aafbf3f1da718ed98",
+      "scope": "full-stack source/config/README/test entry points and specs; no node_modules/dist/data",
+      "status": "VERIFIED_LOCAL_DELIVERY_COMPLETE"
+    },
+    "final_acceptance": {
+      "status": "COMPLETE_LOCAL_DEVELOPMENT_SCOPE",
+      "date": "2026-09-22T04:10:22.836678+00:00",
+      "ac": "B01-B19 evidence mapped in acceptance record",
+      "remaining_outside_verified_scope": [
+        "human learner",
+        "cross-platform",
+        "power-loss durability",
+        "global CLI/TUI extension release"
+      ],
+      "production_sha256": "c2512e24576d4a84f0a853824acd48c5aa2cf358775600936287c495841da078"
+    }
+  },
+  "historical_model_runs": [
+    {
+      "requested_model": "gpt-5.6-luna",
+      "child_thread_id": "01a0c365-6253-7af1-867a-e1421c22f200",
+      "role": "domain-producer",
+      "status": "COMPLETED",
+      "roster_selected": true,
+      "spawn_accepted": true,
+      "provider_succeeded": true,
+      "resolved_model": "unverified",
+      "attribution": "requested_only",
+      "attempt": 1,
+      "state": "completed",
+      "evidence_head": "afd8a01d560284616bea740c659d82c34021588f8dd49f20993ff085f628972d",
+      "adopted_by_gate": true
+    },
+    {
+      "role": "domain-producer",
+      "stage_id": "M2",
+      "requested_model": "gpt-5.6-luna",
+      "resolved_model": "gpt-5.6-luna",
+      "identity_source": "frozen_selection",
+      "runtime_identity": "unverified",
+      "attribution": "requested_only",
+      "evidence_head": "dfc5ecffa1b751948f291f48c261c028fc70266dcab7f411c415fc60bbd26804",
+      "child_thread_id": "01a0c400-f59d-7e71-a42a-c48638ed976c",
+      "started_at": "2026-09-21T12:47:44.220530+00:00",
+      "state": "shutdown",
+      "attempt": 1,
+      "artifact_paths": [
+        "05-工作产物/backend/package.json",
+        "05-工作产物/backend/package-lock.json",
+        "05-工作产物/backend/tsconfig.json",
+        "05-工作产物/backend/README.md",
+        "05-工作产物/backend/.gitignore",
+        "05-工作产物/backend/src/contracts.ts",
+        "05-工作产物/backend/src/resources.ts",
+        "05-工作产物/backend/src/model.ts",
+        "05-工作产物/backend/src/session.ts",
+        "05-工作产物/backend/resources/package.json",
+        "05-工作产物/backend/resources/prompts/query.md",
+        "05-工作产物/backend/resources/prompts/report.md",
+        "05-工作产物/backend/resources/skills/ticket-triage/SKILL.md",
+        "05-工作产物/backend/resources/skills/ticket-triage/references/triage-rules.md",
+        "05-工作产物/backend/resources/extensions/ticket-tools.ts",
+        "05-工作产物/backend/tests/contracts.test.ts",
+        "05-工作产物/backend/tests/resources.test.ts",
+        "05-工作产物/backend/tests/model.test.ts",
+        "05-工作产物/backend/tests/session.test.ts",
+        "05-工作产物/backend/tests/sdk-probe.ts"
+      ],
+      "adopted_by_gate": false,
+      "reason": "Host ended broad task and confirmed missing handle before bounded fresh-context stage; no code written"
+    },
+    {
+      "role": "domain-producer",
+      "stage_id": "M2-contracts",
+      "requested_model": "gpt-5.6-luna",
+      "resolved_model": "gpt-5.6-luna",
+      "identity_source": "frozen_selection",
+      "runtime_identity": "unverified",
+      "attribution": "requested_only",
+      "child_thread_id": "01a0c415-17b7-7641-b10d-834db73081ac",
+      "evidence_head": "94405ff6eb4c472c81e2f0a56f88a1e9662b8961ac8c752a519f7135c948a9a7",
+      "state": "shutdown",
+      "attempt": 1,
+      "started_at": "2026-09-21T13:08:46.725965+00:00",
+      "adopted_by_gate": false,
+      "reason": "Host reclaim of optional delegation after no code artifact; explicit close and not_found confirmed"
+    }
+  ]
+}
+---
+
+# 执行状态
+
+身份字段为运行时校验器的冻结选模绑定，不证明提供商实际模型。真实请求归属仍为requested_only；最终交付状态以00项目入口与实物验证为准。模型过程回执见审核与协作记录。

@@ -1,0 +1,96 @@
+id: spiral-notebook-scrapbook
+name: 线圈手账便签拼贴风 (Spiral Notebook Scrapbook)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: handdrawn-studygram
+  style: spiral-scrapbook-collage
+  subject: formula-series-checklist
+
+tags:
+  - spiral-notebook
+  - washi-tape-collage
+  - sticky-notes
+  - robot-mascot
+  - 7-row-icon-checklist
+  - interactive-community-card
+
+description: 采用左侧金属双螺旋线圈装订、和纸胶带与便利贴拼贴质感的手账便签风。包含手绘线稿机器人吉祥物引线口播、7 行微插画虚线清单大卡片，以及底部预告气泡与打勾便签，亲和力与收藏率极高。
+
+author: antigravity-laowang
+
+use_cases:
+  - "技术万能公式与进阶系列教程（如：Agent 工具协议、RAG 7大召回姿势）"
+  - "工具库、框架能力与技术选型对比大盘点"
+  - "小红书/知乎高互动干货长图"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "scrapbook-collage-poster"
+
+variables:
+  - name: series_title
+    description: 左上角牛皮纸胶带文字
+    default: "AI Agent 落地万能公式 系列①"
+  - name: sticky_note_text
+    description: 右上角浅蓝便利贴金句
+    default: "工具: 决定了智能体的能力边界与执行力 ♡"
+  - name: heading_prefix
+    description: 主标题前缀
+    default: "先为智能体装配"
+  - name: highlight_title
+    description: 主标题橙色加粗核心词
+    default: "「核心工具协议」"
+  - name: intro_paragraph
+    description: 痛点引入段落（黄色荧光笔划线核心词）
+    default: "一开始我也以为只要把任务丢给大模型就行，但模型无法直接与真实系统交互。最好的方式，是用标准协议明确输入输出，让模型精准调度外部能力～"
+  - name: seven_items
+    description: 7 行微插画清单项（含图标描述、英文名、中文名、说明）
+    default: []
+  - name: teaser_text
+    description: 左下角气泡预告文字
+    default: "下篇笔记我将会主要带大家手撕 MCP 工具接入，需要的小伙伴可以蹲一下！♡"
+  - name: checklist_questions
+    description: 右下角黄色便签 4 个复选框问题
+    default:
+      - "工具怎么选？"
+      - "参数如何强校验？"
+      - "运行环境如何隔离？"
+      - "如何防止模型越权？"
+
+prompt_skeleton: |
+  An ultra charming authentic spiral notebook scrapbook study poster, 2:3 vertical aspect ratio, aesthetic bullet journal and stationery collage style. 
+  The background is a clean, warm cream-yellow notebook page. Along the entire left edge is a neat row of authentic black metal double spiral binding coil rings piercing through clean punch holes.
+
+  [TOP AREA & SCRAPBOOK ELEMENTS]
+  Top-left corner has a strip of realistic semi-transparent kraft paper washi tape pasted horizontally, with handwritten text: `{series_title}` next to a tiny orange star.
+  Top-right corner has a cute tilted light-blue square sticky note pinned with tape, containing neat handwriting: `{sticky_note_text}` framed with corner sparkle crosses.
+
+  [MAIN TITLE & MASCOT]
+  A circled number badge `❶` in bold black ink.
+  Large handwritten heading: `{heading_prefix}` followed by a larger, bold vibrant orange-brown brush handwritten title: `{highlight_title}`.
+  Beneath the heading, friendly conversational handwritten paragraph:
+  `{intro_paragraph}`
+  A green curved hand-drawn arrow leads from this text to the right:
+  A super cute hand-drawn line-art robot mascot standing cheerfully, wearing small antenna headphones, left hand on hip, right hand pointing upwards, with a small round badge stamped `(AI)`.
+
+  [CENTER BIG CARD - 7 ITEMS LIST]
+  A large rounded rectangular cream-colored card with a subtle dashed gray border.
+  Top-left corner has a small green pill badge labeled `例如:` with a tiny yellow star.
+  Inside the card, 7 neatly organized rows separated by fine horizontal dashed lines, each row featuring [Doodle Icon] + [English Title (Chinese Name)] ➔ [Green Arrow] + [Capability Explanation]:
+  {seven_items_prompt_block}
+
+  [BOTTOM INTERACTION & CHECKLIST AREA]
+  Bottom-Left: A soft light-blue rounded speech bubble box containing handwritten text:
+  `{teaser_text}`, decorated on the left with a colorful hand-drawn smiling sunflower doodle `🌻`.
+  Bottom-Right: A realistic tilted warm-yellow square sticky note taped with green washi tape at the top, containing 4 neat hand-drawn checkboxes `☑️`:
+  {checklist_questions_block}
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Crisp pen-and-paper illustration, authentic handwritten Chinese characters, authentic spiral coil binding, delicate washi tape textures, pastel markers, clean scrapbook aesthetic.
+
+strict_negative: |
+  NO 3D photorealism, NO dark backgrounds, NO blurry handwriting, NO messy stains, NO distorted robot, NO unreadable overlapping text.

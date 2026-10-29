@@ -1,0 +1,91 @@
+id: enterprise-architecture-blueprint
+name: 企业级生产架构全景蓝图 (Enterprise Architecture Blueprint)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-hardware
+  style: enterprise-vector-flat
+  subject: end-to-end-production-system
+
+tags:
+  - enterprise-architecture
+  - tri-column-winged
+  - security-governance
+  - observability-operations
+  - agent-runtime-core
+  - non-functional-foundation
+  - vector-flat-diagram
+
+description: 采用三栏翼展架构（左翼安全治理 + 右翼观测运营 + 中间6层核心堆栈 + 底部非功能基石）的企业级 AI 生产架构全景蓝图。纯白底纯矢量平面制图，中间核心中枢采用浅冰蓝大底与纯白卡片，彻底消除紫色污染、发灰阴影、笔画重叠与字符乱码。
+
+author: antigravity-laowang
+
+use_cases:
+  - "端到端 AI Agent / 大模型平台企业级落地生产全景架构图"
+  - "系统设计大题答辩与大厂 Tech Lead 架构汇报"
+  - "硬核技术深度文章封面与核心系统架构总览"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "tri-column-winged-poster"
+
+variables:
+  - name: system_title
+    description: 架构大标题
+    default: "AI Agent 生产级架构全景图"
+  - name: system_subtitle
+    description: 副标题定位
+    default: "从交互入口、智能体编排到模型、知识、安全、观测与基础设施的端到端生产体系"
+  - name: left_wing_title
+    description: 左翼支撑栏标题
+    default: "安全与治理"
+  - name: left_wing_items
+    description: 左翼 8 个支撑卡片
+    default: ["身份认证", "权限控制", "敏感信息脱敏", "内容安全审核", "审计日志", "合规策略", "提示词注入防护", "工具调用沙箱"]
+  - name: right_wing_title
+    description: 右翼支撑栏标题
+    default: "观测、评测与运营"
+  - name: right_wing_items
+    description: 右翼 8 个支撑卡片
+    default: ["日志与Tracing", "监控告警", "成本分析", "质量评测", "AB测试", "反馈闭环", "Prompt版本管理", "SLO运维"]
+  - name: core_tiers
+    description: 中间 6 大层级模块配置（接入层、业务层、编排中枢、模型层、知识层、基建层）
+    default: {}
+  - name: non_functional_items
+    description: 底部非功能特性 8 个指标
+    default: ["可扩展", "高可用", "低延迟", "可观测", "安全合规", "可审计", "可运营", "可迭代"]
+
+prompt_skeleton: |
+  An ultra high-density, authoritative enterprise-grade AI software system architecture blueprint poster, 2:3 vertical aspect ratio, pristine 2D vector flat diagram style. 
+  The background is pure crisp white (#FFFFFF) without any paper textures, shadows, or gradients. The overall layout features a majestic Tri-Column Winged Architecture: Left Security Pillar (15% width), Central Core Architecture Stack (70% width), Right Observability Pillar (15% width), and a Full-Width Non-Functional Foundation Strip at the bottom. Color palette strictly unified: Royal Navy Blue (#1E40AF), Ice Blue (#EBF3FC), Tech Cyan (#0284C7), and Pure White (#FFFFFF). STRICTLY NO PURPLE OR VIOLET.
+
+  [TOP HEADER SECTION]
+  Large bold royal navy blue title in crisp modern sans-serif: `{system_title}`.
+  Subtitle below: `{system_subtitle}`.
+
+  [LEFT WING - {left_wing_title} (15% width)]
+  Enclosed in a slim vertical container with a solid royal blue header card: `{left_wing_title}`, shield icon.
+  Vertically stacked 8 neat rectangular pure white cards with micro vector outline icons:
+  {left_wing_items_block}
+
+  [RIGHT WING - {right_wing_title} (15% width)]
+  Enclosed in a slim vertical container with a solid royal blue header card: `{right_wing_title}`, chart dashboard icon.
+  Vertically stacked 8 neat rectangular pure white cards with micro vector outline icons:
+  {right_wing_items_block}
+
+  [CENTER CORE ARCHITECTURE STACK (70% width) - 6 TIERS]
+  {core_tiers_block}
+
+  [BOTTOM FOUNDATION STRIP - 7. 企业级非功能特性]
+  A full-width horizontal navy blue strip with white badge: `7. 企业级非功能特性`, followed by 8 outline icon cards:
+  {non_functional_items_block}
+  Beneath it, clean legend with 3 colored arrow lines: `数据流向 (深蓝实线)`, `控制流向 (蓝虚线)`, `反馈优化 (青色虚线)`.
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Ultra clean 2D vector flat enterprise software architecture, pristine razor-sharp lines, crisp legible Chinese characters, vibrant royal blue, cyan and ice-blue accents, pure flat white cards with bold dark navy text, perfect container alignments, zero clutter, spacious typography.
+
+strict_negative: |
+  NO purple, NO violet, NO lavender, NO 3D rendering, NO photorealistic objects, NO metallic textures, NO hand-drawn sketch style, NO binder rings, NO paper textures, NO dark backgrounds, NO blurry text, NO background overlap, NO messy gradients, NO alien gibberish symbols, NO distorted Chinese characters.

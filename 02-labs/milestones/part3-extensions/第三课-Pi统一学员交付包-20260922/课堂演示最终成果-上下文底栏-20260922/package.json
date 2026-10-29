@@ -1,0 +1,31 @@
+{
+  "name": "pi-context-panel-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "最小 Pi Extension：用 /context-panel 开关 TUI 底栏，单行显示当前会话上下文占用；开关偏好跨窗口延续",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "typecheck": "node scripts/check.mjs --typecheck-only",
+    "test": "node scripts/check.mjs --tests-only"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "0.85.1",
+    "@earendil-works/pi-tui": "0.85.1"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "typescript": "6.0.3"
+  }
+}

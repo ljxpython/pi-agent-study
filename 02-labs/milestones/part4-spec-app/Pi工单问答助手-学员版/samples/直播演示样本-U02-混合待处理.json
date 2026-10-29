@@ -1,0 +1,41 @@
+{
+  "now": "2026-09-17T12:00:00Z",
+  "policy": {
+    "urgentHours": 4,
+    "normalHours": 24
+  },
+  "tickets": [
+    {
+      "id": "P01",
+      "title": "工单列表接口持续报错",
+      "team": "平台",
+      "priority": "urgent",
+      "status": "open",
+      "createdAt": "2026-09-17T06:30:00Z"
+    },
+    {
+      "id": "P02",
+      "title": "新工单通知延迟",
+      "team": "平台",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-17T10:30:00Z"
+    },
+    {
+      "id": "P03",
+      "title": "移动端按钮文字换行",
+      "team": "前端",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-17T09:00:00Z"
+    },
+    {
+      "id": "P04",
+      "title": "平台登录异常已恢复",
+      "team": "平台",
+      "priority": "urgent",
+      "status": "closed",
+      "createdAt": "2026-09-17T05:00:00Z"
+    }
+  ]
+}

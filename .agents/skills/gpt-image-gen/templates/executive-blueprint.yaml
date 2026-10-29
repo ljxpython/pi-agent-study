@@ -1,0 +1,42 @@
+id: executive-blueprint
+name: 极简现代商业与权力拓扑模型
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-doc
+  style: minimalism-3d
+  subject: diagram-chart
+category: minimal-diagram
+tags:
+  - bauhaus
+  - 3d-geometry
+  - executive-brief
+  - power-dynamics
+  - corporate-strategy
+description: 包豪斯高冷极简风与三维几何拓扑结构，专用于商业战略、组织架构演化、博弈论拓扑与高管决策分析
+author: gpt-image-gen-core
+
+use_cases:
+  - "Strategic leadership decks, whitepapers, and executive reports"
+  - "Abstract organizational power structure and game-theoretic dynamics"
+  - "Minimalist tech and business keynote hero visuals"
+
+parameters:
+  aspect_ratio: "16:9 or 3:2"
+  recommended_size: "1024x576 or 1152x768"
+  quality: "high"
+  layout_type: "minimalist-3d-diagram"
+
+variables:
+  - name: structure_dynamics
+    description: 商业组织或博弈动态的抽象几何表达（控制力、杠杆、网络连接、张力平衡）
+    example: "Pure geometric forms representing organizational hierarchy and power dynamics: a solid dark obsidian sphere anchoring a dynamic shifting network of thin golden wireframes"
+
+prompt_skeleton: |
+  Minimalist modern conceptual graphic design, Bauhaus inspired.
+  {structure_dynamics}.
+  Aesthetics: Clean warm-off-white background, elegant studio shadows, sophisticated modern editorial illustration, premium corporate art style.
+
+strict_negative: |
+  STRICT NEGATIVE: Absolutely NO text, NO labels, NO numbers, NO alphabet letters, NO messy sketches.

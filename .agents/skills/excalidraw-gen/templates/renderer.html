@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Excalidraw Renderer</title>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: local('Muyao-Softbrush'), local('沐瑶软笔手写体'), local('slideyouran'), local('演示悠然小楷'), local('LXGW WenKai'), local('霞鹜文楷');
+      unicode-range: U+4E00-9FFF, U+3400-4DBF, U+3000-303F, U+FF00-FFEF, U+2000-206F;
+    }
+    @font-face {
+      font-family: 'Excalifont';
+      src: local('Muyao-Softbrush'), local('沐瑶软笔手写体'), local('slideyouran'), local('演示悠然小楷'), local('LXGW WenKai'), local('霞鹜文楷');
+      unicode-range: U+4E00-9FFF, U+3400-4DBF, U+3000-303F, U+FF00-FFEF, U+2000-206F;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #ffffff;
+      display: inline-block;
+    }
+    #export-container {
+      display: inline-block;
+    }
+    #export-container svg {
+      display: block;
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script type="module">
+    try {
+      const utils = await import('https://esm.sh/@excalidraw/utils@0.1.1?external=react,react-dom');
+      window.ExcalidrawUtils = utils;
+      window.__READY__ = true;
+    } catch(e) {
+      console.error("Failed to load utils:", e);
+      window.__ERROR__ = String(e);
+    }
+  </script>
+</head>
+<body>
+  <div id="export-container"></div>
+</body>
+</html>

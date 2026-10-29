@@ -1,0 +1,110 @@
+id: linear-skills-pipeline
+name: 单列流式五层技能流水线 (5-Tier Linear Skills Pipeline)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-hardware
+  style: enterprise-vector-flat
+  subject: agent-skills-linear-workflow
+
+tags:
+  - 5-tier-pipeline
+  - skills-library-matrix
+  - sequential-reasoning-flow
+  - memory-feedback-loop
+  - clean-numbered-badges
+  - vector-flat-diagram
+
+description: 采用单列纵向 5 层顺序流水线（用户交互 ➔ 智能规划 ➔ 技能执行 ➔ 反馈记忆 ➔ 最终输出）的 AI Agent Skills 技术架构图。纯白底、左上角清晰灰色圆角序号徽章、2×4 技能库矩阵与高对比扁平图标，结构极其规整，适合深度教程与工作流剖析。
+
+author: antigravity-laowang
+
+use_cases:
+  - "AI Agent 技能编排 (Skills) 与工具调用执行链路详解"
+  - "从用户需求到端到端自动执行的系统工作流展示"
+  - "技术博客、课程讲义与面试讲解中的核心架构剖析"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "5-tier-linear-pipeline-poster"
+
+variables:
+  - name: main_title
+    description: 架构大标题
+    default: "AI Agent Skills 技术架构全景图"
+  - name: subtitle
+    description: 副标题定位
+    default: "从用户需求到自动执行的完整智能体工作流"
+  - name: tier1_title
+    description: 第一层标题
+    default: "第一层：用户交互层 (User Interaction Layer)"
+  - name: tier2_title
+    description: 第二层标题
+    default: "第二层：智能规划层 (Agent Reasoning Layer)"
+  - name: tier3_title
+    description: 第三层标题
+    default: "第三层：技能执行层 (Skills Execution Layer)"
+  - name: tier4_title
+    description: 第四层标题
+    default: "第四层：反馈与记忆层 (Memory & Feedback)"
+  - name: tier5_title
+    description: 第五层标题
+    default: "第五层：最终输出层 (Result Layer)"
+
+prompt_skeleton: |
+  An ultra clean, elegant, highly structured AI Agent software architecture blueprint poster, 2:3 vertical aspect ratio, pristine 2D vector flat diagram style.
+  The background is pure crisp white (#FFFFFF) with faint geometric wireframe line accents in the far corners. The diagram layout is strictly a single-column, 5-Tier vertical linear sequence from top to bottom. Color palette: Clean Navy Blue (#1E3A8A), Tech Sky Blue (#0284C7), Soft Amber/Gold, Crisp White cards, and Slate Gray typography.
+
+  [TOP HEADER SECTION]
+  Large bold dark navy title in modern clean sans-serif: `{main_title}`.
+  Subtitle directly below in neat charcoal: `{subtitle}`.
+
+  [TIER 1 - {tier1_title}]
+  Header: Rounded gray badge with white number `1`, followed by bold text `{tier1_title}`, and a light gray explanatory line: `用户通过自然语言或系统触发向 Agent 提出任务需求`.
+  Inside a wide light-blue container:
+  Left side: Prompt input icon `>>]` + text `用户聊天指令` / `API 请求` with an arrow pointing to a central prominent blue pill card: `User Request (用户需求输入)`.
+  Right side: 4 neat tag pills vertically stacked: `API 请求` (message icon), `自动触发任务` (code icon), `定时任务` (clock icon), `外部系统 Webhook` (network icon).
+
+  [TIER 2 - {tier2_title}]
+  Header: Rounded gray badge `2`, followed by bold text `{tier2_title}`.
+  Inside a wide container, a horizontal sequence of 4 warm-bordered rounded cards linked by right-pointing blue arrows:
+  1. `Request LLM (任务理解与规划)`: bullet points: `意图识别`, `任务拆解`, `技能规划`, `推理决策` (gear & brain icons).
+  2. `Skill Analysis (技能分析)`: bullet points: `判断需要哪些能力`, `检查依赖 (搜索/代码/API)` (magnifying glass icon).
+  3. `Skill Action (技能选择)`: text: `选择合适的技能模块`, tags: `Web Search`, `Code Runner`, `Browser Agent`, `Data Analysis`.
+  4. `Skill Params (参数配置)`: text: `配置执行参数`, tags: `API key`, `输入参数`, `返回格式` (sliders icon).
+
+  [TIER 3 - {tier3_title}]
+  Header: Rounded gray badge `3`, followed by bold text `{tier3_title}`.
+  Enclosed in a prominent blue-tinted container titled: `Skills Library (技能库)`.
+  A spacious 2 Rows × 4 Columns grid of 8 pure white cards with crisp blue vector icons and bold text:
+  Row 1:
+  - `Web Search (联网搜索)` (search icon)
+  - `Code Execution (代码执行)` (terminal code icon)
+  - `Data Analysis (数据分析)` (bar chart icon)
+  - `Content 内容生成` (document pencil icon)
+  Row 2:
+  - `Browser Automation (浏览器自动化)` (browser window icon)
+  - `File System (文件操作)` (folder icon)
+  - `Database Query (数据库查询)` (SQL database cylinder icon)
+  - `API Integration (外部系统调用)` (plug connector icon)
+
+  [TIER 4 - {tier4_title}]
+  Header: Rounded gray badge `4`, followed by bold text `{tier4_title}`.
+  Inside a clean container, 3 pure white rectangular cards linked in a continuous cycle by curved double-sided blue arrows (🔄):
+  1. `Observation (执行结果反馈)`: bullet points: `执行结果`, `错误信息`, `状态反馈` (eye & graph icons).
+  2. `Skill History (技能执行历史)`: bullet points: `记录调用的工具`, `执行步骤`, `成功/失败结果`, `形成经验记忆` (notebook pencil icon).
+  3. `Prompt Update (动态优化 Prompt)`: bullet points: `根据历史优化提示词`, `调整技能调用策略`, `提高任务成功率` (refresh AI icon).
+
+  [TIER 5 - {tier5_title}]
+  Header: Rounded gray badge `5`, followed by bold text `{tier5_title}`.
+  A wide container showing the final delivery:
+  Left side: `Final Answer` card with text `Agent 汇总执行结果并输出` (magnifying glass & document icon).
+  Right-pointing arrow directs to 4 neat output cards with blue icons:
+  `结构化报告` (doc icon) | `自然语言解释` (chat bubbles icon) | `自动生成文档` (printer doc icon) | `API 返回结果` (code JSON transfer icon).
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Ultra clean 2D vector flat enterprise architecture, razor-sharp lines, crisp legible Chinese characters, perfect horizontal and vertical container alignments, generous margins, high contrast typography.
+  STRICT NEGATIVE: NO 3D rendering, NO photorealistic objects, NO metallic textures, NO hand-drawn sketch style, NO binder rings, NO paper textures, NO dark cyberpunk backgrounds, NO blurry text, NO alien gibberish symbols, NO distorted Chinese characters.

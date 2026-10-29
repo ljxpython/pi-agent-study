@@ -1,0 +1,91 @@
+id: cute-anime-studygram
+name: 可爱日漫少女手账指南风 (Cute Anime Studygram Tutorial)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: handdrawn-studygram
+  style: cute-anime-studygram-watercolor
+  subject: step-by-step-tutorial-guide
+
+tags:
+  - anime-girl-mascot
+  - 5-step-pathway
+  - cat-paw-prints
+  - studygram
+  - pastel-watercolor
+  - formula-card
+  - rabbit-mascot
+
+description: 采用水彩马卡龙方格纸底衬、S型猫爪足迹流水线与长卷发日漫少女连贯姿势变化的治愈系手账指南。包含 5 步递进卡片、万能公式卡与软萌小兔便签小提醒，在小红书、B站等平台具备极高的点击率与情感粘性。
+
+author: antigravity-laowang
+
+use_cases:
+  - "零基础到高阶的 5 步通关教程与行动指南（如：从零打造个人智能体、AI面试5步备战）"
+  - "高赞爆款小红书/知乎手绘治愈系长图"
+  - "学习方法论与复杂技能拆解"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "s-pathway-tutorial-poster"
+
+variables:
+  - name: title_line_1
+    description: 顶部大标题第一行
+    default: "怎么用 AI 打造"
+  - name: title_line_2
+    description: 顶部大标题第二行
+    default: "高薪个人智能体"
+  - name: banner_subtitle
+    description: 丝带横幅副标题
+    default: "5 步攻关从零到落地的生产级智能体 ♡"
+  - name: five_steps
+    description: 5 个步骤卡片配置（各含少女动作姿态插画、标题、内容、3个标签）
+    default: []
+  - name: formula_equation
+    description: 底部左卡万能公式胶囊串联
+    default: "角色定义 + 目标状态 + 规划拆解 + 工具集成 + 状态机闭环 + 异常自愈"
+  - name: formula_tip
+    description: 底部左卡灯泡核心说明
+    default: "确定性的工程链路约束不确定的智能，结构越清晰，执行越稳定。"
+  - name: tips_list
+    description: 底部右卡老王小提醒 3 条
+    default:
+      - "逻辑先跑通，再做大扩展"
+      - "一次只定位一个报错"
+      - "生产级代码坚决不留死循环"
+
+prompt_skeleton: |
+  An ultra charming and aesthetic cute anime girl studygram tutorial infographic poster, 2:3 vertical aspect ratio, pastel watercolor and Japanese stationery scrapbook style. 
+  The background is a clean, flat warm cream-white grid paper with faint pink and soft yellow grid lines, decorated with gentle pastel doodles, tiny colorful sparkles, and floating cute hearts.
+
+  [TOP HEADER SECTION]
+  Top-left corner has a soft red dashed cloud speech bubble with text `加油` next to a pink heart.
+  Large bold playful hand-drawn title in black and soft sage-green brush lettering with subtle pastel halos:
+  `{title_line_1}`
+  `{title_line_2}`
+  Top-right corner shows a cute miniature pink notebook with a heart on the cover and a diagonal yellow pencil.
+  Directly beneath the title, a white rounded pill banner with pink hearts on both ends displays: `{banner_subtitle}`.
+
+  [S-SHAPED 5-STEP PATHWAY WITH ANIME GIRL MASCOT]
+  A winding S-shaped pathway of delicate brown cat paw print dots links 5 sequential step cards, each featuring an expressive, cute anime girl with long wavy brown hair in different interactive study poses:
+  {five_steps_prompt_block}
+
+  [BOTTOM ROW - FORMULA & TIPS CARDS]
+  Left Card: A large cream card taped with red-and-white checkered washi tape at the top-left, titled `万能公式 ⭐`.
+  Pill chain equation: `{formula_equation}`.
+  Example note: `💡 核心: {formula_tip}`.
+
+  Right Card: A warm yellow sticky note taped with green washi tape at the top, titled `小提醒 ♡`.
+  List with star, heart, and flower icons:
+  {tips_list_block}
+  In the bottom-right corner, a super adorable chibi white bunny doodle `🐰` peeking out cheerfully.
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Soft watercolor pastel illustration, charming anime girl characters, aesthetic studygram stationery, legible handwritten Chinese text, delicate dashed lines, warm cozy atmosphere.
+
+strict_negative: |
+  NO 3D rendering, NO photorealistic objects, NO metallic textures, NO dark cyberpunk backgrounds, NO blurry text, NO distorted faces, NO ugly anatomy, NO dirty stains.

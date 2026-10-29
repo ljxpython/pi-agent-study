@@ -1,0 +1,100 @@
+id: exploded-diagram-tech
+name: 工业与系统架构 3D 爆炸拆解图
+version: 1.0.0
+prompt_mode: structured-json
+
+taxonomy:
+  scene: tech-hardware
+  style: 3d-schematic
+  subject: exploded-diagram
+
+tags:
+  - exploded-view
+  - 3d-render
+  - industrial-design
+  - hardware-schematic
+  - callout-infographic
+  - json-prompt
+
+description: 采用结构化 JSON 树驱动的高科技产品、系统架构与物理组件 3D 爆炸视图海报。通过键值对强力约束中心多层分解组件（Centerpiece）、两侧引线注解（Callout Labels）、顶栏与底栏规范，模型原生生成高精度科技工业拆解图。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "High-tech hardware/device exploded diagram with labeled internal components"
+  - "Complex software architecture or cognitive model rendered as an exploded physical mechanism"
+  - "Industrial product launch promotional poster with technical callouts and sleek studio lighting"
+
+parameters:
+  aspect_ratio: "16:9"
+  recommended_size: "1024x576"
+  quality: "high"
+  layout_type: "exploded-centerpiece-with-side-callouts"
+
+variables:
+  - name: product_name
+    description: 拆解主体或产品名称
+    default: "Quantum Neural Core v2"
+    example: "高精度沉浸式感知设备 / 认知中枢引擎"
+  - name: subtitle
+    description: 宣传主标语或架构核心哲学
+    default: "以精密的内部拓扑，重构无限可能的认知边界。"
+    example: "以极致工程架构，驱动未来智能演进。"
+  - name: centerpiece_layers
+    description: 中心 3D 爆炸拆解组件层级描述
+    default: "中心垂直悬浮堆叠的立体爆炸视图，展示 7 层精密内部组件：哑光钛合金外壳、高速神经计算芯片阵列、散热均热板、光学传感镜组、微型高能固态电池、外部防护边框与柔性贴合衬垫。"
+  - name: left_callouts
+    description: 左侧引线标注列表
+    default:
+      - "主控神经算力芯片：提供毫秒级低延迟推演能力"
+      - "微晶散热矩阵：确保全负载工况下极端稳定"
+      - "钛金属加固框架：追求极佳轻量化与机械强度"
+  - name: right_callouts
+    description: 右侧引线标注列表
+    default:
+      - "高透光学透镜模组：带来广角超清视觉采样"
+      - "微型高密度电池组：优化的电源拓扑实现超长续航"
+      - "人体工学贴合衬垫：长久沉浸依然舒适轻盈"
+  - name: footer_headline
+    description: 底部总结标题
+    default: "科技进化，始于内部结构的重塑"
+  - name: footer_body
+    description: 底部总结正文
+    default: "每一个微观模块都凝聚着前沿科技与工业美学的融合。从底层物理层到交互层，实现全维度的跃迁。"
+  - name: background_style
+    description: 背景与灯光环境
+    default: "深色哑光科技灰配合柔和紫蓝色摄影棚环境光，带有微弱的环境辉光与倒影"
+
+negative_prompt_block: |
+  NEGATIVE CONSTRAINTS:
+  - Do NOT generate messy or tangled explosion lines; every layer must float cleanly and ordered in 3D space.
+  - Do NOT clutter labels with illegible gibberish; keep all callout text sharp and readable.
+  - No low-resolution polygon artifacts, no cartoonish outlines.
+  - No watermarks or unrelated decorative logos.
+
+prompt_skeleton: |
+  {
+    "type": "产品 3D 爆炸视图海报",
+    "subject": "${product_name}",
+    "style": "简洁极致的高科技 3D 工业渲染，摄影棚灯光，精致物理材质与环境辉光",
+    "background": "${background_style}",
+    "header": {
+      "logo": "⬡ ${product_name}",
+      "subtitle": "${subtitle}"
+    },
+    "layout": {
+      "centerpiece": "${centerpiece_layers}",
+      "callout_labels": {
+        "left_side": [
+          ${left_callouts}
+        ],
+        "right_side": [
+          ${right_callouts}
+        ]
+      },
+      "footer": {
+        "headline": "${footer_headline}",
+        "body": "${footer_body}"
+      }
+    }
+  }

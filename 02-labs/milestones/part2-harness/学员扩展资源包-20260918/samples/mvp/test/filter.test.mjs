@@ -1,0 +1,14 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { filterTasks } from '../src/filter.js';
+import { tasks } from '../src/tasks.js';
+const ids = xs => xs.map(x => x.id);
+test('空条件保留全部任务', () => assert.deepEqual(ids(filterTasks(tasks)), [1, 2, 3]));
+test('中文关键词', () => assert.deepEqual(ids(filterTasks(tasks, {query:'登录'})), [1, 2]));
+test('关键词去空白并忽略大小写', () => assert.deepEqual(ids(filterTasks(tasks, {query:' api '})), [3]));
+test('按状态筛选', () => assert.deepEqual(ids(filterTasks(tasks, {status:'done'})), [2]));
+test('关键词和状态同时满足', () => assert.deepEqual(ids(filterTasks(tasks, {query:'登录',status:'todo'})), [1]));
+test('无结果返回空数组', () => assert.deepEqual(filterTasks(tasks, {query:'不存在'}), []));
+test('空白关键词视为无关键词', () => assert.deepEqual(ids(filterTasks(tasks, {query:'  ',status:'todo'})), [1, 3]));
+test('空数据返回空数组', () => assert.deepEqual(filterTasks([], {query:'登录'}), []));
+test('不得修改原数组或对象', () => { const input=tasks.map(x=>Object.freeze({...x}));Object.freeze(input); const before=JSON.stringify(input);filterTasks(input,{query:'登录',status:'todo'});assert.equal(JSON.stringify(input),before); });

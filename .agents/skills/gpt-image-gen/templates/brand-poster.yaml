@@ -1,0 +1,81 @@
+id: brand-poster
+name: 品牌海报·国潮·城市系列·产品宣传
+description: >
+  生成高质量品牌宣传海报，支持国潮风、城市系列、产品推广、节日促销等场景。
+  支持系列一致性（多张风格统一）和单张独立设计两种模式。
+  适合品牌运营、内容创作者、设计师快速产出宣传物料。
+aspect_ratio: "9:16"   # 默认竖版，可覆盖为 16:9 / 1:1
+size: "768x1366"
+
+variables:
+  brand_name: ""                    # 品牌名称
+  poster_theme: ""                  # 海报主题（如：2026城市宣传·北京）
+  style_keyword: "国潮现代"         # 国潮现代 / 科技未来 / 极简商务 / 复古怀旧 / 清新自然
+  primary_color: ""                 # 主色调（如：中国红 #E31E24）
+  accent_color: ""                  # 点缀色
+  main_visual: ""                   # 主视觉元素描述（人物/建筑/产品/符号）
+  headline_text: ""                 # 大标题文字（反引号包裹）
+  subline_text: ""                  # 副标题/slogan（反引号包裹）
+  layout: "人物+文字右侧排版"       # 布局描述
+  series_note: ""                   # 系列编号（如 01/06），留空则不加
+
+prompt_skeleton: |
+  High-quality {style_keyword} brand poster, aspect ratio 9:16 (portrait).
+  
+  ## Visual Style Lock (apply to every element)
+  - Style: {style_keyword}, modern graphic design, editorial magazine quality
+  - Primary color: {primary_color}; Accent: {accent_color}
+  - Background: large negative space, textured or clean depending on style
+  - Typography: bold hierarchy — headline dominant, subline supportive, body minimal
+  
+  ## Layout & Composition
+  {layout}
+  
+  Main visual: {main_visual}
+  
+  Headline (large, dominant): `{headline_text}`
+  Subline / Slogan: `{subline_text}`
+  Brand mark: `{brand_name}` — place at bottom center or corner, refined size
+  {series_note}
+  
+  ## Visual Details
+  - All Chinese text must render crisply with correct character strokes
+  - Decorative elements must match the {style_keyword} aesthetic (e.g. ink brushstroke / 
+    silk ribbon / geometric shapes / traditional patterns)
+  - High production value: studio lighting simulation, premium material textures
+  - Cinematic color grading for the main visual
+
+negative_prompt_block: |
+  no garbled text, no mismatched styles, no amateur layout, no stock-photo feel,
+  no cluttered composition, no inconsistent font weights, no low-resolution textures,
+  no random English text unless specified, no copyright logos from other brands
+
+# 风格参数速查（用户选风格时参考）
+style_presets:
+  国潮现代:
+    bg: "大面积白色纹理留白"
+    elements: "丝绸飘带/水墨笔触/传统纹样/印章"
+    palette: "中国红+墨黑+金色"
+  科技未来:
+    bg: "深空黑/深蓝渐变"
+    elements: "光线/粒子/几何网格/全息投影"
+    palette: "霓虹蓝+电光紫+纯白"
+  极简商务:
+    bg: "纯白或浅灰"
+    elements: "几何色块/细线条/留白"
+    palette: "品牌主色+黑+白"
+  复古怀旧:
+    bg: "纸张纹理/做旧效果"
+    elements: "复古字体/印刷颗粒感/复古插图"
+    palette: "米黄+棕红+墨绿"
+  清新自然:
+    bg: "浅绿或浅米白"
+    elements: "植物/水彩/手绘插图"
+    palette: "森林绿+暖杏+天蓝"
+
+use_case_examples:
+  - "2026中国城市系列宣传海报·北京，国潮丝绸构图"
+  - "品牌口红推荐报告，精致商务风"
+  - "零食品牌节日促销海报，活力配色"
+  - "街头服饰 Campaign，暗黑潮流风"
+  - "Logo 设计展示，极简背景"

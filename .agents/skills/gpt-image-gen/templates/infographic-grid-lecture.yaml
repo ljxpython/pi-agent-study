@@ -1,0 +1,145 @@
+id: infographic-grid-lecture
+name: 极简网格高密度教学讲义海报
+version: 1.0.0
+prompt_mode: structured-json
+
+taxonomy:
+  scene: infographic-edu
+  style: clean-vector-flat
+  subject: slides-diagram
+
+tags:
+  - lecture-poster
+  - grid-layout
+  - bounding-box-cards
+  - pedagogical-infographic
+  - structured-json
+  - high-density-zero-error
+
+description: 采用硬卡片网格系统（Bounding Box Card Grid）驱动的高密度教学讲义海报模板。吸纳 Case 2 地图与 Case 3 霞关风格 Slides 精髓，通过结构化 JSON 树将知识点拆解为 2~6 字的独立高频短语，配合纯白底色与现代平涂矢量线描，彻底根除错别字、字体重叠与纸张脏斑。
+
+author: gpt-image-gen-core
+
+use_cases:
+  - "High-density educational lecture posters with zero typo tolerance"
+  - "Multi-card teaching cheat sheets (Header + Mindset Card + Confrontation Card + Tool Card + SOP Footer)"
+  - "Structured knowledge presentation combining characters, gadgets, and 3-step action frameworks"
+
+parameters:
+  aspect_ratio: "16:9"
+  recommended_size: "1024x576"
+  quality: "medium"
+  layout_type: "four-card-grid-poster"
+
+variables:
+  - name: title
+    description: 讲义核心大标题
+    default: "破唱片防御法全景讲义"
+    example: "认知重塑与终局沟通讲义"
+  - name: subtitle
+    description: 副标题与心智底座
+    default: "夏鹏《强势》心智底座：反逻辑 · 反说服 · 反解释"
+  - name: mascot_character
+    description: 顶部讲解导师角色
+    default: "戴博士帽手持木教鞭面带微笑的哆啦A梦"
+  - name: left_card_title
+    description: 左侧卡片标题
+    default: "三大核心心法"
+  - name: left_card_items
+    description: 左侧核心心法短语列表（每个 2~6 字）
+    default:
+      - "① 反逻辑 · 不辩论"
+      - "② 反说服 · 守底线"
+      - "③ 反解释 · 不递刀"
+  - name: center_card_title
+    description: 中部攻防实战卡片标题
+    default: "实战攻防拆招"
+  - name: center_round_1_label
+    description: 第一轮交锋类型
+    default: "道德绑架"
+  - name: center_round_1_bully
+    description: 第一轮施压者话术（简短）
+    default: "焦急的胖虎：借我作业！"
+  - name: center_round_1_hero
+    description: 第一轮破局者话术（简短）
+    default: "从容的大雄：今天确实不行。"
+  - name: center_round_2_label
+    description: 第二轮交锋类型
+    default: "恶意指责"
+  - name: center_round_2_bully
+    description: 第二轮施压者话术（简短）
+    default: "气恼的小夫：你真自私！"
+  - name: center_round_2_hero
+    description: 第二轮破局者话术（简短）
+    default: "淡定的大雄：今天确实不行。"
+  - name: right_card_title
+    description: 右侧道具或机制解剖卡片标题
+    default: "道具：破唱片胸针"
+  - name: right_centerpiece
+    description: 右侧中心视觉道具
+    default: "发光的金色黑胶唱片徽章"
+  - name: right_labels
+    description: 右侧功能引线短语
+    default:
+      - "内疚阻断网"
+      - "无限复读芯"
+  - name: footer_sop_title
+    description: 底栏流程标题
+    default: "行动 SOP"
+  - name: footer_sop_steps
+    description: 底栏 3 步闭环（极简短语）
+    default:
+      - "1 锁定目的"
+      - "2 承认感受"
+      - "3 温和复读"
+
+negative_prompt_block: |
+  STRICT NEGATIVE: NO dirty stains, NO ink splatters, NO paper grunge, NO smudge, NO messy lines, NO ugly textures, NO extra text, NO blurry low-res characters, pure clean digital anime illustration only.
+
+prompt_skeleton: |
+  {
+    "type": "教学讲义信息图海报",
+    "theme": "${title}",
+    "style": "极简纯净的现代日漫手绘平涂风格，纯白色干净背景，圆润清晰工整的粗黑描线，鲜艳纯净高对比度色彩，类似 Irasutoya 与经典日漫结合的整洁教学 Slides",
+    "header": {
+      "title": "${title}",
+      "subtitle": "${subtitle}",
+      "mascot": "${mascot_character}"
+    },
+    "layout": {
+      "grid_structure": "4 个带细灰色边框和轻微圆角的独立干净白色矩形卡片",
+      "cards": [
+        {
+          "position": "左侧卡片",
+          "title": "${left_card_title}",
+          "items": ${left_card_items}
+        },
+        {
+          "position": "中间卡片",
+          "title": "${center_card_title}",
+          "scene_top": {
+            "label": "${center_round_1_label}",
+            "bully": "${center_round_1_bully}",
+            "hero": "${center_round_1_hero}"
+          },
+          "scene_bottom": {
+            "label": "${center_round_2_label}",
+            "bully": "${center_round_2_bully}",
+            "hero": "${center_round_2_hero}"
+          }
+        },
+        {
+          "position": "右侧卡片",
+          "title": "${right_card_title}",
+          "centerpiece": "${right_centerpiece}",
+          "labels": ${right_labels}
+        },
+        {
+          "position": "底栏卡片",
+          "title": "${footer_sop_title}",
+          "steps": ${footer_sop_steps}
+        }
+      ]
+    },
+    "strict_negative": "STRICT NEGATIVE: NO dirty stains, NO ink splatters, NO paper grunge, NO smudge, NO messy lines, NO ugly textures, NO extra text, pure clean digital anime illustration only."
+  }

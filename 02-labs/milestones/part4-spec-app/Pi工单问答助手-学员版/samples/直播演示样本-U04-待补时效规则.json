@@ -1,0 +1,28 @@
+{
+  "tickets": [
+    {
+      "id": "R01",
+      "title": "支付回调出现间歇失败",
+      "team": "平台",
+      "priority": "urgent",
+      "status": "open",
+      "createdAt": "2026-09-17T07:00:00Z"
+    },
+    {
+      "id": "R02",
+      "title": "批量导出任务排队",
+      "team": "平台",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-17T09:30:00Z"
+    },
+    {
+      "id": "R03",
+      "title": "筛选器默认值显示错误",
+      "team": "前端",
+      "priority": "normal",
+      "status": "open",
+      "createdAt": "2026-09-17T11:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+--- a/handlers.ts
++++ b/handlers.ts
+@@ -467,7 +467,7 @@
+   if (sent.length === 0) {
+     const failedStr = failed.map(f => `${f.name} (${f.error})`).join(", ");
+     return result(
+-      `Failed to send: ${failedStr}`,
++      `Failed to send: ${failedStr}. No message was delivered. Do not wait or report receipt. Run list to resolve an active peer name (model names are not agent names). If the recipient depends on your unfinished task, notify the coordinator and block this task: that peer cannot start until the dependency is changed. For bidirectional chat, both peers must be alive concurrently.`,
+       { mode: "send", error: "all_failed", sent: [], failed }
+     );
+   }
+--- a/index.ts
++++ b/index.ts
+@@ -75,6 +75,7 @@
+ import { loadCrewConfig } from "./crew/utils/config.ts";
+ import * as crewStore from "./crew/store.ts";
+ import * as teamStore from "./crew/team/store.ts";
++import { progressLines } from "./crew/progress-widget.ts";
+ import { getLiveWorkers, onLiveWorkersChanged } from "./crew/live-progress.ts";
+ import { shutdownAllWorkers } from "./crew/agents.ts";
+ import { shutdownLobbyWorkers } from "./crew/lobby.ts";
+@@ -242,10 +243,17 @@
+   // Status
+   // ===========================================================================
+ 
++  let lastProgressText = "";
+   function updateStatus(ctx: ExtensionContext): void {
+     try {
+       if (!ctx.hasUI || !state.registered) return;
+ 
++      const lines = progressLines(getLiveWorkers(ctx.cwd).values());
++      const text = lines.join("\n");
++      if (text !== lastProgressText) {
++        ctx.ui.setWidget("messenger-progress", lines.length ? lines : undefined);
++        lastProgressText = text;
++      }
+       const agents = store.getActiveAgents(state, dirs);
+       checkStuckAgents(ctx, agents);
+       const activeNames = new Set(agents.map(a => a.name));
+@@ -317,7 +325,7 @@
+     }
+   }
+ 
+-  const STATUS_HEARTBEAT_MS = 15_000;
++  const STATUS_HEARTBEAT_MS = 1_000;
+   let latestCtx: ExtensionContext | null = null;
+   let statusHeartbeatTimer: ReturnType<typeof setInterval> | null = null;
+   const AUTONOMOUS_CONTINUE_REPEAT_LIMIT = 3;
+@@ -357,7 +365,7 @@
+     startStatusHeartbeat();
+   }
+ 
+-  onLiveWorkersChanged(() => {
++  const unsubscribeLiveWorkers = onLiveWorkersChanged(() => {
+     if (latestCtx) updateStatus(latestCtx);
+   });
+ 
+@@ -1138,6 +1146,8 @@
+   });
+ 
+   pi.on("session_shutdown", async (_event, ctx) => {
++    unsubscribeLiveWorkers();
++    if (ctx.hasUI) ctx.ui.setWidget("messenger-progress", undefined);
+     latestCtx = null;
+     const cwd = ctx.cwd || state.cwd;
+     if (cwd) {
+--- a/crew/progress-widget.ts
++++ b/crew/progress-widget.ts
+@@ -0,0 +1,8 @@
++import type { LiveWorkerInfo } from "./live-progress.ts";
++export function progressLines(workers: Iterable<LiveWorkerInfo>, now = Date.now()): string[] {
++ return Array.from(workers).slice(0, 4).map(w => {
++  const secs = Math.max(0, Math.floor((now-w.startedAt)/1000));
++  const stage = w.progress.currentTool ? `执行 ${w.progress.currentTool}` : w.progress.toolCallCount ? "等待模型继续" : "等待模型首个动作";
++  return `● 团队 ${w.taskId} · ${w.model ?? w.agent} · ${stage} · ${secs}s · 已完成 ${w.progress.toolCallCount} 次工具调用${now-(w.updatedAt ?? w.startedAt) >= 30000 ? " · 30秒以上无新增事件，可 Esc 取消" : ""}${w.progress.error ? " · 上次请求异常" : ""}`;
++ });
++}
+--- a/crew/agents.ts
++++ b/crew/agents.ts
+@@ -269,12 +269,28 @@
+     if (task.taskId) {
+       registerWorker({ type: "worker", proc, name: workerName, cwd, taskId: task.taskId });
+     }
++    const progressId = task.taskId ?? `${role}-${runId}-${index}`;
++    updateLiveWorker(cwd, progressId, { taskId: progressId, agent: task.agent, model, name: workerName, progress: { ...progress, recentTools: [] }, startedAt: startTime });
+     let gracefulShutdownRequested = false;
+     let discoveredWorkerName: string | null = null;
+ 
+     let jsonlBuffer = "";
+     let fullOutput = "";
+     let terminalProviderError: string | null = null;
++    let lastEventAt = Date.now();
++    const configuredTimeout = config.work.noEventTimeoutMs;
++    const noEventTimeoutMs = typeof configuredTimeout === "number" && Number.isFinite(configuredTimeout) && configuredTimeout >= 1000 ? configuredTimeout : 120000;
++    let forceKillTimer: ReturnType<typeof setTimeout> | undefined;
++    const silenceTimer = setInterval(() => {
++      if (Date.now() - lastEventAt < noEventTimeoutMs || terminalProviderError) return;
++      terminalProviderError = `Worker timeout: ${Math.round(noEventTimeoutMs/1000)}s without events from ${model ?? task.agent}. No success inferred; check provider or increase crew.work.noEventTimeoutMs.`;
++      progress.error = terminalProviderError;
++      proc.kill("SIGTERM");
++      forceKillTimer = setTimeout(() => { if (proc.exitCode === null) proc.kill("SIGKILL"); }, 5000);
++      forceKillTimer.unref?.();
++    }, 1000);
++    silenceTimer.unref?.();
++    proc.on("error", (error) => { terminalProviderError = `Worker spawn failed: ${error.message}`; });
+ 
+     proc.stdout?.on("data", (data) => {
+       try {
+@@ -285,6 +301,7 @@
+         for (const line of lines) {
+           const event = parseJsonlLine(line);
+           if (event) {
++            lastEventAt = Date.now();
+             updateProgress(progress, event, startTime);
+             const assistantText = getAssistantText(event);
+             if (assistantText) fullOutput = assistantText;
+@@ -298,10 +315,11 @@
+               progress.error = providerError;
+               proc.kill("SIGTERM");
+             }
+-            if (task.taskId) {
+-              updateLiveWorker(cwd, task.taskId, {
+-                taskId: task.taskId,
++            {
++              updateLiveWorker(cwd, progressId, {
++                taskId: progressId,
+                 agent: task.agent,
++                model,
+                 name: workerName,
+                 progress: {
+                   ...progress,
+@@ -319,8 +337,10 @@
+     proc.stderr?.on("data", (data) => { stderr += data.toString(); });
+ 
+     proc.on("close", (code) => {
++      clearInterval(silenceTimer);
++      if (forceKillTimer) clearTimeout(forceKillTimer);
++      removeLiveWorker(cwd, progressId);
+       if (task.taskId) {
+-        removeLiveWorker(cwd, task.taskId);
+         unregisterWorker(cwd, task.taskId);
+       }
+       const exitCode = terminalProviderError ? 1 : code ?? 1;
+--- a/crew/live-progress.ts
++++ b/crew/live-progress.ts
+@@ -7,6 +7,8 @@
+   name: string;
+   progress: AgentProgress;
+   startedAt: number;
++  model?: string;
++  updatedAt?: number;
+ }
+ 
+ const liveWorkers = new Map<string, LiveWorkerInfo>();
+@@ -20,6 +22,7 @@
+   liveWorkers.set(getWorkerKey(cwd, taskId), {
+     ...info,
+     cwd,
++    updatedAt: Date.now(),
+   });
+   notifyListeners();
+ }
+--- a/skills/pi-messenger-crew/SKILL.md
++++ b/skills/pi-messenger-crew/SKILL.md
+@@ -345,3 +345,11 @@
+ 4. SIGKILL if still running
+ 
+ Tasks from gracefully shutdown workers reset to `todo` for retry on the next wave. Crashed workers (non-graceful exit) block the task in autonomous mode to prevent retry loops.
++
++## Live peer communication constraints
++
++- A task dependency gates process startup, not just file access. Never require task A to message task B before A completes when B depends on A: B cannot be online.
++- For bidirectional messaging, start both peers in the same wave without task dependencies; wait for a file/message with a bounded timeout (60 seconds), and keep the sender alive until the reply arrives. For sequential tasks use durable task artifacts, not direct replies to an exited worker.
++- Resolve actual registered peer names using list; a model name such as GLM is not automatically a peer name.
++- Assign explicit provider/model per task when different workers must use different models. Role-level worker defaults apply to ALL worker tasks, including tasks titled GLM.
++- Offline send is failure, not queued delivery. Report it and block when the required peer cannot start; do not repeatedly poll or claim success.
+--- a/crew/agents/crew-planner.md
++++ b/crew/agents/crew-planner.md
+@@ -170,3 +170,11 @@
+ - Each finding informs the next step. Use what you learn to guide deeper investigation.
+ - The task breakdown is the critical output. Invest time in getting it right.
+ - Dependencies use full task titles (matching the `title` field exactly)
++
++## Live peer communication constraints
++
++- A task dependency gates process startup, not just file access. Never require task A to message task B before A completes when B depends on A: B cannot be online.
++- For bidirectional messaging, start both peers in the same wave without task dependencies; wait for a file/message with a bounded timeout (60 seconds), and keep the sender alive until the reply arrives. For sequential tasks use durable task artifacts, not direct replies to an exited worker.
++- Resolve actual registered peer names using list; a model name such as GLM is not automatically a peer name.
++- Assign explicit provider/model per task when different workers must use different models. Role-level worker defaults apply to ALL worker tasks, including tasks titled GLM.
++- Offline send is failure, not queued delivery. Report it and block when the required peer cannot start; do not repeatedly poll or claim success.
+--- a/crew/agents/crew-worker.md
++++ b/crew/agents/crew-worker.md
+@@ -127,3 +127,11 @@
+ 
+ Follow the coordination instructions in your task prompt's "Coordination" section.
+ If no coordination section is present, do not send messages — focus on your task.
++
++## Live peer communication constraints
++
++- A task dependency gates process startup, not just file access. Never require task A to message task B before A completes when B depends on A: B cannot be online.
++- For bidirectional messaging, start both peers in the same wave without task dependencies; wait for a file/message with a bounded timeout (60 seconds), and keep the sender alive until the reply arrives. For sequential tasks use durable task artifacts, not direct replies to an exited worker.
++- Resolve actual registered peer names using list; a model name such as GLM is not automatically a peer name.
++- Assign explicit provider/model per task when different workers must use different models. Role-level worker defaults apply to ALL worker tasks, including tasks titled GLM.
++- Offline send is failure, not queued delivery. Report it and block when the required peer cannot start; do not repeatedly poll or claim success.
+--- a/crew/utils/config.ts
++++ b/crew/utils/config.ts
+@@ -68,6 +68,7 @@
+     stopOnBlock: boolean;
+     env?: Record<string, string>;
+     shutdownGracePeriodMs?: number;
++    noEventTimeoutMs?: number;
+   };
+   dependencies: "advisory" | "strict";
+   coordination: CoordinationLevel;

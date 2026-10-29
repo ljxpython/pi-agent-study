@@ -1,0 +1,204 @@
+[
+  {
+    "stage": "01-最初流程草图",
+    "file": "01-最初流程草图/01-01-开始对话.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端流程草图-v1/01-开始对话.png",
+    "sha256": "1fa5d0e9fc864c3508ae1393d7d2b8f1114ec61ddee5fd3380deb4ba81471f83"
+  },
+  {
+    "stage": "01-最初流程草图",
+    "file": "01-最初流程草图/02-02-拖入查询能力.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端流程草图-v1/02-拖入查询能力.png",
+    "sha256": "57f3bc96cd7f3d7996eb4d8848da9780f228348d4a0879e44bd8f1c912608ecc"
+  },
+  {
+    "stage": "01-最初流程草图",
+    "file": "01-最初流程草图/03-03-先给结论再看结果.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端流程草图-v1/03-先给结论再看结果.png",
+    "sha256": "e132bf579457540fa3fae9e264a8260855fea2dc624514b6a8c4e23adbcb5241"
+  },
+  {
+    "stage": "01-最初流程草图",
+    "file": "01-最初流程草图/04-04-报告草稿待确认.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端流程草图-v1/04-报告草稿待确认.png",
+    "sha256": "86f43f8e22e09b85d1072f11a7468bb2342d1a1e529d6545e4c81e8447db032a"
+  },
+  {
+    "stage": "01-最初流程草图",
+    "file": "01-最初流程草图/05-05-确认保存.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端流程草图-v1/05-确认保存.png",
+    "sha256": "a105098daa6ffa98195b83d8fc5d8330dbb589810088ede56b55c3bc56f26bf6"
+  },
+  {
+    "stage": "01-最初流程草图",
+    "file": "01-最初流程草图/06-06-文件已保存.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端流程草图-v1/06-文件已保存.png",
+    "sha256": "72aea01b8bdbc26db8c79c82a1e330f5efed8712b753ffffb13e1261e2e04d18"
+  },
+  {
+    "stage": "02-采纳四图视觉方向",
+    "file": "02-采纳四图视觉方向/01-01-初始工作台.png",
+    "source": "../视觉基线/01-初始工作台.png",
+    "sha256": "3874afe9de8e72d77c20cbc899173bfd007cabe42ca96bc52101b91259300d77"
+  },
+  {
+    "stage": "02-采纳四图视觉方向",
+    "file": "02-采纳四图视觉方向/02-02-查询结果.png",
+    "source": "../视觉基线/02-查询结果.png",
+    "sha256": "347d5aef696c3bcef1e3243a20ac8e324573b58fc45ed704539863b1e4757108"
+  },
+  {
+    "stage": "02-采纳四图视觉方向",
+    "file": "02-采纳四图视觉方向/03-03-模型设置.png",
+    "source": "../视觉基线/03-模型设置.png",
+    "sha256": "5d76931b0dccd523b9a7824dd748630c11706a4034aa6ae186d4c0db89ae08f0"
+  },
+  {
+    "stage": "02-采纳四图视觉方向",
+    "file": "02-采纳四图视觉方向/04-04-报告待确认.png",
+    "source": "../视觉基线/04-报告待确认.png",
+    "sha256": "51ebdc36c641c71443c8228abdf93a04e2c613fa4bf15df3a9cce3f71a536936"
+  },
+  {
+    "stage": "03-青金配色试验否决",
+    "file": "03-青金配色试验否决/01-01-初始工作台-石青底浅金-v2.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端石青浅金-v1/01-初始工作台-石青底浅金-v2.png",
+    "sha256": "dbbec9f3d73607057f999f12ae7f4e5eab40fb813044fe3987dd8ba9d1c1979d"
+  },
+  {
+    "stage": "03-青金配色试验否决",
+    "file": "03-青金配色试验否决/02-01-初始工作台-浅雾青淡金-v3.png",
+    "source": "../../../../02-课程设计/003-Pi Agent框架调研与课程基础/05-工作产物/课程课件/04-第四节课-交付Pi应用-状态恢复与业务迁移/Images/前端石青浅金-v1/01-初始工作台-浅雾青淡金-v3.png",
+    "sha256": "c4ddc8945a8180b61898d33d5303dc387ecdccaf2871a21dcd80e26d6bbc4246"
+  },
+  {
+    "stage": "04-能力库与命令补全",
+    "file": "04-能力库与命令补全/01-02-模板管理.png",
+    "source": "../M1c设计参考/02-模板管理.png",
+    "sha256": "96330b2ad993b324c1f6503ee6b7b4eb6d04dec68e6eb045e17dd4573bf32d10"
+  },
+  {
+    "stage": "04-能力库与命令补全",
+    "file": "04-能力库与命令补全/02-04-命令菜单.png",
+    "source": "../M1c设计参考/04-命令菜单.png",
+    "sha256": "d833e6bb2426460ed67b36ec18dcfc85060df8807be9a74265c67bbd250199f6"
+  },
+  {
+    "stage": "04-能力库与命令补全",
+    "file": "04-能力库与命令补全/03-m1c-02-模板编辑.png",
+    "source": "../../06-验收与交付/screenshots/m1c-02-模板编辑.png",
+    "sha256": "d159ae265006fd1fbff1b312c6683c0015e67eb5dafc1fd86039afd75bc58a24"
+  },
+  {
+    "stage": "04-能力库与命令补全",
+    "file": "04-能力库与命令补全/04-m1c-04-命令菜单.png",
+    "source": "../../06-验收与交付/screenshots/m1c-04-命令菜单.png",
+    "sha256": "ac056f8fea49f887c2cbd58c71ec9a2b93e52b97393cf17ece1d0c1faa6728a3"
+  },
+  {
+    "stage": "05-侧栏与资料精修",
+    "file": "05-侧栏与资料精修/01-layout-collapsed.png",
+    "source": "../../06-验收与交付/screenshots/layout-collapsed.png",
+    "sha256": "328a4d68d132d214c19c4a109a00aed9003575a7b31bffc24f8bcb551930ad8b"
+  },
+  {
+    "stage": "05-侧栏与资料精修",
+    "file": "05-侧栏与资料精修/02-layout-filtered.png",
+    "source": "../../06-验收与交付/screenshots/layout-filtered.png",
+    "sha256": "b8aa85fc7996ea50ee25351c473a0371fe3d6c2802d362c82e42f38e4ce0a3f0"
+  },
+  {
+    "stage": "06-无资料对话入口",
+    "file": "06-无资料对话入口/01-help-desktop.png",
+    "source": "../../06-验收与交付/screenshots/help-desktop.png",
+    "sha256": "bd247a229e52f93430049add0be19d44e574808413528e122b1e3ef98d224aec"
+  },
+  {
+    "stage": "06-无资料对话入口",
+    "file": "06-无资料对话入口/02-help-mobile.png",
+    "source": "../../06-验收与交付/screenshots/help-mobile.png",
+    "sha256": "80ae1ee8cbfcca0dab846b8358ad4eb7d5301bd53983114fb1524abfaabea780"
+  },
+  {
+    "stage": "03-青金配色试验否决",
+    "file": "03-青金配色试验否决/03-用户最初配色色卡.jpg",
+    "source_type": "user_attachment",
+    "source_filename": "ff803b033db090429b50b24b33bd722c.jpg",
+    "sha256": "9fe8e2514c22713ea34989da02b3427a15d34d97150fa62a88463b4f28b850bc"
+  },
+  {
+    "stage": "04-能力库与命令补全",
+    "file": "04-能力库与命令补全/05-用户指出工具卡冗余.png",
+    "source_type": "user_attachment",
+    "source_filename": "codex-clipboard-ZRlIAO.png",
+    "sha256": "1d984644ae15f636d9c15181899ad3f377eae62b34a4a05c927fb1dbf25f884c"
+  },
+  {
+    "stage": "05-侧栏与资料精修",
+    "file": "05-侧栏与资料精修/03-修改前折叠留白.png",
+    "source_type": "user_attachment",
+    "source_filename": "codex-clipboard-RVzDqh.png",
+    "sha256": "22d1227d7fb2e50ba722ccda7c50424b6fec0cae93778ef60c564b27ab45f9a5"
+  },
+  {
+    "stage": "05-侧栏与资料精修",
+    "file": "05-侧栏与资料精修/04-修改前资料筛选诉求.png",
+    "source_type": "user_attachment",
+    "source_filename": "codex-clipboard-sHj40W.png",
+    "sha256": "ff7869e0a3dbf0d929e8af3ffb062db18d1becbd93f3686be7751817fa9742fe"
+  },
+  {
+    "stage": "07-能力库五类资源与关联",
+    "file": "07-能力库五类资源与关联/01-扩展详情与工具关联.png",
+    "source": "2026-09-21本会话生成图；用户确认保存",
+    "sha256": "67c96e4f6edddf88aff601a586dfccde9443643246da66ecfea110b2ff287fa6"
+  },
+  {
+    "stage": "07-能力库五类资源与关联",
+    "file": "07-能力库五类资源与关联/02-多包目录与资源分组.png",
+    "source": "2026-09-21本会话生成图；用户确认保存",
+    "sha256": "14effdce1c6a6b20a86831bc125373dd34e3e3c56176481fde4970bedac61408"
+  },
+  {
+    "stage": "08-工作台边框与对话布局",
+    "file": "08-工作台边框与对话布局/00-修改前实际页面.png",
+    "source_type": "user_attachment",
+    "source": "用户提供的本阶段修改前页面",
+    "sha256": "10e8829d2f77ff78a1b3a50027d226de03042376a47b6409ffe63bb4f29710bd"
+  },
+  {
+    "stage": "08-工作台边框与对话布局",
+    "file": "08-工作台边框与对话布局/01-整体外框候选.png",
+    "source_type": "generated_image",
+    "source": "单项外框候选，未独立定稿",
+    "sha256": "644f6ddfe80d4c0be29a96f3de91da85487a4b04930fd49abbac60e5888175ea"
+  },
+  {
+    "stage": "08-工作台边框与对话布局",
+    "file": "08-工作台边框与对话布局/02-左右交替对话候选.png",
+    "source_type": "generated_image",
+    "source": "单项对话候选，宽度随后修订",
+    "sha256": "41ec06d6abe47bbc54094402b919397f4c484b3cd164544cc65dc691555afb0d"
+  },
+  {
+    "stage": "08-工作台边框与对话布局",
+    "file": "08-工作台边框与对话布局/03-消息与输入区共宽修订.png",
+    "source_type": "generated_image",
+    "source": "按用户反馈加宽输入区",
+    "sha256": "3797a1058d340c0b94213e8ac85412d72942d5fe703b0f6b274341cc542da848"
+  },
+  {
+    "stage": "08-工作台边框与对话布局",
+    "file": "08-工作台边框与对话布局/04-助手标识与输入区装饰.png",
+    "source_type": "generated_image",
+    "source": "按用户反馈补Pi标识和输入提示",
+    "sha256": "e66300bbefbf647a023193bc205c2adbc26a96949aa2630c1d1cc3b30c9dbacc"
+  },
+  {
+    "stage": "08-工作台边框与对话布局",
+    "file": "08-工作台边框与对话布局/05-合成视觉基准.png",
+    "source_type": "generated_image",
+    "source": "用户确认的合成视觉基准；同字节另存视觉基线",
+    "sha256": "87e3cd61c69f66cb538ad3c84cf5ea2a3b1b3f80254a9e9543b18d00d7395d04"
+  }
+]

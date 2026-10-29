@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "support": {
+      "command": "python3",
+      "args": [
+        "tools/mcp-server.py"
+      ],
+      "directTools": true
+    }
+  },
+  "settings": {
+    "hostConfigDiscovery": "off"
+  }
+}

@@ -1,0 +1,42 @@
+id: hero-metaphor
+name: 高概念哲学意境隐喻大图
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: cover-hero
+  style: cinematic-still
+  subject: abstract-concept
+category: concept-art
+tags:
+  - hero-cover
+  - cinematic-widescreen
+  - philosophical-metaphor
+  - volumetric-lighting
+  - surrealism
+description: 宏大深邃的哲学意境与具象化心智符号，专用于文章封面视觉锚点（Hero Visual）、概念总览与心智模型建立
+author: gpt-image-gen-core
+
+use_cases:
+  - "Article hero banner and publication cover image (16:9 or 2.35:1)"
+  - "Abstract philosophical or psychological concept visualization"
+  - "Keynote opening slide and landing page hero art"
+
+parameters:
+  aspect_ratio: "16:9 or 2.35:1"
+  recommended_size: "1024x576 or 2048x1152"
+  quality: "high"
+  layout_type: "cinematic-widescreen"
+
+variables:
+  - name: concept_subject
+    description: 具象化物理隐喻核心主体（如：被拔掉的机械遥控器、剪除荆棘的金色剪刀、粉碎病毒的旋转唱片、被枷锁困住的飞鸟等）
+    example: "A massive vintage mechanical remote control unplugged and lying shattered on the ground, surrounded by a calm person bathed in translucent golden geometric shield"
+
+prompt_skeleton: |
+  Cinematic conceptual art, wide angle establishing shot.
+  {concept_subject}.
+  Lighting & Mood: Dramatic cinematic lighting, volumetric golden rays bursting through dark moody fog, epic philosophical atmosphere, rich textures, award-winning digital painting, minimalist composition.
+
+strict_negative: |
+  STRICT NEGATIVE: Absolutely NO text, NO fonts, NO letters, NO symbols, NO signature, NO watermark, NO cluttered noise.

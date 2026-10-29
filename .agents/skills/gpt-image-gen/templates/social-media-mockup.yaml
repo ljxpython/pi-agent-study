@@ -1,0 +1,53 @@
+id: social-media-mockup
+name: 社媒界面仿真截图
+description: >
+  生成高度仿真的社交媒体界面截图，支持 X/Twitter、微博、小红书、
+  抖音直播间、galgame 对话框等平台 UI。适合内容创作者展示社媒数据、
+  品牌在社媒上的影响力，或创意场景模拟。
+aspect_ratio: "3:4"  # 手机竖屏截图标准比例
+size: "768x1024"
+
+variables:
+  platform: "X (Twitter)"          # 目标平台：X / 微博 / 小红书 / 抖音直播间
+  color_mode: "深色模式"            # 深色模式 / 浅色模式
+  account_name: "OpenAI"            # 账号名称
+  account_handle: "@OpenAI"         # 账号 handle
+  verified_badge: "蓝勾认证"        # 蓝勾 / 橙勾 / 无
+  post_content: ""                  # 正文内容（用反引号包裹显示文字）
+  media_in_post: ""                 # 帖子内嵌图片/视频描述（可选）
+  interaction_data: "评论 8.9K · 转发 42K · 点赞 298K · 收藏 34K · 浏览 32.4M"
+  timestamp: "2小时前"
+
+prompt_skeleton: |
+  A photorealistic mobile phone screenshot of {platform}, {color_mode}.
+  Aspect ratio 3:4, no phone frame, screenshot only (no device bezel).
+  
+  UI layout from top to bottom:
+  1. System status bar: time on left, battery/signal icons on right, {color_mode} style.
+  2. App navigation bar: back arrow, "{platform}" title centered, search/notification icons.
+  3. Post card:
+     - Header: circular avatar (abstract/brand style), account name `{account_name}`, 
+       handle `{account_handle}`, {verified_badge} icon, timestamp `{timestamp}`.
+     - Post body text in correct platform font: `{post_content}`
+     {media_in_post}
+     - Interaction bar: reply / repost / like (highlighted) / bookmark / share icons.
+     - Engagement counts: `{interaction_data}` displayed accurately.
+  4. Feed continues below with 1~2 blurred/faded placeholder posts for realism.
+  
+  Visual quality: pixel-perfect UI replication, correct platform typography,
+  realistic icon rendering, no gibberish text, all text must display exactly as specified.
+  
+  Negative: no phone hardware/frame, no watermark, no garbled characters, 
+  no misplaced UI elements, no English text where Chinese is specified.
+
+negative_prompt_block: |
+  no phone frame or device bezel, no garbled text, no incorrect character encoding,
+  no mismatched UI elements, no amateur design artifacts, no watermark,
+  crisp pixel-level rendering only
+
+use_case_examples:
+  - "X/Twitter 截图，展示某品牌推文爆火，点赞 100K+"
+  - "小红书封面截图，模拟博主发布探店内容"
+  - "抖音直播间截图，弹幕飘着热门词"
+  - "galgame 风格对话框叠加在真人写真上"
+  - "微博截图，展示明星互动数据"

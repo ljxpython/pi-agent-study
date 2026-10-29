@@ -1,0 +1,198 @@
+--- a/index.ts
++++ b/index.ts
+@@ -75,7 +75,6 @@
+ import { loadCrewConfig } from "./crew/utils/config.ts";
+ import * as crewStore from "./crew/store.ts";
+ import * as teamStore from "./crew/team/store.ts";
+-import { runLegacyAgentCleanupMigration } from "./crew/utils/install.ts";
+ import { getLiveWorkers, onLiveWorkersChanged } from "./crew/live-progress.ts";
+ import { shutdownAllWorkers } from "./crew/agents.ts";
+ import { shutdownLobbyWorkers } from "./crew/lobby.ts";
+@@ -85,9 +84,7 @@
+ let overlayOpening = false;
+ 
+ export default function piMessengerExtension(pi: ExtensionAPI) {
+-  // One-time migration: remove stale crew agents from shared ~/.pi/agent/agents/
+-  // (crew agents now discovered from extension-local directory)
+-  runLegacyAgentCleanupMigration();
++  // Legacy cleanup is an explicit CLI operation, never a startup side effect.
+ 
+   // ===========================================================================
+   // State & Configuration
+@@ -135,33 +132,12 @@
+   // ===========================================================================
+ 
+   function deliverMessage(msg: AgentMailMessage): void {
+-    // Store in chat history (keyed by sender)
+-    let history = state.chatHistory.get(msg.from);
+-    if (!history) {
+-      history = [];
+-      state.chatHistory.set(msg.from, history);
+-    }
+-    history.push(msg);
+-    if (history.length > MAX_CHAT_HISTORY) history.shift();
+-
+-    // Increment unread count
+-    const current = state.unreadCounts.get(msg.from) ?? 0;
+-    state.unreadCounts.set(msg.from, current + 1);
+-
+-    // Trigger overlay re-render if open
+-    overlayTui?.requestRender();
+-
+     // Build message content with optional context
+     // Detect if this is a new agent identity (first contact OR same name but different session)
+     const sender = store.getActiveAgents(state, dirs).find(a => a.name === msg.from);
+     const senderSessionId = sender?.sessionId;
+     const prevSessionId = state.seenSenders.get(msg.from);
+     const isNewIdentity = !prevSessionId || (senderSessionId && prevSessionId !== senderSessionId);
+-
+-    // Update seen senders with current sessionId (only if we could look it up)
+-    if (senderSessionId) {
+-      state.seenSenders.set(msg.from, senderSessionId);
+-    }
+ 
+     let content = "";
+ 
+@@ -189,6 +165,28 @@
+       { customType: "agent_message", content, display: true, details: msg },
+       { triggerTurn: true, deliverAs: "steer" }
+     );
++    // Commit local display state only after Pi accepts the message.
++    // Update seen senders with current sessionId (only if we could look it up)
++    if (senderSessionId) {
++      state.seenSenders.set(msg.from, senderSessionId);
++    }
++
++    // Store in chat history (keyed by sender)
++    let history = state.chatHistory.get(msg.from);
++    if (!history) {
++      history = [];
++      state.chatHistory.set(msg.from, history);
++    }
++    history.push(msg);
++    if (history.length > MAX_CHAT_HISTORY) history.shift();
++
++    // Increment unread count
++    const current = state.unreadCounts.get(msg.from) ?? 0;
++    state.unreadCounts.set(msg.from, current + 1);
++
++    // Trigger overlay re-render if open
++    try { overlayTui?.requestRender(); } catch { /* Delivery already accepted. */ }
++
+   }
+ 
+   // ===========================================================================
+@@ -847,7 +845,7 @@
+     }
+ 
+     state.isHuman = ctx.hasUI;
+-    try { fs.rmSync(join(homedir(), ".pi/agent/messenger/feed.jsonl"), { force: true }); } catch {}
++    // Preserve historical feeds; startup must not delete user data.
+ 
+     const shouldAutoRegister = config.autoRegister || 
+       matchesAutoRegisterPath(state.cwd, config.autoRegisterPaths);
+--- a/store.ts
++++ b/store.ts
+@@ -948,6 +948,14 @@
+   return join(dirs.inbox, state.agentName);
+ }
+ 
++// Retry state is tied to this live receiver, and cancelled by stopWatcher().
++// Files are the durable queue; a failed callback must never acknowledge a message.
++const mailboxRetries = new WeakMap<MessengerState, {
++  timer: ReturnType<typeof setTimeout> | null;
++  attempts: number;
++  delivered: Set<string>;
++}>();
++
+ export function processAllPendingMessages(
+   state: MessengerState,
+   dirs: Dirs,
+@@ -962,6 +970,12 @@
+   }
+ 
+   isProcessingMessages = true;
++  let retryNeeded = false;
++  let retry = mailboxRetries.get(state);
++  if (!retry) {
++    retry = { timer: null, attempts: 0, delivered: new Set() };
++    mailboxRetries.set(state, retry);
++  }
+ 
+   try {
+     const inbox = getMyInbox(state, dirs);
+@@ -971,6 +985,7 @@
+     try {
+       files = fs.readdirSync(inbox).filter(f => f.endsWith(".json")).sort();
+     } catch {
++      retryNeeded = true;
+       return;
+     }
+ 
+@@ -984,18 +999,32 @@
+           to: state.agentName,
+           timestamp: new Date().toISOString(),
+         });
+-        deliverFn(msg);
++        // If unlink failed after acceptance, retry only the unlink in this process.
++        if (!retry.delivered.has(msg.id)) {
++          deliverFn(msg);
++          retry.delivered.add(msg.id);
++        }
+         fs.unlinkSync(msgPath);
++        retry.delivered.delete(msg.id);
+       } catch {
+-        // On any failure (read, parse, deliver), delete to avoid infinite retry loops
+-        try {
+-          fs.unlinkSync(msgPath);
+-        } catch {
+-          // Already gone or can't delete
+-        }
++        // Preserve read/parse/delivery failures, including malformed evidence.
++        // Backoff prevents a broken receiver or file from spinning the event loop.
++        retryNeeded = true;
+       }
+     }
+   } finally {
++    if (retryNeeded && state.registered && !retry.timer) {
++      const waitMs = Math.min(250 * 2 ** Math.min(retry.attempts++, 7), 30000);
++      retry.timer = setTimeout(() => {
++        retry.timer = null;
++        processAllPendingMessages(state, dirs, deliverFn);
++      }, waitMs);
++      retry.timer.unref?.();
++    } else if (!retryNeeded) {
++      if (retry.timer) clearTimeout(retry.timer);
++      retry.timer = null;
++      retry.attempts = 0;
++    }
+     isProcessingMessages = false;
+ 
+     // Re-process if new calls came in while we were processing
+@@ -1028,7 +1057,15 @@
+ 
+   const random = Math.random().toString(36).substring(2, 8);
+   const msgFile = join(targetInbox, `${Date.now()}-${random}.json`);
+-  fs.writeFileSync(msgFile, JSON.stringify(msg, null, 2));
++  // Publish only complete JSON; watchers ignore the temporary suffix.
++  const tempFile = `${msgFile}.${randomUUID()}.tmp`;
++  try {
++    fs.writeFileSync(tempFile, JSON.stringify(msg, null, 2), { mode: 0o600, flag: "wx" });
++    fs.renameSync(tempFile, msgFile);
++  } catch (error) {
++    try { fs.unlinkSync(tempFile); } catch { /* Already absent. */ }
++    throw error;
++  }
+ 
+   return msg;
+ }
+@@ -1089,6 +1126,9 @@
+ }
+ 
+ export function stopWatcher(state: MessengerState): void {
++  const retry = mailboxRetries.get(state);
++  if (retry?.timer) clearTimeout(retry.timer);
++  mailboxRetries.delete(state);
+   if (state.watcherDebounceTimer) {
+     clearTimeout(state.watcherDebounceTimer);
+     state.watcherDebounceTimer = null;

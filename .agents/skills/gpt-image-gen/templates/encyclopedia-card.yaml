@@ -1,0 +1,71 @@
+id: encyclopedia-card
+name: 科普百科卡·模块化图鉴
+description: >
+  生成高质量科普百科风格的竖版信息卡，兼具图鉴感、百科感和收藏感。
+  适合博主做系列科普内容（植物/动物/食物/城市/产品/人物/概念）。
+  风格参考高级博物图鉴、现代百科书页，信息密度丰富但不拥挤。
+aspect_ratio: "3:4"
+size: "768x1024"
+
+variables:
+  subject: ""                       # 主题（如：粗陶拿铁 / 暹罗猫 / 北极光 / 量子纠缠）
+  category: ""                      # 类别（食物 / 动植物 / 自然现象 / 科技概念 / 城市地标）
+  headline: ""                      # 大标题（反引号包裹）
+  key_facts:                        # 核心信息点列表（最多6条）
+    - "基础档案"
+    - "外观特征"
+    - "形成机制或结构"
+    - "适用场景或人群"
+    - "优缺点或注意事项"
+    - "评分卡"
+  style: "清新自然"                  # 清新自然 / 学术图鉴 / 现代科技 / 手绘温暖
+  color_palette: "浅色干净背景，柔和配色"
+
+prompt_skeleton: |
+  A high-quality vertical 3:4 encyclopedic infographic card about `{subject}`.
+  Style: {style}, modular layout like a premium nature atlas or modern encyclopedia page.
+  Background: {color_palette}, light shadow, rounded corners on info blocks.
+  
+  ## Required Layout Modules (top to bottom):
+  
+  1. **Header Zone** (top 20%):
+     - Large title: `{headline}` — bold, clear, immediately readable
+     - Category tag: `{category}` — small badge style
+     - Hero visual: a detailed, accurate illustration of {subject} — center or right-side,
+       realistic or stylized depending on category, high detail
+  
+  2. **Info Modules** (middle 60%, 2-column grid of rounded cards):
+     Each module = icon + label + 2~3 lines of concise factual text:
+     - Module 1: 基础档案 (origin, classification, core identity)
+     - Module 2: 外观特征 (visual characteristics, close-up details)
+     - Module 3: {key_facts[2]} with relevant micro-illustration
+     - Module 4: {key_facts[3]}
+     - Module 5: {key_facts[4]} (if applicable)
+  
+  3. **Scoring / Summary Card** (bottom 20%):
+     - Visual rating bar or star system for 3~4 dimensions relevant to {category}
+     - One-line summary tagline in `quotes`
+  
+  ## Visual Quality Rules:
+  - All text must be crisp, correct Chinese characters, readable at thumbnail size
+  - Section dividers: thin lines or subtle color bands
+  - Icons: minimal flat-style, consistent line weight
+  - Color scheme: 60% background + 30% content + 10% accent highlight
+  - Overall feel: feels like a page you'd want to save and share, not an ad
+  
+  ## Negative:
+  no advertisement feel, no heavy promotional language, no cluttered layout,
+  no garbled characters, no stock-photo texture, no mismatched icon styles
+
+negative_prompt_block: |
+  no promotional/advertisement tone, no garbled text, no icon style inconsistency,
+  no cluttered information, no low-contrast text, no generic stock backgrounds,
+  information density must feel curated not overwhelming
+
+use_case_examples:
+  - "暹罗猫百科卡（动物图鉴风格）"
+  - "粗陶拿铁百科卡（咖啡知识图鉴）"
+  - "北极光科学原理卡（自然现象科普）"
+  - "量子纠缠概念解析卡（科技概念图鉴）"
+  - "长发造型分析信息图（美妆/造型百科）"
+  - "某城市地标图鉴（旅行/地理百科）"

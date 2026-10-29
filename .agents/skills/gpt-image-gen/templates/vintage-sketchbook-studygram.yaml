@@ -1,0 +1,80 @@
+id: vintage-sketchbook-studygram
+name: 复古线圈素描学霸手记 (Vintage Spiral Sketchbook Studygram)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: tech-hardware
+  style: vintage-sketchbook-studygram
+  subject: student-geek-study-blueprint
+
+tags:
+  - vintage-sketchbook
+  - metal-spiral-binding
+  - dip-pen-ink-sketch
+  - cross-hatching-texture
+  - sepia-watercolor-wash
+  - studygram-diary
+  - focused-girl-mascot
+
+description: 采用真实金属双螺旋线圈装订、复古泛黄草稿纸、细腻黑墨水蘸水钢笔排线素描与局部焦糖淡彩（Sepia Watercolor Wash）的高信息密度学霸手记。极具人文温度与学术手账感，底部包含伏案书写的素描少女与书堆笔筒。
+
+author: antigravity-laowang
+
+use_cases:
+  - "学习方法论、时间管理、高分通关与自律学习指南"
+  - "小红书、知乎高收藏复古手记封面与知识干货长图"
+  - "AI 工具深度玩法实战上手指南与日程表"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "vintage-spiral-notebook-poster"
+
+variables:
+  - name: main_title
+    description: 顶部毛笔大标题
+    default: "拒绝拖延！"
+  - name: subtitle
+    description: 纸飞机副标题
+    default: "暑期弯道超车学习法"
+  - name: sticky_note_text
+    description: 右上角回形针便签寄语
+    default: "这个暑假，不做时间的奴隶，而做自己的赢家！♡"
+  - name: middle_banner_title
+    description: 中间板块飘带标题
+    default: "一、为什么暑期是弯道超车的黄金期？"
+
+prompt_skeleton: |
+  An ultra detailed, aesthetic vintage spiral notebook sketchnote studygram poster, 2:3 vertical aspect ratio, hand-drawn ink and delicate sepia watercolor wash style.
+  The background is an authentic aged, warm cream-tan textured kraft sketchbook paper with visible natural paper fibers. Along the entire left edge is a photorealistic metallic double-spiral wire coil binding with clean punched rectangular notebook holes.
+  Artistic technique: Exquisite fine black ink dip-pen sketches with delicate cross-hatching shade lines, accented by soft caramel-ochre, sepia, and warm amber watercolor washes. Clean, beautiful handwritten Chinese calligraphy throughout the entire page.
+
+  [TOP HEADER SECTION]
+  Top left: Large, energetic, bold black brush-lettered title: `{main_title}` with an ink exclamation mark and tiny hand-drawn diamond sparkles.
+  Directly beneath it, a delicate ink paper airplane doodle with dashed loop trails pointing to handwritten title with a warm caramel watercolor highlighter stroke: `{subtitle}`.
+  Top right: A realistic paper clip holds a white cream sticky note taped with textured masking tape:
+  `{sticky_note_text}`
+  Middle right: A vintage mechanical twin-bell alarm clock resting on a tall stack of 3 hardcover sketchbooks with titles on spines: `自律`, `专注`, `成长 ♡`, beside a potted succulent plant with fine cross-hatching ink leaves.
+  Middle left: A wooden trail signpost with two arrows pointing right: `现在努力 ➔` and `未来可期 ➔` standing in grass.
+  Next to it, a fluffy ink-sketched speech cloud with motivational quote.
+
+  [MIDDLE SECTION - {middle_banner_title}]
+  Framed by an antique swallowtail parchment ribbon banner: `{middle_banner_title}`.
+  A horizontal row of 4 neat rectangular dashed-line cards:
+  {middle_cards_block}
+
+  [LOWER MIDDLE SECTION - TWO-COLUMN SPLIT]
+  Left Column (50% width) - 核心方法 5 条列表:
+  Framed by a neat sketched ribbon header. 5 vertically stacked illustrated bullet points with detailed text and icons.
+  Right Column (50% width) - 高效日程表/时间轴:
+  A cute vintage pinned timetable card with scalloped edges. 8-slot daily schedule timeline with timestamps and mini hand-drawn icons.
+
+  [BOTTOM FOOTER SECTION]
+  Bottom left: A hand-drawn decorative dialogue card with inspirational closing quote.
+  Bottom center & right: A detailed, charming sketch of a focused young girl with a ponytail leaning forward over an open desk, diligently writing with a pencil in an open notebook. Beside her is a stack of books with a paper slip reading `自律 自由 ♡` and a ceramic cup filled with pencils and rulers.
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Masterful ink sketch, warm sepia watercolor wash, detailed cross-hatching textures, realistic metal spiral binder, authentic Japanese studygram diary aesthetic, ultra crisp legible handwritten Chinese characters, spacious balanced layout.
+  STRICT NEGATIVE: NO 3D plastic render, NO digital vector flat lines, NO glossy shine, NO dark cyberpunk backgrounds, NO blurry illegible text, NO distorted girl face or anatomy.

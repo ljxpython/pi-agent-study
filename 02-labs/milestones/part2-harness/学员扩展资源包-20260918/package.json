@@ -1,0 +1,35 @@
+{
+  "name": "pi-lesson2-student-resources",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "pi": "pi",
+    "hooks": "node scripts/run.mjs hooks",
+    "mvp": "node scripts/run.mjs mvp",
+    "memory": "node scripts/run.mjs memory",
+    "web": "node scripts/run.mjs web",
+    "mcp": "node scripts/run.mjs mcp",
+    "lsp": "node scripts/run.mjs lsp",
+    "subagents": "node scripts/run.mjs subagents",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "file:./packages/earendil-works-pi-coding-agent-0.85.1.tgz",
+    "@earendil-works/pi-ai": "file:./packages/earendil-works-pi-ai-0.85.1.tgz",
+    "@earendil-works/pi-agent-core": "file:./packages/earendil-works-pi-agent-core-0.85.1.tgz",
+    "@earendil-works/pi-tui": "file:./packages/earendil-works-pi-tui-0.85.1.tgz",
+    "pi-memory": "file:./packages/pi-memory-0.4.2.tgz",
+    "pi-web-access": "file:./packages/pi-web-access-0.29.0.tgz",
+    "pi-mcp-adapter": "file:./packages/pi-mcp-adapter-2.34.0.tgz",
+    "pi-subagents": "file:./packages/pi-subagents-0.68.0.tgz",
+    "@narumitw/pi-lsp": "file:./packages/narumitw-pi-lsp-0.49.7.tgz",
+    "@kkkiio/pi-web-ui": "file:./packages/kkkiio-pi-web-ui-0.1.1.tgz",
+    "typescript": "file:./packages/typescript-5.9.3.tgz",
+    "typescript-language-server": "file:./packages/typescript-language-server-5.1.3.tgz",
+    "tsx": "file:./packages/tsx-4.21.0.tgz"
+  }
+}

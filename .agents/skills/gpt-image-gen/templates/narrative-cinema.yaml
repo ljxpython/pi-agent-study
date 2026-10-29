@@ -1,0 +1,42 @@
+id: narrative-cinema
+name: 电影级现实博弈抓拍
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: editorial-article
+  style: cinematic-still
+  subject: character-interaction
+category: cinematic-still
+tags:
+  - film-still
+  - character-interaction
+  - tension
+  - 35mm-photography
+  - realistic-drama
+description: 35mm胶片质感的现实冲突瞬间抓拍，强化人物肢体语言、眼神交锋与微表情张力，专用于散文故事叙事转折点
+author: gpt-image-gen-core
+
+use_cases:
+  - "Narrative article scene illustrations and turning point visual beats"
+  - "Human interaction, business negotiation, and psychological tension portrayal"
+  - "Book chapter frontispiece or realistic editorial story slice"
+
+parameters:
+  aspect_ratio: "4:3 or 16:9"
+  recommended_size: "1024x768 or 1024x576"
+  quality: "medium or high"
+  layout_type: "cinematic-film-still"
+
+variables:
+  - name: scene_conflict
+    description: 现实社交或职场博弈的关键冲突场景（对垒双方的动作、微表情、心理地位差距）
+    example: "Two figures seated across a wooden conference table. The arrogant opponent leans forward aggressively pointing fingers, while the protagonist maintains relaxed, upright posture, making steady, piercing eye contact with a calm, stoic expression"
+
+prompt_skeleton: |
+  A tense, dramatic cinematic film still capturing a decisive moment in a modern professional or social negotiation:
+  {scene_conflict}.
+  Cinematography: 35mm film photography aesthetic, shallow depth of field, natural atmospheric lighting, rich shadows, warm and cool color grading, authentic emotional tension.
+
+strict_negative: |
+  STRICT NEGATIVE: Absolutely NO text, NO captions, NO artificial overlays, NO distorted anatomy.

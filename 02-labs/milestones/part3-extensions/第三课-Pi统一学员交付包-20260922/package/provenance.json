@@ -1,0 +1,23 @@
+{
+  "status": "CANDIDATE_NOT_FULLY_ACCEPTED",
+  "pi_baseline": "0.85.1",
+  "modules": [
+    {
+      "module": "monitor",
+      "source": "学员资料包-Pi终端监控栏-20260921",
+      "source_version": "1.0.0"
+    },
+    {
+      "module": "activity",
+      "source": "学员资料包-Pi简洁执行扩展-20260921",
+      "source_version": "1.0.1"
+    },
+    {
+      "module": "messenger",
+      "source": "学员资料包-Pi-Agent-Teams-20260921/package",
+      "source_version": "0.15.2"
+    }
+  ],
+  "version": "0.1.1",
+  "layout": "self-contained extension directories"
+}

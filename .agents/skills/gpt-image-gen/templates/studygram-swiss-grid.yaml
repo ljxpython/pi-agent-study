@@ -1,0 +1,94 @@
+id: studygram-swiss-grid
+name: 现代学院派方格手绘笔记 (Studygram Swiss Grid)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: handdrawn-studygram
+  style: modern-studygram-aesthetic
+  subject: architecture-theory-notes
+
+tags:
+  - studygram
+  - swiss-grid
+  - highlighter-notes
+  - left-text-right-diagram
+  - timeline-callouts
+  - washi-tape-summary
+
+description: 采用 5mm 方格纸底衬与三色半透明马克笔高亮条的现代学院派学霸手绘笔记。纵向三大板块严格左文右图互锁，右侧支持演化时间线、微架构带引线说明与贴胶带便签小结，极具学术严谨性与手写温度。
+
+author: antigravity-laowang
+
+use_cases:
+  - "技术架构演进与深层设计逻辑剖析（如：Agent 认知架构、RAG 进阶检索体系）"
+  - "理论模型推演与包含公式/架构图的深度学习笔记"
+  - "知乎/掘金技术深度文章核心原理解析大图"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "three-section-grid-poster"
+
+variables:
+  - name: main_title_prefix
+    description: 顶部大标题前缀
+    default: "大模型 Agent 认知架构"
+  - name: main_title_highlight
+    description: 顶部大标题草木绿高亮条部分
+    default: "设计逻辑与工程落地"
+  - name: subtitle
+    description: 英文/中英结合副标题
+    default: "Cognitive Agent Architecture / 结构化执行逻辑 / 生产级落地手记"
+  - name: section_1
+    description: 板块一（绿色标·演化起源与时间线）
+    default: {}
+  - name: section_2
+    description: 板块二（粉色标·核心工程语法与带引线微架构图）
+    default: {}
+  - name: section_3
+    description: 板块三（棕色标·生产实战优势与胶带便签小结）
+    default: {}
+
+prompt_skeleton: |
+  An authentic modern studygram notebook page, aesthetic swiss grid study notes poster, 2:3 vertical aspect ratio, referencing top-tier academic handwritten study notes. 
+  The background is a clean, flat light cream-green 5mm grid graph paper texture, completely flat without any binder rings, spiral coils, or harsh shadows. Thin horizontal dashed divider lines cleanly separate the page into three major sections.
+
+  [TOP HEADER SECTION]
+  At the very top:
+  Bold handwritten title in dark ink: `{main_title_prefix}：{main_title_highlight}`, where the latter half `{main_title_highlight}` has a soft semi-transparent sage-green highlighter stroke beneath it.
+  Directly beneath it, neat subtitle: `{subtitle} ✧`, followed by a thin dark green horizontal accent line.
+
+  [SECTION 1: {sec1_name}]
+  Section header box with a sage-green highlighter brush stroke: `一、{sec1_name}`.
+  Divided into left text and right diagram:
+  - Left Column: Three bullet points with circular outline numbers ① ② ③ in neat handwriting with pastel green highlights on key terms:
+    {sec1_bullets}
+  - Right Column:
+    Top: horizontal timeline labeled `● 时间线: {sec1_timeline_title}`, timeline nodes: {sec1_timeline_nodes}.
+    Bottom: clean hand-drawn tablet/iPad screen doodle displaying: `{sec1_doodle_notes}` with an `Apple Pencil` resting beside it.
+
+  [SECTION 2: {sec2_name}]
+  Section header box with a soft coral-pink highlighter brush stroke: `二、{sec2_name}`.
+  Divided into left text and right diagram:
+  - Left Column: Four bullet points with square outline numbers 1 2 3 4:
+    {sec2_bullets}
+  - Right Column:
+    A diagram box labeled `● {sec2_diagram_title}`, showing flowchart cards with neat callout arrows pointing right:
+    {sec2_callout_annotations}
+
+  [SECTION 3: {sec3_name}]
+  Section header box with a warm khaki-brown highlighter brush stroke: `三、{sec3_name}`.
+  Divided into left text and right diagram:
+  - Left Column: Four bullet points with solid black circle numbers ❶ ❷ ❸ ❹:
+    {sec3_bullets}
+  - Right Column:
+    Top: horizontal process flowchart: {sec3_process_chain} ➔ a bright glowing hand-drawn lightbulb doodle labeled `生产落地`.
+    Bottom: a charming tilted sticky note paper taped with kraft washi tape at the top, labeled `小结`, containing four colored highlighter keyword blocks: {sec3_summary_keywords}, with tiny botanical leaf doodles at the bottom.
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Crisp pen-and-paper illustration, authentic handwritten Chinese characters, soft pastel highlighter brush strokes (sage green, coral pink, warm khaki), fine charcoal line art, spacious elegant layout, clean educational aesthetic.
+
+strict_negative: |
+  NO 3D rendering, NO photorealistic objects, NO metallic gloss, NO shadows, NO hole punchers, NO binder rings, NO spiral notebook coils, NO blurry text, NO dirty stains, NO dark backgrounds, NO cluttered overlap.

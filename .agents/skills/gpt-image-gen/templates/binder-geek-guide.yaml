@@ -1,0 +1,111 @@
+id: binder-geek-guide
+name: 极客活页草稿本上手指南 (Binder Notebook Blueprint)
+version: 1.0.0
+prompt_mode: natural-language
+
+taxonomy:
+  scene: handdrawn-studygram
+  style: tech-geek-binder-handdrawn
+  subject: engineering-implementation-guide
+
+tags:
+  - binder-notebook
+  - lined-paper
+  - geek-guide
+  - stick-figure-mascot
+  - 7-capability-icons
+  - checklist-card
+  - toc-footer
+
+description: 采用规整打孔横线活页纸底衬与深蓝钢笔笔迹的极客工程实战上手指南。包含双栏顶框、7 栏虚线核心能力微图标、台阶爬楼插旗火柴人、复选框清单与底部 10 章节目录横幅，专为生产级技术框架与大纲总览设计。
+
+author: antigravity-laowang
+
+use_cases:
+  - "大模型/Agent 实战工程完全上手指南（第 1 页总览）"
+  - "框架技术能力大盘点（7大核心能力 + 学习推进阶梯）"
+  - "生产级落地避坑打勾复选清单"
+
+parameters:
+  aspect_ratio: "2:3"
+  recommended_size: "1024x1536"
+  quality: "high"
+  layout_type: "binder-notebook-poster"
+
+variables:
+  - name: main_topic
+    description: 顶部大标题第一行技术名称
+    default: "AI Agent 智能体"
+  - name: guide_title
+    description: 顶部大标题第二行指南名称
+    default: "架构完全上手指南"
+  - name: subtitle
+    description: 来源或实战项目出处
+    default: "基于生产级实战项目《ai-agent-platform》整理"
+  - name: audience_bullets
+    description: ① 这篇指南讲什么（4 点受众与定位）
+    default: []
+  - name: core_mindset_formula
+    description: ② 一句话先记住（核心破解公式）
+    default: "生产级 Agent ≠ 迷信模型自由发挥，而是靠：目标明确 + 状态机闭环 + 沙箱隔离 + 熔断自愈。"
+  - name: seven_capabilities
+    description: ③ 7 栏虚线核心能力与微图标
+    default: []
+  - name: pathway_steps
+    description: ④ 学习路线推进步骤（6 个卡片箭头连接）
+    default: []
+  - name: checklist_items
+    description: ⑤ 快速结论复选框清单（左右双列）
+    default: []
+  - name: stick_figure_quote
+    description: 右下角火柴人手持板上的喊话气泡
+    default: "状态可控更稳妥!"
+  - name: ten_chapters
+    description: 底部横幅 10 个章节目录胶囊
+    default: []
+
+prompt_skeleton: |
+  An ultra high-density authentic tech geek binder notebook guide poster, 2:3 vertical aspect ratio, aesthetic engineering study note. 
+  The background is a clean, flat lined binder notebook paper with faint blue horizontal ruled lines and authentic hole punches along the left edge. The entire graphic uses crisp dark navy blue and charcoal fountain pen ink lines, with subtle crimson red underline accents.
+
+  [TOP HEADER SECTION]
+  At the very top, large hand-drawn double-line title: `{main_topic}` flanked by radiant energy lines `\= /=`, followed by large bold brush lettering: `{guide_title}`. Both sides are framed with tiny hand-drawn botanical vine leaves.
+  Below it, subtitle in neat handwriting: `{subtitle}`.
+  Directly below the subtitle, an enclosed ribbon banner labeled: `第 1 页 | 总览`.
+
+  [TOP ROW - TWO COMPARTMENTS]
+  Left Compartment: A rounded navy blue ink box with header `① 这篇指南讲什么？`.
+  Bullet points in neat handwriting:
+  {audience_bullets_prompt_block}
+  In the lower-right corner of this box, a cute minimal stick-figure peeks out and waves cheerfully.
+
+  Right Compartment: A rounded navy blue ink box with a five-pointed star icon `⭐` in the upper-right corner. Header: `② 一句话先记住`.
+  Content in prominent bold handwriting with underline accents:
+  `{core_mindset_formula}` with key phrases emphasized by red double underlines.
+
+  [MIDDLE ROW 1 - 7-COLUMN CORE CAPABILITIES]
+  A full-width horizontal rounded container labeled `③ 核心能力`.
+  Internally divided into 7 equal vertical columns by delicate dashed separator lines, each column having a circled number and a micro doodle icon:
+  {seven_capabilities_prompt_block}
+
+  [MIDDLE ROW 2 - LEARNING PATHWAY WITH STICK FIGURE]
+  A full-width horizontal container labeled `④ 这套图你将学到`.
+  Left side has a clean horizontal sequence of 6 rectangular step cards connected by arrows:
+  {pathway_steps_flow}
+  Right side shows a dynamic doodle of a cheerful stick figure actively climbing a staircase towards a waving flag `🚩` at the top.
+
+  [BOTTOM ROW - QUICK CHECKLIST]
+  A full-width horizontal container labeled `⑤ 快速结论`.
+  Two parallel columns of neat checklist items with hand-drawn checked boxes `☑️`:
+  {checklist_items_prompt_block}
+  In the lower-right corner, a stick figure holding a clipboard with a speech bubble: `{stick_figure_quote}`.
+
+  [FOOTER BANNER - TABLE OF CONTENTS]
+  At the very bottom, a full-width ribbon strip labeled `本套目录` on the left, followed by 10 numbered circular pill tags:
+  {ten_chapters_strip}
+
+  [ARTISTIC STYLE & CONSTRAINTS]
+  Crisp pen-and-paper illustration, authentic dark navy blue ink linework, charming handwritten Chinese characters, white and blue contrast, stick-figure illustrations, high-density structured layout, clean notebook aesthetic.
+
+strict_negative: |
+  NO 3D rendering, NO photorealistic objects, NO metallic textures, NO dark cyberpunk backgrounds, NO blurry handwriting, NO messy stains, NO distorted anatomy.
