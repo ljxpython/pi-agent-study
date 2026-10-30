@@ -1,1 +1,17 @@
-{"name":"pi-ticket-teaching-resources","version":"1.0.0","private":true,"pi":{"extensions":["./extensions/ticket-tools.ts"],"skills":["./skills/ticket-triage"],"prompts":["./prompts"]}}
+{
+  "name": "pi-ticket-teaching-resources",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "pi": {
+    "extensions": [
+      "./extensions/ticket-tools.ts"
+    ],
+    "skills": [
+      "./skills/ticket-triage"
+    ],
+    "prompts": [
+      "./prompts"
+    ]
+  }
+}

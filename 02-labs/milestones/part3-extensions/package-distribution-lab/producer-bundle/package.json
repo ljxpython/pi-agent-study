@@ -1,0 +1,31 @@
+{
+  "name": "@laowang/pi-custom-suite",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "老王暴躁实战包：上下文常驻底栏、架构投影模板与智能审计技能",
+  "files": [
+    "extensions/",
+    "prompts/",
+    "skills/",
+    "README.md",
+    "!**/tests/**"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions/context-panel/index.ts"
+    ],
+    "prompts": [
+      "./prompts/project-map.md"
+    ],
+    "skills": [
+      "./skills/project-auditor"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

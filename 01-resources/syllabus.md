@@ -13,8 +13,8 @@
 | 阶段 | 模块主题 | 核心实战沙盒 | 原材料精准映射 | 预计耗时 | 状态 | 交付成果 |
 |---|---|---|---|---|---|---|
 | **Part 1** | **上手 Pi Agent：原理架构与四大内置工具** | `02-labs/milestones/part1-basics/sdk-demo` | `Part 1.ipynb §1-§6` + `sdk-demo/` | 2.5h | ✅ 已完成 | 渐进式 4 阶段实战脚本；Agent Loop 机制；时序架构图；Event Sourcing 状态剖析 |
-| **Part 2** | **组装 Pi Agent：Harness 全景与 MCP 生态适配** | `02-labs/milestones/part2-harness` | `Part 2.ipynb §1-§6` + `pi-mcp-adapter` | 2.5h | ⬜ 未开始 | 事实核对表：生态选配矩阵；MCP 源码剖析 |
-| **Part 3** | **定制 Pi Agent：从 Prompt 模板到 TUI 扩展包** | `02-labs/milestones/part3-extensions` | `Part 3.ipynb §1-§7` + `上下文底栏插件` | 3.0h | ⬜ 未开始 | 实操代码：可安装的 npm 扩展包 |
+| **Part 2** | **组装 Pi Agent：Harness 全景与 MCP 生态适配** | `02-labs/milestones/part2-harness` | `Part 2.ipynb §1-§6` + `pi-mcp-adapter` | 2.5h | ✅ 已完成 | 阶段 1 MCP 协议报文握手实战；阶段 2 Pi 扩展适配与大模型多步决策；阶段 3 Ticket Agent 24+3 项测试门禁；4 张高质手账卡 |
+| **Part 3** | **定制 Pi Agent：从 Prompt 模板到 TUI 扩展包** | `02-labs/milestones/part3-extensions` | `Part 3.ipynb §1-§7` + `第三课统一交付包` | 3.0h | ✅ 已完成 (100%) | Prompt 模板四段论；最小 Extension；冷启动 Token 税实测；按需延迟加载；E2~E3 常驻底栏；跨进程排他锁与自愈；标准分发包验收通过 |
 | **Part 4** | **交付 Pi 应用：从双端 Spec 到生产业务迁移** | `02-labs/milestones/part4-spec-app` | `Part 4.ipynb §1-§6` + `工单问答助手` | 3.0h | ⬜ 未开始 | 深度博客底稿；生产适配架构方案 |
 
 ---
@@ -57,25 +57,26 @@
 
 ### 1. 核心心智模型与技术事实（带精准原材料映射）
 
-- [ ] **2.1 Agent 运行形态与 Harness 全景** ➔ `对应 Part 2.ipynb §1-§3`
+- [x] **2.1 Agent 运行形态与 Harness 全景** ➔ `对应 Part 2.ipynb §1-§3`
   - 从使用目标划分：代码审查助理、全自动重构 Agent、外挂运维助手；
   - 什么是 Harness？为轻量内核插上生态翅膀（输入扩展、执行扩展、UI 交互扩展）。
-- [ ] **2.2 MCP 协议深度适配与源码剖析** ➔ `对应 Part 2 课件 + sources/pi-mcp-adapter-2.34.0/`
+- [x] **2.2 MCP 协议深度适配与源码剖析** ➔ `对应 Part 2 课件 + sources/pi-mcp-adapter-2.34.0/`
   - Claude 插件加载机制（`claude-plugin-loader.ts`）；
   - 工具懒加载与按需激活（`lazy-loader.ts`）；
   - 工具命名空间隔离，防止命名冲突（`namespace-tools.ts`）；
   - 直连工具协议与错误信号传递（`direct-tools.ts`, `error-signal.ts`）。
-- [ ] **2.3 工单助手实战项目 (MEM-DEMO-01)** ➔ `对应 Part 2.ipynb MEM-DEMO-01 + samples/ticket-agent/`
+- [x] **2.3 工单助手实战项目 (MEM-DEMO-01)** ➔ `对应 Part 2.ipynb MEM-DEMO-01 + samples/ticket-agent/`
   - 工单处理工具链（`tools/` 目录实现）；
   - 基于 Python 实现的本地 MCP Server（`samples/mcp/mcp-server.py`）；
-  - 学员实时调试工作区基线配置（`student-workspaces/ticket-live/`）。
-- [ ] **2.4 增加网页入口与组合方案** ➔ `对应 Part 2.ipynb §4-§6`
+  - 学员实时调试工作区基线配置（`ticket-live/` 24+3项业务与对抗测试全通）。
+- [x] **2.4 增加网页入口与组合方案** ➔ `对应 Part 2.ipynb §4-§6`
   - 终端 Agent 如何通过 RPC/Websocket 暴露 Web UI；形成个人编程助手的完整工具矩阵。
 
 ### 2. 对应实操沙盒代码
-- 📂 `02-labs/milestones/part2-harness/学员扩展资源包-20260918/sources/pi-mcp-adapter-2.34.0/`
-- 📂 `02-labs/milestones/part2-harness/学员扩展资源包-20260918/samples/ticket-agent/`
-- 📂 `02-labs/milestones/part2-harness/学员扩展资源包-20260918/samples/mcp/mcp-server.py`
+- 📂 `02-labs/milestones/part2-harness/mcp-demo/01-mcp-handshake.mjs`（阶段 1：MCP 原始协议三步握手）
+- 📂 `02-labs/milestones/part2-harness/mcp-demo/02-pi-mcp-integration.mjs`（阶段 2：Pi 扩展与大模型多步自主决策）
+- 📂 `02-labs/milestones/part2-harness/ticket-live/`（阶段 3：Ticket Agent 工业级实战与原型链攻防）
+- 📄 `02-labs/run-part2.sh`（Part 2 全链路一键运行脚本）
 
 ---
 
@@ -83,20 +84,23 @@
 
 ### 1. 核心心智模型与技术事实（带精准原材料映射）
 
-- [ ] **3.1 自定义能力分层与 Prompt 模板开发** ➔ `对应 Part 3.ipynb 第一章到第二章`
-  - 什么时候用 Prompt 模板？什么时候写 TypeScript 扩展？
-  - 提示词参数插值与上下文隔离规范（`prompts/project-map.md`）。
-- [ ] **3.2 最小 Extension 架构解剖** ➔ `对应 Part 3.ipynb 第三章, docs/extensions.md`
-  - 核心接口实现：`registerTool`、`onSessionStart`、`onMessage`、`onToolCall`；
-  - 扩展的生命周期与错误捕获。
-- [ ] **3.3 终端界面 (TUI) 上下文底栏开发** ➔ `对应 Part 3.ipynb 第四章到第五章 + 课堂演示最终成果-上下文底栏`
-  - 面板状态核心逻辑：`panel-core.ts`；
-  - 终端渲染引擎与事件响应：`src/index.ts`；
-  - 偏好持久化与界面渲染可靠性校验（`scripts/check.mjs`）。
-- [ ] **3.4 打包为独立 NPM Package 并跨项目使用** ➔ `对应 Part 3.ipynb 第六章到第七章 + package/`
-  - `package.json` 中的 Pi 专用扩展元数据定义；
-  - 包含多扩展组合发布：`monitor`（监控）、`activity`（活动日志）、`messenger`（消息转发）；
-  - 打包分发与跨项目无损加载测试（`scripts/verify-load.ts`）。
+- [x] **3.1 自定义能力分层与 Prompt 模板开发** ➔ `对应 Part 3.ipynb 第一章到第二章`
+  - 什么时候用 Prompt 模板？什么时候写 TypeScript 扩展？（四阶能力光谱已解密）；
+  - 提示词参数插值与上下文隔离规范（`prompts/project-map.md`，三项黄金测试用例已全通）。
+- [x] **3.2 最小 Extension 架构解剖与运行时防御** ➔ `对应 Part 3.ipynb 第三章, docs/extensions.md`
+  - 核心接口实现：`registerCommand("context-usage")`、模式守卫 `ctx.mode !== "tui"`、可选链 `?.()` 与 `Number.isFinite` 严苛防御；
+  - 5 项针对性单元测试 100% 通过；
+  - **高级深潜反哺**：冷启动底座税成因（28,593 Tokens）、按需工具延迟发现（Deferred Tool Loading）手撕实装与提示词前缀缓存（Prompt Caching）四大铁律（已沉淀入全局面试题库）。
+- [x] **3.3 终端界面 (TUI) 上下文底栏开发与动态控制** ➔ `对应 Part 3.ipynb 第四章到第五章 + 课堂演示最终成果-上下文底栏`
+  - 10 格条形图算法（`[██░░░░░░░░] 23.0%`）与 `ctx.ui.setStatus` 屏幕底栏挂载；
+  - 事件驱动：`pi.on("turn_end")` 大模型轮次结束自动无感重绘；
+  - 动态开关与持久化：`/context-panel on/off/toggle` 与沙盒私有 `.pi/context-panel.json`；
+  - 5 项状态栏单测 100% 满分全通；
+  - 跨进程排他锁（`state.lock`，基于 `openSync wx`）与损坏自愈机制（Corrupt Recovery，原子替换 `fsync+rename`）。
+- [x] **3.4 打包为独立 NPM Package 并跨项目使用** ➔ `对应 Part 3.ipynb 第六章到第七章 + package/`
+  - `package.json` 中的 `pi` 专用字段规范（`pi.extensions`、`pi.prompts`、`pi.skills`）；
+  - 多扩展套件组合（`monitor`、`activity`、`messenger`）；
+  - 打包分发与跨项目无损加载测试（`scripts/verify-load.ts` 0错误通过，25项核心单测100% PASS）。
 
 ### 2. 对应实操沙盒代码
 - 📂 `02-labs/milestones/part3-extensions/第三课-Pi统一学员交付包-20260922/课堂演示最终成果-上下文底栏-20260922/`
@@ -104,22 +108,29 @@
 
 ---
 
-## 🎯 Part 4：交付 Pi 应用——从双端 Spec 到业务迁移落地
+## 🎯 Part 4：交付 Pi 应用——从双端 Spec 到业务迁移落地 (✅ 已完成 100%)
 
 ### 1. 核心心智模型与技术事实（带精准原材料映射）
 
-- [ ] **4.1 端到端工单问答助手全景透视** ➔ `对应 Part 4.ipynb 第一章 + Pi工单问答助手-学员版`
-  - 一次完整用户查询背后的链路：Web 前端 ➔ 后端服务 ➔ Pi SDK/RPC ➔ 工具执行 ➔ 流式打字机回传。
-- [ ] **4.2 双端 Spec 驱动开发方法论** ➔ `对应 Part 4.ipynb 第二章 + 项目材料/Pi工单项目案例文件夹/`
-  - 为什么要写 Spec？拒绝边猜边写；
-  - 前端契约规范：`frontend-spec.md`（组件状态机、流式渲染协议、用户输入防抖）；
-  - 后端契约规范：`backend-spec.md`（接口定义、状态持久化、Tool 权限鉴权与异常熔断）；
-  - 过程管理模板：`01-小型Agent应用-项目启动与交付SOP.md`、`PLAN.md`、`PROJECT_STATE.md`。
-- [ ] **4.3 Pi SDK 深度接线与责任边界划分** ➔ `对应 Part 4.ipynb 第三章到第四章`
-  - 谁负责什么？严格划分：LLM 负责决策、Pi SDK 负责执行、业务后端负责鉴权与安全审计、前端负责视觉呈现。
-- [ ] **4.4 交付可靠性评测与业务系统迁移** ➔ `对应 Part 4.ipynb 第五章到第六章`
-  - 怎样量化判定 Agent 回复可靠性？（断言工具调用序列、结果幻觉率检测）；
-  - 将工单案例的架构范式迁移到自有生产系统（如 `ai-agent-platform`）。
+- [x] **4.1 端到端工单问答助手全景透视** ➔ `对应 Part 4.ipynb 第一章 + Pi工单问答助手-学员版`
+  - 一次完整用户查询背后的物理链路：Web 前端 ➔ 业务后端 ➔ Pi SDK ➔ 工具执行 ➔ 证据链组装 ➔ SSE 流式回传；
+  - 核心认知：一段靠谱的 Agent 回复绝不是裸文本，必须拆解为四重事实证据（Text / Tool / Entity / Source）。
+- [x] **4.2 双端 Spec 驱动开发方法论** ➔ `对应 Part 4.ipynb 第二章 + 项目材料/Pi工单项目案例文件夹/`
+  - 为什么坚决拒绝边猜边写？将口嗨愿望转化为可量化验收的断言句子；
+  - 双端 Spec 规范：`frontend-spec.md`（状态机与流式协议）+ `backend-spec.md`（接口契约与异常熔断）；
+  - 敏捷过程管理：启动 SOP、`PLAN.md`（分阶段里程碑）与 `PROJECT_STATE.md`（状态与断点记忆）。
+- [x] **4.3 Pi SDK 深度接线与来源绑定实战** ➔ `对应 Part 4.ipynb 第三章 + Pi工单问答助手-学员版/backend/`
+  - 前后端本地启动架构：前端 Vite 纯 TS 渲染，后端 Node.js + Pi SDK 会话生命周期挂载；
+  - 来源绑定（Source Binding）三重防御机制（正常匹配、无引用阻断、旧版本引用拒绝）；
+  - **核心单测实战**：编写 `backend/tests/source-binding.test.ts` 实现自动化回归断言（4 项单测 100% PASS）。
+- [x] **4.4 责任边界划分：三权分立与四问法** ➔ `对应 Part 4.ipynb 第四章`
+  - 智能体决策 vs 应用实现（LLM 决策工具调用，业务后端掌控物理权限与真实数据）；
+  - 报告草稿与人工确认（Human-in-the-loop 生产防线）；
+  - 四问法：输入什么、决定什么、谁执行、谁兜底。
+- [x] **4.5 可靠性判断与自有平台架构迁移** ➔ `对应 Part 4.ipynb 第五章到第六章`
+  - 连续三步法判定结果可靠：选中、绑定、使用；
+  - 空数据、无记录与未初始化的状态判别；
+  - 将工单助手双端架构迁移落地到自有开源或企业级平台（如 `ai-agent-platform`）。
 
 ### 2. 对应实操沙盒代码
 - 📂 `02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/`

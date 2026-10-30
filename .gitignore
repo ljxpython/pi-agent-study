@@ -1,5 +1,7 @@
 # Dependencies
 node_modules/
+**/node_modules
+**/node_modules/**
 .venv/
 venv/
 env/
@@ -21,6 +23,8 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+*.tgz
+.pi-agent/
 
 # Logs & Runtime
 *.log

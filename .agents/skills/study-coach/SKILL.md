@@ -42,12 +42,25 @@ description: 研学私教与AI课件人话解构引擎。专门用于处理生�
 
 ```mermaid
 flowchart TD
-    A["Raw Courseware (原始生涩课件)"] --> B["Step 1: 门槛概念与动机穿透 (Threshold Concepts & Why)"]
+    A["Raw Courseware (原始生涩课件)"] --> Step0["Step 0: Agent 内部防误导自检契约 (Zero-Drift Internal Contract)"]
+    Step0 -->|"静默自检完毕·呈现10秒心智锚点"| B["Step 1: 门槛概念与动机穿透 (Threshold Concepts & Why)"]
     B --> C["Step 2: 源码执行流与 PRIMM 动手实操 (Code Trace & PRIMM)"]
     C --> D["Step 3: 全量技术事实核对矩阵 (Lossless Fact Sheet)"]
-    D --> E["Step 4: 精细化追问与老王技术盘问 (Elaborative Interrogation)"]
+    D --> E["Step 4: 精细化追问与自动化质检交付 (Elaborative Interrogation & Quality Gate)"]
     E --> F["Solidified Knowledge (真正转化为肌肉记忆)"]
 ```
+
+### Step 0: Agent 内部防误导自检契约 (Zero-Drift Internal Contract · 零打扰铁律)
+- **核心原则**：**把控教学方向与真实性是 Agent 的天职，严禁通过频繁打扰用户“求确认”来转嫁责任！** 用户是来高效汲取知识的，不是来当审批官或测谎仪的。
+- **🚨 零遗漏前置地毯式点验（Full-Spectrum Pre-Audit）**：
+  在开啃任何章节前，必须在后台通读原始课件全量内容，在 `01-resources/knowledge-ledger.md` 逐行建档点验，课件里有的考点必须 100% 覆盖精讲，严禁偷懒跳读跳讲、严禁等用户提问才临时抱佛脚！
+- **🚨 形态跃迁与命令溯源铁律（Form Transition & Command Provenance Rule）**：
+  只要从 SDK 代码切换到 CLI 终端，必须在前置笔记写明《认知过渡篇》说明为何切换；出现任何终端/斜杠命令，必须先白纸黑字解密其来源（内置/扩展/Prompt模板）与底层 20+ 步物理流转时序！
+- **🚨 核心调度引擎循环深潜（Engine Loop Deep-Dive）**：
+  对于具备自主探索能力的 Agent 框架，必须画出底层双层 while 循环架构图，逐行解剖事件分发、单轮多工具并发、截断容错与退出判定。
+- **🚨 终端物理现场 Dry-Run 预检**：
+  所有指导用户运行的命令与演进脚本，Agent 必须在后台真实执行过、检查过输出与依赖，把报错踩平，绝不准臆测！
+- **交付呈现**：在每一章节笔记开头，仅提供一行简洁明了的 **`💡 10秒心智锚点（Mental Model Anchor）`**（技术内核、主客体拓扑、实操关键线索），**用户顺畅跟读，无需回复审批确认！**
 
 ### Step 1: 动机穿透与直觉隐喻（Say Human Words）
 - **禁止直接罗列定义**！AI 课件最爱做的事就是把术语平铺。
@@ -75,7 +88,8 @@ flowchart TD
     3. **【关键源码逐行拆解】**（核心函数、关键参数、执行流）；
     4. **【实操命令与运行方法】**（如 `npm run demo:01`）；
     5. **【真实终端执行日志与物理现场深潜】**（如捕获的生命周期事件、生成的持久化真实节点）；
-    6. **【避坑指南与 Naive vs Production 对比】**。
+    6. **【避坑指南与 Naive vs Production 对比】**；
+    7. **【小节就地嵌入知识手账卡】**（每个小节讲解末尾，必须就地嵌入一张对应知识点的 Style 2 现代瑞士方格手账图作为视觉认知收口，大章收官处嵌入一张 Style 3 极客活页打卡手册大卡，做到图文互证、一站式通读）。
 - 🚫 **严禁绝对路径铁律（No Absolute Paths Rule）**：
   - **杜绝写死宿主机路径**：在所有 Markdown 笔记、代码注释、配置文件和文档中，**绝对严禁**出现如 `/Users/...` 或 `C:\...` 等宿主机绝对路径！
   - **必须使用仓库相对路径**：项目内部的文件互引一律使用相对路径（例如 `../../02-labs/milestones/...` 或 `./01-xxx`），确保项目在任何新环境、任何开发者电脑上克隆即跑，超链接永远有效。
@@ -104,6 +118,8 @@ flowchart TD
   在大纲（`syllabus.md`）或阶段总结文末，必须附带：
   1. **《原材料覆盖率审计报告》**：逐章清点原材料目录中的每一个文档、每一份工程代码，确认是否已 100% 覆盖并吸收；
   2. **《老王生产级扩展建议》**：指出原材料未提及或语焉不详、但真实企业级落地必不可少的扩展考量（如并发锁、Token熔断、沙盒隔离、企业鉴权）。
+- **自动化交付质检门禁 (Quality Gate Verification)**：
+  在向用户交卷前，Agent 必须在后台执行 `bash scripts/verify-all.sh`，确保 Mermaid 语法无冲突、相对路径无死链、宿主机绝对路径 0 残留，Exit Code 0 绿灯后方可向用户交付！
 
 ---
 

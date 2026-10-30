@@ -1,0 +1,7 @@
+{
+  "name": "consumer-business-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "模拟真实下游业务项目，消费 @laowang/pi-custom-suite 扩展包"
+}

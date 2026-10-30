@@ -1,8 +1,8 @@
 ---
-title: "Part 1：上手 Pi Agent——架构原理与渐进式实战研学"
-description: "深度拆解轻量级 Coding Agent 架构标杆 Pi Agent 的运行底座、六项极简取舍哲学、四大原子工具与渐进式四阶段 Labs 代码实操全景。"
+title: "Part 1：上手 Pi Agent——原理架构与四大内置工具"
+description: "深入剖析 Pi Agent 微内核架构、六项取舍哲学、三大调用入口与四大原子工具边界，理解 Agent Loop 与纯文本追加持久化。"
 collection: "foundations"
-section: "架构底座"
+section: "核心原理"
 order: 1
 published: true
 ---
@@ -153,16 +153,85 @@ Pi 坚决拒绝封装“一键重构项目”这种粗粒度、黑盒式的超�
 > **老王划重点（`edit` 为什么要求 `oldText` 唯一？）**：
 > 很多 AI 编程工具之所以把代码改得稀巴烂，就是因为采用了正则替换或宽松模糊匹配。Pi 的 `edit` 工具底层规定：如果在原文件中找到了 2 处及以上相同的 `oldText`，工具直接抛出错误终止执行！这倒逼模型必须先调用 `read` 工具，看清楚上下文的前后几行，携带足够的定位行信息后再调用 `edit`，彻底杜绝误伤代码！
 
-#### (2) Agent Loop 三态机流转
-Pi 的底层调度核心（`agent-loop.ts`）由一个严谨的状态机驱动：
+#### (2) 深度专篇：Agent Loop 核心循环与调度机制全景剖析（心脏解密）
+
+> 🚨 **老王认知纠偏**：很多初学者以为 Agent 就是大模型加几个函数。其实大模型只是一颗静态的“大脑芯片”，而 **Agent Loop（智能体循环）** 才是让这颗芯片不断产生心跳、驱动双手干活的**“心脏与血液循环系统”**！  
+> 官方课件在《第一节课-上手Pi-Agent.ipynb》第 2.5 节（“串起一次模型与工具调用循环”）中专门将它列为唯一核心调度依据。
+
+##### ① 为什么必须有这个循环？（从单次请求到自主探索）
+普通调用大模型是“**单向一问一答**”，模型答完即死；
+但 AI 程序员在写代码或改 Bug 时，是“**多步自主探索**”：
+1. 它不知道当前代码有啥 Bug ➔ 必须先调 `lsp_diagnostics` 去探查编译器红线；
+2. 看到红线它需要看政策 ➔ 必须调 `support_get_policy` 跨进程拿阈值；
+3. 拿到政策它需要动手术 ➔ 必须调 `edit` 去改指定文件；
+4. 改完之后它不知道改对了没有 ➔ 必须调 `bash` 去跑 `npm test`；
+5. 看到单测全绿了 ➔ 它才收手向人类汇报。
+
+**这整套“探查 ➔ 决策 ➔ 动手 ➔ 检验 ➔ 再决策”的自运转机制，全靠底层 `@earendil-works/pi-agent-core/dist/agent-loop.js` 里的双层 `while` 循环在驱动！**
+
+##### ② 核心循环架构流程图（双层 While 循环推进）
 ```mermaid
-stateDiagram-v2
-    [*] --> Idle
-    Idle --> WaitingForModel: session.prompt() 发送请求
-    WaitingForModel --> ExecutingTools: 模型返回 Tool Calls
-    ExecutingTools --> WaitingForModel: 工具执行完成，聚合 toolResult 回传模型
-    WaitingForModel --> Idle: 模型判定任务结束，生成文本并终止
+flowchart TD
+    Start["1. 收到用户任务输入 (session.prompt / TUI)"] --> OuterLoop["2. 进入外层循环: while (true)"]
+    
+    subgraph CoreLoop["Agent Loop 核心循环运转体 (agent-loop.js)"]
+        OuterLoop --> Steering["3. 检查排队消息 (Steering & Pending Messages)"]
+        Steering --> ContextConvert["4. 上下文转译 (AgentMessage[] ➔ LLM Payload)"]
+        ContextConvert --> LLMCall["5. 流式请求大模型 (streamFn 调用)"]
+        
+        LLMCall --> CheckOutput{"6. 检查模型返回的 content"}
+        
+        CheckOutput --"纯文本回复 (没有 toolCall)"--> BreakCheck{"7. 还有未处理消息吗？"}
+        BreakCheck --"无"--> Exit["🏁 跳出循环 (break)，输出最终回答"]
+        BreakCheck --"有"--> OuterLoop
+        
+        CheckOutput --"包含 toolCall (如 read, edit, mcp)"--> InnerLoop["8. 内层循环: 执行工具调度"]
+        
+        InnerLoop --> ModeCheck{"9. 是否包含顺序执行工具？"}
+        ModeCheck --"否"--> Parallel["10. executeToolCallsParallel (单轮多工具并发)"]
+        ModeCheck --"是"--> Sequential["11. executeToolCallsSequential (严格串行)"]
+        
+        Parallel --> ToolExec["12. 本地 Node 进程执行 tool.execute(...)"]
+        Sequential --> ToolExec
+        
+        ToolExec --> CreateResult["13. 包装 toolResult (内容/报错/details)"]
+        CreateResult --> Feedback["14. 将工具结果作为新事件回填上下文"]
+        Feedback --> OuterLoop
+    end
+    
+    LLMCall --"Token 超限截断 / 用户按下 Ctrl+C"--> GuardExit["⚠️ 触发截断容错或优雅中止"]
 ```
+
+##### ③ 源码逐行深潜：四大关键运行阶段（`agent-loop.js` L85-L290）
+
+- **阶段 1：Steering 转向插队检查（`agent-loop.js` L82-L84）**
+  在每一轮向大模型发起请求前，循环首先检查 `pendingMessages`。
+  如果用户在模型上一步跑单测的时候突然敲了：“等等，先别测，先检查下类型”，Pi 不需要把进程杀死，而是会在**下一轮循环中自动把人类的新指令插队进去**，实现任务方向的即时纠偏！
+
+- **阶段 2：上下文转译与流式请求（`agent-loop.js` L105-L125）**
+  Pi 内部使用的是富事件结构的 `AgentMessage[]`（保存了完整的生命周期事件）。只有在真正要打给大模型供应商的 HTTP 边界处，才通过 `convertToLlm()` 转化为标准的 OpenAI/Anthropic 消息体，并通过 `streamFn` 流式透传。
+
+- **阶段 3：工具调用拦截与并发调度（`agent-loop.js` L130-L145）**
+  模型输出流结束后，循环立刻提取：
+  ```javascript
+  const toolCalls = assistantMessage.content.filter((c) => c.type === "toolCall");
+  ```
+  - **若 `toolCalls.length === 0`**：说明模型已经给出了最终答案，没有新的工具调度，循环 `break` 收敛退出！
+  - **若 `toolCalls.length > 0`**：Pi 展现出强大的架构优势——**单轮多工具并发调度（Parallel Execution）**！如果模型这一轮同时要求调用 `get_policy` 和 `list_tickets`，底座会通过 `Promise.all` 瞬间并发打给外部服务，几毫秒内同时拿回两项数据！
+
+- **阶段 4：执行结果回填与闭环（`agent-loop.js` L293-L350）**
+  **工具永远是在你的本机由 Node.js 进程真实执行的**（模型没有权限直连磁盘）。工具执行完成后的输出（或错误信息），被包装成 `type: "toolResult"` 塞回上下文数组；
+  **然后循环回到头部！** 带着刚执行出来的工具结果，向大模型发起下一轮请求，直到任务达成。
+
+##### ④ Pi Agent Loop 的三大工业级护城河（区别于玩具框架的关键）
+1. **截断自动容错保护（Truncation Guard · `agent-loop.js` L138）**：
+   如果大模型输出超长触发了输出 Token 限制，工具调用的 JSON 字符串只吐了一半就被截断，普通框架会因为 JSON 解析报错直接崩掉。Pi 会自动捕获 `finishReason === 'length'`，**将半截调用自动包装为错误提示送回模型**，让模型下一轮用更简短的参数重试！
+2. **纯事件溯源留痕（Event Sourcing）**：
+   循环推进的每一步事件（何时调用、实参是什么、回执是什么）都会无损写入磁盘 `.sessions/*.jsonl`，断电或换终端随时可秒级回溯；
+3. **取消信号优雅级联（AbortSignal）**：
+   用户在终端按 `Ctrl+C` 时，取消信号在 1 毫秒内同步广播给大模型连接、正在跑的 bash 进程和 MCP 管道，绝不留僵尸子进程。
+
+---
 
 #### (3) 生命周期事件截获
 在工具调度过程中，Event Bus 会触发以下关键事件：
@@ -229,6 +298,7 @@ await session.prompt(
 ✅ [事件: tool_execution_end] 工具执行完毕并回传结果给模型！
    👉 工具名称: read
    👉 错误状态: 🟢 正常完成
+   👉 返回内容摘要: {"content":[{"type":"text","text":"{\n  \"name\": \"pi-lesson-01-sdk-demo\",\n..."
 --------------------------------------------------
 🤖 Agent 收到工具数据，正在生成最终答复：
 `package.json` 内容提炼：

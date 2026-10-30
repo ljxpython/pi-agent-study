@@ -1,0 +1,16 @@
+{
+  "name": "pi-lesson-02-harness-mcp-demo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "start": "node 01-mcp-handshake.mjs",
+    "demo:01": "node 01-mcp-handshake.mjs",
+    "demo:02": "node 02-pi-mcp-integration.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "^0.85.1"
+  }
+}
