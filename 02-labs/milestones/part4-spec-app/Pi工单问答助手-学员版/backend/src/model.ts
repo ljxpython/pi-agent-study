@@ -1,6 +1,7 @@
+import { readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { ModelRuntime } from '@earendil-works/pi-coding-agent';
 import { InMemoryCredentialStore, InMemoryModelsStore, type Api, type Model, type Credential } from '@earendil-works/pi-ai';
@@ -40,6 +41,105 @@ export function validatePreferences(value:unknown):ModelPreferences {
   validate({...fields,expectedRevision:version,keyAction:'keep'});
   return value as unknown as ModelPreferences;
 }
+function detectEnvModel(): { prefs: Omit<ModelPreferences, 'revision'>; key: string } | undefined {
+  const env = { ...process.env };
+  // 兜底尝试从上层工程根目录读取 .env
+  for (const envPath of [
+    resolve(process.cwd(), '.env'),
+    resolve(process.cwd(), '../../../.env'),
+    resolve(homedir(), 'PyCharmMiscProject/ai-research/pi-agent-study/.env'),
+  ]) {
+    try {
+      const content = readFileSync(envPath, 'utf8');
+      for (const line of content.split('\n')) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const eq = trimmed.indexOf('=');
+        if (eq > 0) {
+          const k = trimmed.slice(0, eq).trim();
+          const v = trimmed.slice(eq + 1).trim().replace(/^["']|["']$/g, '');
+          if (!env[k]) env[k] = v;
+        }
+      }
+      break;
+    } catch {}
+  }
+
+  if (env.XIAOK_PROXY_API_KEY) {
+    return {
+      prefs: {
+        credentialMode: 'independent',
+        provider: 'xiaok',
+        modelId: env.XIAOK_PROXY_DEFAULT_MODEL || 'deepseek-v4.1-flash',
+        api: 'openai-completions',
+        baseUrl: env.XIAOK_PROXY_URL || 'https://xiaok.lol/v1',
+      },
+      key: env.XIAOK_PROXY_API_KEY,
+    };
+  }
+  if (env.PI_API_KEY) {
+    return {
+      prefs: {
+        credentialMode: 'independent',
+        provider: 'pi-env',
+        modelId: env.PI_MODEL_ID || 'gpt-4o-mini',
+        api: 'openai-completions',
+        baseUrl: env.PI_BASE_URL || 'https://api.openai.com/v1',
+      },
+      key: env.PI_API_KEY,
+    };
+  }
+  if (env.DEEPSEEK_API_KEY) {
+    return {
+      prefs: {
+        credentialMode: 'independent',
+        provider: 'deepseek',
+        modelId: env.DEEPSEEK_MODEL_ID || 'deepseek-chat',
+        api: 'openai-completions',
+        baseUrl: env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1',
+      },
+      key: env.DEEPSEEK_API_KEY,
+    };
+  }
+  if (env.OPENAI_API_KEY) {
+    return {
+      prefs: {
+        credentialMode: 'independent',
+        provider: 'openai',
+        modelId: env.OPENAI_MODEL_ID || 'gpt-4o-mini',
+        api: 'openai-completions',
+        baseUrl: env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
+      },
+      key: env.OPENAI_API_KEY,
+    };
+  }
+  if (env.SILICONFLOW_API_KEY) {
+    return {
+      prefs: {
+        credentialMode: 'independent',
+        provider: 'siliconflow',
+        modelId: env.SILICONFLOW_MODEL_ID || 'deepseek-ai/DeepSeek-V3',
+        api: 'openai-completions',
+        baseUrl: 'https://api.siliconflow.cn/v1',
+      },
+      key: env.SILICONFLOW_API_KEY,
+    };
+  }
+  if (env.ZHIPU_API_KEY) {
+    return {
+      prefs: {
+        credentialMode: 'independent',
+        provider: 'zhipu',
+        modelId: 'glm-4-flash',
+        api: 'openai-completions',
+        baseUrl: 'https://open.bigmodel.cn/api/paas/v4',
+      },
+      key: env.ZHIPU_API_KEY,
+    };
+  }
+  return undefined;
+}
+
 /** Owns only process-memory authentication. Persist preferences(), never this instance. */
 export class Models {
   private prefs:ModelPreferences;
@@ -51,8 +151,22 @@ export class Models {
   }
   preferences():ModelPreferences {return {...this.prefs};}
   view():ModelConfigView {return {...this.prefs,configured:!!this.binding};}
-  require():ModelBinding {assert(this.binding,'模型尚未配置','MODEL_NOT_CONFIGURED'); return this.binding;}
-  async initialize():Promise<void> {this.binding=await this.resolve(this.prefs,undefined);}
+  require():ModelBinding {assert(this.binding,'模型尚未配置。请点击右上角【设置】填入 API Key，或在终端设置环境变量 (如 DEEPSEEK_API_KEY / OPENAI_API_KEY)','MODEL_NOT_CONFIGURED'); return this.binding;}
+  async initialize():Promise<void> {
+    this.binding=await this.resolve(this.prefs,undefined);
+    if (!this.binding) {
+      const envConfig = detectEnvModel();
+      if (envConfig) {
+        const prefs: ModelPreferences = { ...envConfig.prefs, revision: this.prefs.revision };
+        const binding = await this.resolve(prefs, envConfig.key);
+        if (binding) {
+          this.prefs = prefs;
+          this.key = envConfig.key;
+          this.binding = binding;
+        }
+      }
+    }
+  }
   async update(input:unknown, persist:(preferences:ModelPreferences)=>Promise<void>=async()=>{}):Promise<ModelConfigView> {
     assert(!this.busy()&&!this.changing,'当前任务尚未结束','BUSY');
     const next=validate(input); assert(next.expectedRevision===this.prefs.revision,'模型配置已变化','REVISION_CONFLICT');

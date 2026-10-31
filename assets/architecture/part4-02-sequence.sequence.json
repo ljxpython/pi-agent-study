@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "工单问答助手端到端全链路时序图",
+    "output": "assets/architecture/part4-02-sequence.html",
+    "viewBox": [1000, 680],
+    "column_fit": "spread",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "full-flow",
+        "label": "端到端完整时序",
+        "focus": ["user", "frontend", "backend", "pisdk", "llm", "business"],
+        "note": "从用户在 Web 页面敲击回车，到大模型决策查库，再到 SSE 双轨流式推送到前端。"
+      },
+      {
+        "id": "tool-binding-focus",
+        "label": "工具决策与来源绑定",
+        "focus": ["pisdk", "backend", "business", "llm"],
+        "note": "突出大模型仅做参数决策，物理查库与 Datasets.bound 来源鉴权由后端硬编码控制。"
+      },
+      {
+        "id": "sse-stream-focus",
+        "label": "流式推流与事实呈现",
+        "focus": ["pisdk", "backend", "frontend", "user"],
+        "note": "通过 session.subscribe 捕获 text_delta 并经由 SSE 推送给前端打字机。"
+      }
+    ]
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "业务用户", "sublabel": "Web 浏览器会话" },
+    { "id": "frontend", "type": "frontend", "label": "Web 前端", "sublabel": "Vite / TS 单页应用" },
+    { "id": "backend", "type": "backend", "label": "业务后端", "sublabel": "Node.js HTTP & SSE" },
+    { "id": "pisdk", "type": "security", "label": "Pi SDK 引擎", "sublabel": "受控会话与 Tool 沙盒" },
+    { "id": "llm", "type": "cloud", "label": "大语言模型", "sublabel": "Prompt 推理与决策" },
+    { "id": "business", "type": "database", "label": "工单物理库", "sublabel": "版本化工单数据集" }
+  ],
+  "segments": [
+    { "from": 150, "to": 260, "label": "阶段 1：提问受理与推理装配" },
+    { "from": 265, "to": 415, "label": "阶段 2：工具决策与物理查库" },
+    { "from": 420, "to": 580, "label": "阶段 3：流式生成与双轨推送" }
+  ],
+  "messages": [
+    { "id": "user-query", "from": "user", "to": "frontend", "y": 160, "label": "输入自然语言提问并回车", "variant": "default" },
+    { "id": "http-submit", "from": "frontend", "to": "backend", "y": 190, "label": "POST /api/requests (带 sourceRef)", "variant": "emphasis" },
+    { "id": "sdk-prompt", "from": "backend", "to": "pisdk", "y": 220, "label": "session.prompt() 会话调度", "variant": "default" },
+    { "id": "llm-reason", "from": "pisdk", "to": "llm", "y": 250, "label": "组装 Prompt + 受控 Tool Schema", "variant": "default" },
+    { "id": "llm-decision", "from": "llm", "to": "pisdk", "y": 280, "label": "决策调用 query_tickets", "variant": "emphasis" },
+    { "id": "sdk-callback", "from": "pisdk", "to": "backend", "y": 310, "label": "execute(query_tickets) 回调", "variant": "default" },
+    { "id": "db-query", "from": "backend", "to": "business", "y": 340, "label": "Datasets.bound() 指纹鉴权查库", "variant": "security" },
+    { "id": "db-return", "from": "business", "to": "backend", "y": 375, "label": "返回真实工单事实 (T01, T04, T06)", "variant": "return" },
+    { "id": "feed-fact", "from": "backend", "to": "pisdk", "y": 405, "label": "回填工单事实驱动继续思考", "variant": "return" },
+    { "id": "llm-resume", "from": "pisdk", "to": "llm", "y": 435, "label": "注入事实继续流式推理", "variant": "default" },
+    { "id": "llm-stream", "from": "llm", "to": "pisdk", "y": 470, "label": "生成报告草稿 token 增量", "variant": "return" },
+    { "id": "sdk-delta", "from": "pisdk", "to": "backend", "y": 500, "label": "session.subscribe 抓取 text_delta", "variant": "default" },
+    { "id": "sse-push", "from": "backend", "to": "frontend", "y": 530, "label": "SSE 双轨流式推流 (message.delta)", "variant": "emphasis" },
+    { "id": "ui-render", "from": "frontend", "to": "user", "y": 565, "label": "打字机输出报告并弹窗待确认", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "frontend", "from": 160, "to": 570, "type": "frontend" },
+    { "participant": "backend", "from": 190, "to": 535, "type": "backend" },
+    { "participant": "pisdk", "from": 220, "to": 505, "type": "security" },
+    { "participant": "llm", "from": 250, "to": 285, "type": "cloud" },
+    { "participant": "business", "from": 340, "to": 380, "type": "database" },
+    { "participant": "llm", "from": 435, "to": 475, "type": "cloud" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "闭环时序保证 (Guaranteed Sequence)",
+      "items": [
+        "大模型仅出嘴决策，物理查库由后端使用 Datasets.bound 强制校验版本指纹",
+        "工单事实回填至 Pi SDK 后，大模型方可进入报告草稿的流式生成阶段"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "双轨轻量推流 (Dual-track SSE)",
+      "items": [
+        "摒弃高复杂度的 WebSocket，基于原生 Server-Sent Events 实现轻量单向推流",
+        "左轨推送自然语言打字机增量，右轨推送工单卡片与人工确认按钮"
+      ]
+    }
+  ]
+}

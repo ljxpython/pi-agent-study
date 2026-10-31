@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Pi Agent 架构跃迁：从终端玩具到全栈生产应用",
+    "output": "assets/architecture/part4-01-evolution.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "evolution-all",
+        "label": "架构跃迁全景对比",
+        "focus": ["term_user", "term_kernel", "term_mcp", "web_client", "backend_server", "pi_session", "domain_tools"],
+        "note": "对比 Part 1~3 的单人终端玩具阶段与 Part 4 的全栈生产级智能体业务应用。"
+      },
+      {
+        "id": "phase-terminal",
+        "label": "Part 1~3 终端调试",
+        "focus": ["term_user", "term_kernel", "term_mcp"],
+        "note": "命令行 TUI 交互，依赖本地文件与进程内 MCP 插件，缺乏企业级边界。"
+      },
+      {
+        "id": "phase-fullstack",
+        "label": "Part 4 全栈业务应用",
+        "focus": ["web_client", "backend_server", "pi_session", "domain_tools"],
+        "note": "单端口全栈单体架构，受控 SDK 会话，数据源指纹防串味与人工审批闭环。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "term_user", "type": "external", "label": "终端开发者", "sublabel": "单人命令行交互", "pos": [50, 110], "size": [130, 60] },
+    { "id": "term_kernel", "type": "backend", "label": "Pi 内核终端", "sublabel": "TUI 交互与调试", "pos": [300, 110], "size": [140, 60], "tag": "Part 1~3 阶段" },
+    { "id": "term_mcp", "type": "cloud", "label": "单机扩展插件", "sublabel": "本地 MCP / Extension", "pos": [560, 110], "size": [150, 60] },
+
+    { "id": "web_client", "type": "frontend", "label": "Web 前端应用", "sublabel": "Vite / TS 单页工作台", "pos": [50, 320], "size": [130, 60] },
+    { "id": "backend_server", "type": "backend", "label": "全栈业务后端", "sublabel": "Node.js :5179 (REST+SSE)", "pos": [300, 320], "size": [150, 60], "tag": "单端口全栈单体" },
+    { "id": "pi_session", "type": "security", "label": "Pi SDK 会话沙盒", "sublabel": "noTools: builtin 约束", "pos": [570, 320], "size": [150, 60], "tag": "权限受控隔离" },
+    { "id": "domain_tools", "type": "database", "label": "工单领域工具", "sublabel": "只读查库与来源鉴权", "pos": [840, 320], "size": [150, 60], "tag": "四重证据防串味" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Part 1~3 终端玩具阶段 (单机环境)", "wraps": ["term_user", "term_kernel", "term_mcp"] },
+    { "kind": "region", "label": "Part 4 全栈生产交付阶段 (企业业务闭环)", "wraps": ["web_client", "backend_server", "pi_session", "domain_tools"] }
+  ],
+  "connections": [
+    { "id": "term-interact", "from": "term_user", "to": "term_kernel", "label": "STDIN 提问", "fromSide": "right", "toSide": "left" },
+    { "id": "term-dispatch", "from": "term_kernel", "to": "term_mcp", "label": "插件调用", "fromSide": "right", "toSide": "left" },
+
+    { "id": "web-to-server", "from": "web_client", "to": "backend_server", "label": "REST / SSE", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "id": "server-to-sdk", "from": "backend_server", "to": "pi_session", "label": "openSession", "variant": "security", "fromSide": "right", "toSide": "left" },
+    { "id": "sdk-to-tools", "from": "pi_session", "to": "domain_tools", "label": "受控 Tool 决策", "variant": "emphasis", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "rose", "title": "终端阶段局限 (Toy Demo)", "items": ["依赖命令行终端交互，缺乏面向业务用户的 Web 交互界面", "模型默认拥有原生 Shell 权限，直接暴露有巨大安全风险"] },
+    { "dot": "emerald", "title": "全栈生产架构 (Production)", "items": ["单端口全栈单体服务架构：5179 端口同时托管静态页面与 API/SSE", "noTools: 'builtin' 彻底封杀危险原生命令，仅注入业务白名单"] },
+    { "dot": "cyan", "title": "可靠性事实防线 (Reliability)", "items": ["Datasets.bound 强制校验数据源版本指纹，防止跨版本串味", "Human-in-the-loop 人工审批闭环，严禁大模型擅自落盘写库"] }
+  ]
+}

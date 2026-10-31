@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "生产级智能体系统三权分立原则 (四问法边界划分)",
+    "output": "assets/architecture/part4-05-tripartite.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "tripartite-all",
+        "label": "三权分立防线全景",
+        "focus": ["llm_intent", "llm_decision", "host_auth", "host_exec", "human_verify", "human_approval"],
+        "note": "工业级权限隔离：模型出嘴决策、后端硬编码执行查库、人类掌握最终落盘生杀大权。"
+      },
+      {
+        "id": "decision-to-exec",
+        "label": "决策与执行分离",
+        "focus": ["llm_decision", "host_auth", "host_exec"],
+        "note": "大模型只能提出调用参数建议，业务后端负责 Datasets.bound 版本鉴权与只读查库。"
+      },
+      {
+        "id": "human-gate-view",
+        "label": "人类审批与落盘闭环",
+        "focus": ["host_exec", "human_verify", "human_approval"],
+        "note": "报告草稿仅在内存预览，四重事实核验通过后，经由人类手动批准方可物理落盘。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "llm_intent", "type": "cloud", "label": "意图与参数抽取", "sublabel": "自然语言意图理解", "pos": [50, 160], "size": [140, 60] },
+    { "id": "llm_decision", "type": "cloud", "label": "受控工具调用决策", "sublabel": "提出入参 (只出嘴)", "pos": [260, 160], "size": [150, 60], "tag": "决策权" },
+
+    { "id": "host_auth", "type": "security", "label": "指纹鉴权与熔断", "sublabel": "Datasets.bound() 鉴权", "pos": [480, 160], "size": [150, 60], "tag": "执行权" },
+    { "id": "host_exec", "type": "backend", "label": "只读查库与草稿装配", "sublabel": "无害查询 (不动盘)", "pos": [700, 160], "size": [160, 60], "tag": "受控执行" },
+
+    { "id": "human_verify", "type": "frontend", "label": "四重事实证据核验", "sublabel": "草稿与工单证据卡", "pos": [930, 160], "size": [150, 60], "tag": "知情权" },
+    { "id": "human_approval", "type": "security", "label": "手动确认归档写盘", "sublabel": "Human-in-the-loop", "pos": [1150, 160], "size": [150, 60], "tag": "裁决权" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "1. 决策层：大语言模型 (只出嘴·不动手)", "wraps": ["llm_intent", "llm_decision"] },
+    { "kind": "security-group", "label": "2. 执行层：业务后端服务 (拿电门·查真库)", "wraps": ["host_auth", "host_exec"] },
+    { "kind": "region", "label": "3. 裁决层：人类审批防线 (看得清·掌生杀)", "wraps": ["human_verify", "human_approval"] }
+  ],
+  "connections": [
+    { "id": "intent-to-decide", "from": "llm_intent", "to": "llm_decision", "label": "提取参数", "fromSide": "right", "toSide": "left" },
+    { "id": "decide-to-auth", "from": "llm_decision", "to": "host_auth", "label": "提议调用", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "id": "auth-to-exec", "from": "host_auth", "to": "host_exec", "label": "校验通过", "variant": "security", "fromSide": "right", "toSide": "left" },
+    { "id": "exec-to-verify", "from": "host_exec", "to": "human_verify", "label": "只读预览", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "id": "verify-to-approve", "from": "human_verify", "to": "human_approval", "label": "核实事实", "variant": "security", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "大模型权责边界 (LLM: Decision Only)",
+      "items": [
+        "大模型只能决定调用哪个受控工具以及如何用自然语言总结事实",
+        "大模型绝对不能直接操作物理数据库，更不能拥有写盘权限"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "业务后端权责边界 (Backend: Read-only Exec)",
+      "items": [
+        "物理查库、数据脱敏、版本指纹校验必须 100% 由后端硬编码保障",
+        "即使模型产生调用幻觉，后端也会在参数鉴权阶段直接拦截熔断"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "人类最终审批权 (Human: Final Approval)",
+      "items": [
+        "高危动作（工单状态变更、报告归档落盘）模型只能起草 Proposal",
+        "必须由业务人员在 Web 界面亲手点击【确认保存】，后端才真正写盘"
+      ]
+    }
+  ]
+}

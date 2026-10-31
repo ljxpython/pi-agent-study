@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Pi 智能体与业务服务 5 大接线端子全景架构",
+    "output": "assets/architecture/part4-04-five-terminals.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "terminals-circuit",
+        "label": "5 大接线端子全景闭环",
+        "focus": ["ui_chat", "gw_monolith", "app_core", "pi_sandbox", "llm_reason", "tool_exec", "data_guard", "human_gate"],
+        "note": "全景呈现 Pi SDK 与全栈业务后端通过 5 大物理接线端子深度焊牢的执行回路。"
+      },
+      {
+        "id": "security-view",
+        "label": "安全与鉴权端子 (端子 1 & 3 & 5)",
+        "focus": ["app_core", "pi_sandbox", "tool_exec", "data_guard", "human_gate"],
+        "note": "noTools: builtin 剥夺 Shell 危险权限，Datasets.bound 防串味，人工审批保障落盘安全。"
+      },
+      {
+        "id": "stream-view",
+        "label": "回调与流式端子 (端子 2 & 4)",
+        "focus": ["llm_reason", "tool_exec", "app_core", "gw_monolith", "ui_chat"],
+        "note": "execute 工具回调接线与 session.subscribe 配合 SSE 双轨流式打字推流。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "ui_chat", "type": "frontend", "label": "Web 交互工作台", "sublabel": "对话打字机与证据", "pos": [50, 130], "size": [140, 60] },
+    { "id": "gw_monolith", "type": "security", "label": "全栈单体网关", "sublabel": "server.ts :5179", "pos": [310, 130], "size": [140, 60], "tag": "单端口单体" },
+    { "id": "app_core", "type": "backend", "label": "业务调度中心", "sublabel": "app.ts 总控中枢", "pos": [570, 130], "size": [140, 60], "tag": "总控大脑" },
+    { "id": "pi_sandbox", "type": "security", "label": "Pi SDK 会话沙盒", "sublabel": "noTools: builtin", "pos": [830, 130], "size": [140, 60], "tag": "【端子1】安全隔离" },
+
+    { "id": "human_gate", "type": "security", "label": "人工确认落盘", "sublabel": "reports.publish()", "pos": [50, 360], "size": [140, 60], "tag": "【端子5】审批防线" },
+    { "id": "data_guard", "type": "database", "label": "数据源指纹鉴权", "sublabel": "Datasets.bound()", "pos": [310, 360], "size": [140, 60], "tag": "【端子3】版本校验" },
+    { "id": "tool_exec", "type": "backend", "label": "业务工具执行器", "sublabel": "queryTickets 查库", "pos": [570, 360], "size": [140, 60], "tag": "执行电门" },
+    { "id": "llm_reason", "type": "cloud", "label": "大模型决策中枢", "sublabel": "Tool 决策与生成", "pos": [830, 360], "size": [140, 60], "tag": "【端子2】决策回路" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "服务接入与智能体沙盒层 (接入与总控)", "wraps": ["ui_chat", "gw_monolith", "app_core", "pi_sandbox"] },
+    { "kind": "security-group", "label": "业务领域与执行闭环层 (领域与持久化)", "wraps": ["human_gate", "data_guard", "tool_exec", "llm_reason"] }
+  ],
+  "connections": [
+    { "id": "ui-to-gw", "from": "ui_chat", "to": "gw_monolith", "label": "HTTP 提问", "fromSide": "right", "toSide": "left" },
+    { "id": "gw-to-app", "from": "gw_monolith", "to": "app_core", "label": "路由分发", "fromSide": "right", "toSide": "left" },
+    { "id": "t1-sandbox", "from": "app_core", "to": "pi_sandbox", "label": "端子1:沙盒隔离", "variant": "security", "fromSide": "right", "toSide": "left" },
+
+    { "id": "sdk-to-llm", "from": "pi_sandbox", "to": "llm_reason", "label": "推理驱动", "fromSide": "bottom", "toSide": "top", "labelDy": 30 },
+    { "id": "t2-tools", "from": "llm_reason", "to": "tool_exec", "label": "端子2:回调注入", "variant": "emphasis", "fromSide": "left", "toSide": "right" },
+    { "id": "t3-binding", "from": "tool_exec", "to": "data_guard", "label": "端子3:指纹鉴权", "variant": "security", "fromSide": "left", "toSide": "right" },
+    { "id": "data-to-human", "from": "data_guard", "to": "human_gate", "label": "报告草稿", "fromSide": "left", "toSide": "right" },
+
+    { "id": "t5-approval", "from": "human_gate", "to": "ui_chat", "label": "端子5:审批归档", "variant": "security", "fromSide": "top", "toSide": "bottom", "labelDy": -40 },
+    { "id": "fact-feed", "from": "tool_exec", "to": "app_core", "label": "端子4:SSE推流", "variant": "emphasis", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "端子 1 & 2: 紧箍咒与控制权 (Security & Wiring)",
+      "items": [
+        "【端子1】noTools: 'builtin' 彻底剥夺 Bash/读写等危险能力，锁死宿主机权限",
+        "【端子2】execute 回调将大模型的 Tool 调用电缆牢牢抓在业务后端手里"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "端子 3 & 4: 防串味与流式打字 (Data & Streaming)",
+      "items": [
+        "【端子3】Datasets.bound 强制校验数据源版本指纹，版本不符立即 400 阻断",
+        "【端子4】session.subscribe 毫秒级抓取 text_delta，通过 SSE 推给前端打字机"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "端子 5: 人工审批闭环 (Human-in-the-loop)",
+      "items": [
+        "模型生成的报告只保留在内存 Proposal 草稿，页面弹出黄色高亮确认卡",
+        "只有人类用户手动点击【确认归档】，后端才调用 publish() 真正落盘写文件"
+      ]
+    }
+  ]
+}

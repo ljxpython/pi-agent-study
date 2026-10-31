@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "双端 Spec 驱动开发流水线 (从口嗨愿望到自动化交付)",
+    "output": "assets/architecture/part4-03-spec-pipeline.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "spec-all",
+        "label": "全生命周期 Spec 流水线",
+        "focus": ["req_wish", "req_assert", "spec_dual", "plan_milestone", "state_tracking", "verify_gate"],
+        "note": "立宪定规：需求断言化 ➔ 双端契约锁定 ➔ 敏捷看板与断点存盘 ➔ 质量门禁交付。"
+      },
+      {
+        "id": "spec-freeze",
+        "label": "需求立宪与契约锁定",
+        "focus": ["req_wish", "req_assert", "spec_dual"],
+        "note": "前后端以 Spec 为准绳独立推进开发，杜绝边猜边写和联调扯皮。"
+      },
+      {
+        "id": "agile-state",
+        "label": "敏捷状态机与门禁",
+        "focus": ["plan_milestone", "state_tracking", "verify_gate"],
+        "note": "以 PLAN.md 驱动阶段推进，以 PROJECT_STATE.md 保障跨会话断点秒级恢复。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "req_wish", "type": "external", "label": "业务口嗨愿望", "sublabel": "非正式诉求", "pos": [40, 180], "size": [120, 60] },
+    { "id": "req_assert", "type": "backend", "label": "验收断言确立", "sublabel": "Checkable 断言", "pos": [230, 180], "size": [130, 60], "tag": "需求立宪" },
+
+    { "id": "spec_dual", "type": "security", "label": "双端契约锁定", "sublabel": "前后端规范契约", "pos": [430, 180], "size": [140, 60], "tag": "协议状态机" },
+
+    { "id": "plan_milestone", "type": "backend", "label": "里程碑规划看板", "sublabel": "PLAN.md", "pos": [640, 180], "size": [140, 60], "tag": "敏捷推进" },
+    { "id": "state_tracking", "type": "database", "label": "断点状态存盘", "sublabel": "PROJECT_STATE", "pos": [850, 180], "size": [140, 60], "tag": "秒级断点" },
+    { "id": "verify_gate", "type": "cloud", "label": "自动化门禁验收", "sublabel": "verify-all.sh", "pos": [1060, 180], "size": [130, 60], "tag": "自动化交付" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "阶段 1：需求立宪", "wraps": ["req_wish", "req_assert"] },
+    { "kind": "security-group", "label": "阶段 2：契约锁定 (Frozen Specs)", "wraps": ["spec_dual"] },
+    { "kind": "region", "label": "阶段 3：敏捷状态机与门禁验收", "wraps": ["plan_milestone", "state_tracking", "verify_gate"] }
+  ],
+  "connections": [
+    { "id": "wish-to-assert", "from": "req_wish", "to": "req_assert", "label": "量化断言", "fromSide": "right", "toSide": "left" },
+    { "id": "assert-to-spec", "from": "req_assert", "to": "spec_dual", "label": "契约冻结", "variant": "security", "fromSide": "right", "toSide": "left" },
+    { "id": "spec-to-plan", "from": "spec_dual", "to": "plan_milestone", "label": "驱动排期", "fromSide": "right", "toSide": "left" },
+    { "id": "plan-to-state", "from": "plan_milestone", "to": "state_tracking", "label": "阶段存盘", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "id": "state-to-verify", "from": "state_tracking", "to": "verify_gate", "label": "全量验证", "variant": "security", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "拒绝边猜边写 (Frozen Specs)",
+      "items": [
+        "90% 的智能体项目烂尾源于需求口嗨化与接口薛定谔化",
+        "先冻结 frontend-spec.md 与 backend-spec.md，再动手编写业务代码"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "秒级断点续航 (State Machine)",
+      "items": [
+        "PLAN.md 划定各阶段验收门禁，PROJECT_STATE.md 实时记录最近验证结果与阻塞项",
+        "即使跨越长上下文轮次或中途断线，任何人接手均可在 30 秒内无缝恢复开发"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "自动化门禁闭环 (Quality Gate)",
+      "items": [
+        "包含绝对路径排查、Mermaid保留字防炸、死链检测与站点编译4大严苛检查",
+        "全量检查 100% 绿灯方可交付交付物，坚决杜绝带着语法和死链缺陷上线"
+      ]
+    }
+  ]
+}

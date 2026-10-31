@@ -104,8 +104,25 @@ const runtime = new ApiRuntime(() => {
   state.datasets = runtime.datasets;
   state.selectedDatasetId = runtime.selectedDatasetId;
   if (catalogChanged) { updateDatasetList(); updateSelection(); }
-  const badge = refs.shell.querySelector(".demo-badge-text");
-  if (badge) badge.textContent = runtime.readonly ? "恢复只读模式" : runtime.connected ? "已连接后端" : "后端未连接";
+  const badge = refs.shell.querySelector(".demo-badge");
+  const badgeText = refs.shell.querySelector(".demo-badge-text");
+  if (badgeText) {
+    if (runtime.readonly) {
+      badgeText.textContent = "恢复只读模式";
+      badge?.classList.remove("is-warning", "is-configured");
+    } else if (!runtime.connected) {
+      badgeText.textContent = "后端未连接";
+      badge?.classList.remove("is-warning", "is-configured");
+    } else if (!runtime.model?.configured) {
+      badgeText.textContent = "⚠️ 模型未配置 (点击配置)";
+      badge?.classList.add("is-warning");
+      badge?.classList.remove("is-configured");
+    } else {
+      badgeText.textContent = `模型就绪 · ${runtime.model.provider}`;
+      badge?.classList.remove("is-warning");
+      badge?.classList.add("is-configured");
+    }
+  }
   setNotice(runtime.notice);
   updateControls();
   renderRuntime();
@@ -430,16 +447,17 @@ function openSettings(): void {
   if (isBusy(runtime.status)) { setNotice("当前任务进行中，暂不能切换模型设置。"); return; }
   lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   const model = runtime.model;
-  refs.settingsLocal.checked = model?.credentialMode !== "independent";
-  refs.settingsIndependent.checked = !refs.settingsLocal.checked;
-  refs.settingsBaseUrl.value = model?.baseUrl ?? "";
-  refs.settingsModelId.value = model?.modelId ?? "glm-5.3";
-  refs.settingsProvider.value = model?.provider ?? "tongba";
+  const preferIndependent = !model?.configured || model?.credentialMode === "independent";
+  refs.settingsIndependent.checked = preferIndependent;
+  refs.settingsLocal.checked = !preferIndependent;
+  refs.settingsBaseUrl.value = model?.baseUrl ?? (preferIndependent ? "https://api.deepseek.com/v1" : "");
+  refs.settingsModelId.value = model?.modelId ?? (preferIndependent ? "deepseek-chat" : "glm-5.3");
+  refs.settingsProvider.value = model?.provider ?? (preferIndependent ? "deepseek" : "tongba");
   refs.settingsApi.value = model?.api ?? "openai-completions";
   clearApiKey();
   syncSettingsMode();
   refs.settingsDialog.showModal();
-  (refs.settingsLocal.checked ? refs.settingsLocal : refs.settingsBaseUrl).focus();
+  (refs.settingsIndependent.checked ? refs.settingsApiKey : refs.settingsLocal).focus();
 }
 
 async function applySettings(): Promise<void> {
@@ -590,6 +608,8 @@ function buildApp(): UiRefs {
   const topbarActions = element("div", "topbar-actions");
   const demoBadge = element("span", "demo-badge");
   demoBadge.append(element("span", "demo-dot"), element("span", "demo-badge-text", "正在连接后端"));
+  demoBadge.title = "点击查看或配置模型";
+  demoBadge.addEventListener("click", openSettings);
   const settingsButton = labelledButton("设置", "settings-button", "settings");
   settingsButton.setAttribute("aria-label", "打开模型设置");
   settingsButton.addEventListener("click", openSettings);
@@ -824,6 +844,35 @@ function buildApp(): UiRefs {
   independentLabel.htmlFor = "source-independent";
   independentLabel.append(settingsIndependent, element("span", "source-copy", "独立配置"), element("small", "source-note", "使用自定义接口配置"));
   sourceFieldset.append(localLabel, independentLabel);
+  const presetContainer = element("div", "preset-container");
+  presetContainer.append(element("div", "preset-title", "⚡ 常用服务商预设（点击自动填入接口地址与模型，只需输入 Key）："));
+  const presetPills = element("div", "preset-pills");
+  const PRESETS = [
+    { name: "小K (xiaok)", provider: "xiaok", api: "openai-completions", baseUrl: "https://xiaok.lol/v1", modelId: "deepseek-v4.1-flash" },
+    { name: "DeepSeek", provider: "deepseek", api: "openai-completions", baseUrl: "https://api.deepseek.com/v1", modelId: "deepseek-chat" },
+    { name: "硅基流动 (SiliconFlow)", provider: "siliconflow", api: "openai-completions", baseUrl: "https://api.siliconflow.cn/v1", modelId: "deepseek-ai/DeepSeek-V3" },
+    { name: "智谱清言 (GLM)", provider: "zhipu", api: "openai-completions", baseUrl: "https://open.bigmodel.cn/api/paas/v4", modelId: "glm-4-flash" },
+    { name: "通义千问 (Qwen)", provider: "qwen", api: "openai-completions", baseUrl: "https://dashscope.aliyuncs.com/compatible-mode/v1", modelId: "qwen-plus" },
+    { name: "OpenAI", provider: "openai", api: "openai-completions", baseUrl: "https://api.openai.com/v1", modelId: "gpt-4o-mini" },
+    { name: "本地 Ollama", provider: "ollama", api: "openai-completions", baseUrl: "http://127.0.0.1:11434/v1", modelId: "qwen2.5:7b" },
+  ];
+  for (const p of PRESETS) {
+    const pill = element("button", "preset-pill", p.name);
+    pill.type = "button";
+    pill.addEventListener("click", () => {
+      settingsIndependent.checked = true;
+      settingsLocal.checked = false;
+      syncSettingsMode();
+      settingsProvider.value = p.provider;
+      interfaceSelect.value = p.api;
+      settingsBaseUrl.value = p.baseUrl;
+      settingsModelId.value = p.modelId;
+      settingsApiKey.focus();
+      settingsFeedback.textContent = `已自动填入 ${p.name} 预设！请在下方输入你的 API Key，然后点击【保存设置】。`;
+    });
+    presetPills.append(pill);
+  }
+  presetContainer.append(presetPills);
   const formGrid = element("div", "form-grid");
   const interfaceSelect = element("select") as HTMLSelectElement;
   interfaceSelect.name = "interfaceType";
@@ -874,7 +923,7 @@ function buildApp(): UiRefs {
       .then(() => { clearApiKey(); refs.settingsFeedback.textContent = "后端内存密钥已清除，需重新输入才能请求模型。"; }).catch(() => {});
   });
   settingsActions.append(settingsValidate, clearKey, settingsSave);
-  settingsBody.append(sourceFieldset, formGrid, statusGrid, settingsFeedback, settingsActions);
+  settingsBody.append(sourceFieldset, presetContainer, formGrid, statusGrid, settingsFeedback, settingsActions);
   settingsForm.append(settingsHeader, settingsBody);
   settingsDialog.append(settingsForm);
 
@@ -1019,6 +1068,11 @@ function buildApp(): UiRefs {
 
 async function submitQuestion(): Promise<void> {
   const text = refs.textarea.value;
+  if (!runtime.model?.configured) {
+    setNotice("⚠️ 模型尚未配置，请先在弹出的设置窗口中输入 API Key 或选择服务商。");
+    openSettings();
+    return;
+  }
   if (await runtime.submit(text)) {
     if (refs.textarea.value === text) refs.textarea.value = "";
     resourceUI.hideMenu();

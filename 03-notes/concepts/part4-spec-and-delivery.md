@@ -12,55 +12,22 @@
 - 需要可靠的 **数据源版本绑定（Source Binding）**，防止模型拿着张三的数据回答李四的问题；
 - 需要 **报告草稿的人工确认机制（Human-in-the-loop）**，防止模型脑抽直接把脏数据写进数据库！
 
-```mermaid
-flowchart LR
-    subgraph Phase1_3["Part 1 ~ Part 3 阶段 (命令行终端)"]
-        T1["终端 TUI 交互"] --> T2["Pi 内核 + 插件"]
-        T2 --> T3["单人本地调试"]
-    end
+![Pi Agent 架构跃迁：从终端玩具到全栈生产应用](../../assets/architecture/part4-01-evolution.png)
 
-    subgraph Phase4["Part 4 阶段 (全栈生产应用)"]
-        W1["Web 浏览器前端 (Vite / TS)"] -->|"SSE / REST API"| W2["业务后端服务 (Node.js / Express)"]
-        W2 -->|"Pi SDK (会话生命周期)"| W3["Pi 智能体内核 (Tool 决策)"]
-        W3 -->|"回调执行"| W4["业务领域工具 (工单数据库 / 事实检索)"]
-        W4 -->|"四重事实证据链"| W1
-    end
-```
+> 🔗 **架构交互与矢量资产**: [查看交互式全栈架构图 (HTML)](../../assets/architecture/part4-01-evolution.html) · [查看高清矢量图 (SVG)](../../assets/architecture/part4-01-evolution.svg)
 
 ---
 
 ## 2. 第一章：从用户的一次查询看完整应用架构（全链路拆解）
 
 当用户在工单助手的 Web 输入框中敲入：
-> *“帮我查一下近一周未解决的高危故障工单，并整理成一份汇报草稿。”*
+> *“帮我查一下近一周未解决的高危故障工单，并整理成一份汇报草稿。”*å
 
 看似简单的一句话，在底层触发了 **7 大环节的精准接力**：
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User as "业务用户"
-    participant Frontend as "Web 前端 (Vite/TS)"
-    participant Backend as "业务后端 (Node.js)"
-    participant PiSDK as "Pi SDK 会话引擎"
-    participant LLM as "大语言模型 (决策)"
-    participant Business as "业务工具 (工单库)"
+![工单助手端到端全链路时序图](../../assets/architecture/part4-02-sequence.png)
 
-    User->>Frontend: 输入自然语言提问并回车
-    Frontend->>Backend: POST /api/chat (携带提问 + 数据源版本指纹 sourceRef)
-    Backend->>PiSDK: 创建/复用会话 session.prompt(...)
-    PiSDK->>LLM: 组装 System Prompt + 挂载的 Tool Schemas 发起推理
-    LLM-->>PiSDK: 决策调用工具：queryTickets({ status: "open", severity: "high" })
-    PiSDK->>Backend: 回调业务 Tool 执行器
-    Backend->>Business: 检索物理数据库/JSON，打上 sourceRef 版本凭证
-    Business-->>Backend: 返回 3 条真实工单 (T01, T04, T06)
-    Backend-->>PiSDK: 返回结构化工单事实
-    PiSDK->>LLM: 将工单事实回传给模型继续推理
-    LLM-->>PiSDK: 流式生成自然语言分析报告草稿
-    PiSDK-->>Backend: 吐出 Text 增量与 Tool 执行事件
-    Backend-->>Frontend: SSE (Server-Sent Events) 双轨流式推送
-    Frontend-->>User: 左侧打字机输出报告，右侧弹出工单证据卡与确认按钮
-```
+> 🔗 **时序交互与矢量资产**: [查看交互式执行时序图 (HTML)](../../assets/architecture/part4-02-sequence.html) · [查看高清矢量图 (SVG)](../../assets/architecture/part4-02-sequence.svg)
 
 ### 2.1 四重事实证据链（Production Evidence Chain）
 
@@ -82,25 +49,9 @@ sequenceDiagram
 
 工单助手项目给出了工业级解法：**双端 Spec 驱动开发 + 敏捷看板状态机**！
 
-```mermaid
-flowchart TD
-    subgraph Input["1. 需求立宪阶段"]
-        A["业务愿望 (口嗨)"] -->|转化| B["可检查的验收断言 (Checkable Assertions)"]
-        B --> C["系统生成原型图 / 交互流"]
-    end
+![双端 Spec 驱动开发流水线](../../assets/architecture/part4-03-spec-pipeline.png)
 
-    subgraph Specs["2. 双端契约锁定 (Frozen Specs)"]
-        C --> D1["前端契约规范 frontend-spec.md<br/>• 组件状态机 (idle / streaming / error)<br/>• SSE 流式解析协议<br/>• 防抖与用户确认弹窗"]
-        C --> D2["后端契约规范 backend-spec.md<br/>• REST 路由与参数 Schema<br/>• 错误码字典 (400/404/500)<br/>• 数据源绑定校验 (Datasets.bound)<br/>• 异常熔断与会话持久化"]
-    end
-
-    subgraph Process["3. 敏捷落地执行 (State Tracking)"]
-        D1 --> E1["PLAN.md (分阶段里程碑 Milestone 01~08)"]
-        D2 --> E1
-        E1 --> E2["PROJECT_STATE.md (断点状态与已验证存盘)"]
-        E2 --> E3["端到端自动化测试与交付"]
-    end
-```
+> 🔗 **流水线交互与矢量资产**: [查看交互式 Spec 流水线图 (HTML)](../../assets/architecture/part4-03-spec-pipeline.html) · [查看高清矢量图 (SVG)](../../assets/architecture/part4-03-spec-pipeline.svg)
 
 ### 3.1 怎么把“愿望”改成“可以检查的句子”？
 
@@ -120,7 +71,135 @@ flowchart TD
 
 > 🔗 **沙盒代码坐标**：[`../../02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/`](../../02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/)
 
-### 4.1 Pi SDK 会话生命周期与安全基线 (`session.ts`)
+### 4.0 随课全栈服务如何真实启动起来？（极简单端口全栈单体）
+
+很多初学者以为全栈应用必须开两个终端、配 Nginx 反向代理、解决复杂的跨域问题。  
+但在工单助手中，官方采用了一套极其优雅的**“单端口全栈单体服务架构（Single-Port Full-Stack Monolith）”**：
+- **后端 `backend/src/server.ts`** 不仅是 REST API 和 SSE 管道的宿主，还直接在 **5179 端口** 静态托管前端编译好的产物（`frontend/dist/index.html`）；
+- 因此，**只需启动后端这一个服务，你在浏览器就能立即访问完整应用！**
+
+#### 真实启动两步法（照着敲即可在浏览器访问）：
+
+```bash
+# 步骤 1：构建前端静态产物 (仅需执行一次，810ms 即刻生成 dist/)
+cd /Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/frontend
+npm run build
+
+# 步骤 2：启动后端全栈单体服务
+cd ../backend
+npm run start
+```
+
+* **控制台输出观察**：
+```text
+Pi 工单问答助手：http://127.0.0.1:5179
+```
+* **访问验证**：
+打开本地浏览器访问 `http://127.0.0.1:5179`，即可看到高颜值的工单问答助手 Web UI！界面左侧为对话打字机与报告草稿区，右侧为工单事实卡与时效判定看板。
+
+#### 4.0.1 避坑与体验优化：为什么首次打开提示“模型尚未配置”？
+
+- **原版痛点原因**：官方工程默认的 `DEFAULT` 模型偏好是寻找本机 `~/.pi/agent/auth.json` 中的 `tongba`（通霸 / `glm-5.3`）。学员初次在自己电脑上跑，机器里压根没有这个通霸凭证，导致一进页面模型处于未配置状态；
+- **优化前缺陷**：原版界面在未配置状态下，状态栏只冷冰冰显示“已连接后端”，用户点击提问或快捷命令时，直接遭遇 400 接口报错，被生硬地抛出“模型尚未配置”，且弹窗默认仍停留在无用的“本机 Pi 配置”，极大劝退学员；
+- **老王硬核实战优化落地**：
+  1. **前端智能前置拦截与直达唤起**：未配置模型时，顶部状态徽章直接高亮提示 `⚠️ 模型未配置 (点击配置)` 并支持一键点击；用户点击提问时，前端提前友好拦截并**自动弹出【模型设置】窗口**，直接聚焦到独立配置；
+  2. **内置 6 大主流服务商一键预设 (Presets)**：在设置窗口增加快捷填入栏（**DeepSeek**、**硅基流动 SiliconFlow**、**智谱清言 GLM**、**通义千问 Qwen**、**OpenAI**、**本地 Ollama**）。点击对应按钮即可**秒级自动补全 Provider、接口类型、Base URL 与模型 ID**，学员只需粘贴自己的 API Key 点保存即可！
+  3. **后端环境变量零配置自动绑定 (Zero-Config via ENV)**：在 `backend/src/model.ts` 中增强了环境变量检测，如果终端已设置 `DEEPSEEK_API_KEY`、`OPENAI_API_KEY`、`SILICONFLOW_API_KEY` 或 `ZHIPU_API_KEY`，后端启动时自动装配激活，实现免开网页输 Key 的爽快开发体验。
+
+---
+
+### 4.1 核心解密：Pi 智能体与真实业务服务是如何连接起来的？（5 大接线端子全景）
+
+整个工程的代码很多，但**真正把 Pi 和业务服务死死焊在一起的，只有以下 5 个核心接线端子**：
+
+![Pi 智能体与业务服务 5 大接线端子全景架构](../../assets/architecture/part4-04-five-terminals.png)
+
+> 🔗 **端子接线交互与矢量资产**: [查看交互式 5 大端子架构图 (HTML)](../../assets/architecture/part4-04-five-terminals.html) · [查看高清矢量图 (SVG)](../../assets/architecture/part4-04-five-terminals.svg)
+
+#### 接线端子 1：会话初始化与安全阉割 (`session.ts` -> `openSession`)
+- **连接目的**：初始化 Pi Agent 实例，并给大模型戴上“安全紧箍咒”；
+- **核心代码**：
+  ```typescript
+  const result = await createAgentSession({
+    cwd: RESOURCE_ROOT,
+    agentDir: resolve(resources.dataRoot, 'sdk-config'),
+    modelRuntime: binding.runtime,
+    model: binding.model,
+    thinkingLevel: binding.thinkingLevel,
+    noTools: 'builtin', // 🛡️ 关键：彻底剥夺 bash、read、write 等系统危险工具！
+    tools,              // 🛡️ 仅放行业务白名单工具 (query_tickets 等)
+    sessionManager: manager,
+  });
+  ```
+- **核心价值**：大模型绝不能有操作宿主机操作系统的权限，所有能力收敛为只读领域工具。
+
+#### 接线端子 2：业务工具的 Schema 声明与回调接线 (`app.ts` -> `tools()`)
+- **连接目的**：告诉 Pi 大模型“你能调用什么工具”，以及“大模型决定调用时该通知谁”；
+- **核心代码**：
+  ```typescript
+  private tools(): ToolDefinition[] {
+    return TOOL_NAMES.map(name => ({
+      name,
+      label: labels[name],
+      description: `${labels[name]}...`,
+      parameters: Type.Unsafe(modelToolSchema(name)), // TypeBox 声明 JSON Schema
+      execute: async (_id, input) => this.tool(name, input) // 💡 核心电缆：回调给业务后端！
+    }));
+  }
+  ```
+- **核心价值**：大模型只负责看懂参数规范并做决策，执行电缆牢牢握在业务后端手中。
+
+#### 接线端子 3：物理执行与数据源防串味 (`app.ts` -> `tool()` & `datasets.ts`)
+- **连接目的**：大模型做出了调用决策，业务后端去真实查库，并将结果喂回模型；
+- **核心代码**：
+  ```typescript
+  private async tool(name: ToolName, input: unknown) {
+    // 1. 强制数据源绑定鉴权：版本不对立刻抛错阻断
+    this.datasets.bound(r.sourceRef);
+  
+    // 2. 真实业务查询：从物理 JSON 中过滤工单
+    if (name === 'query_tickets') {
+      this.working = queryTickets(this.datasets.bound(r.sourceRef).payload, r.sourceRef!, input, r.requestId);
+      output = { ok: true, ...this.working };
+    }
+    // 3. 将真实事实打包成文本喂回给 Pi，驱动模型继续思考
+    const text = JSON.stringify(output);
+    return { content: [{ type: 'text', text }], details: { ok: true } };
+  }
+  ```
+- **核心价值**：模型永远拿不到假数据，物理执行由领域层保障。
+
+#### 接线端子 4：双轨流式传输与前端打字机 (`app.ts` -> `run()` & `events.ts`)
+- **连接目的**：大模型在生成回复时，如何做到前端左侧实时流式打字、右侧实时弹出工单卡？
+- **核心代码**：
+  ```typescript
+  const unsubscribe = session.subscribe(event => {
+    if (event.type === 'message_update') {
+      const update = event.assistantMessageEvent;
+      if (update.type === 'text_delta') {
+        message.text += update.delta;
+        // 💡 实时推流：每一个字符通过 SSE 推给浏览器！
+        this.events.publish('message.delta', {
+          messageId: message.id, 
+          role: 'assistant', 
+          delta: update.delta
+        }, r.requestId);
+      }
+    }
+  });
+  ```
+- **核心价值**：基于原生 SSE 协议实现轻量双轨流式输出，彻底摒弃重型 WebSocket。
+
+#### 接线端子 5：报告草稿与人工确认闭环 (`app.ts` -> `confirm()` & `reports.ts`)
+- **连接目的**：实现严密的 Human-in-the-loop 生产防线，杜绝模型幻觉写坏生产数据；
+- **核心代码**：
+  - 当模型调用 `prepare_report` 时，后端仅保存在内存 `this.proposal`；
+  - 前端收到 `report.updated` 弹出确认弹窗；
+  - 只有当用户点击“确认”发起 `POST /api/report-actions/:id/confirm` 时，后端 `this.reports.publish(draft, action)` 才会真正把 Markdown 报告落盘到磁盘 `reports/` 目录！
+
+---
+
+### 4.2 Pi SDK 会话生命周期与安全基线 (`session.ts`)
 
 在企业后端中，绝对不能允许大模型直接拿到宿主机的 Shell 权限！查看 `backend/src/session.ts` 的核心接线函数：
 
@@ -237,38 +316,138 @@ test("预期三：使用旧版本引用当前资料时，Datasets.bound() 明确
 
 ---
 
-## 5. 第四章：三权分立与责任边界（谁负责什么？四问法）
+## 5. 第四章：工程架构深度解密——Pi 到底在哪？文件职责清单与流式全链路
+
+很多初学者一听“基于某智能体 SDK 开发全栈 Web 应用”，脑子里就浮现出天真的幻想：*以为前端调一个官方的 `<PiChatBox />` 组件，后端随手调一个 API 就完事了* —— **大错特错！工业级项目要是这么轻浮，早被黑客和并发搞死八百遍了！**
+
+### 5.1 Pi 的部分在哪里？全栈 12 个核心文件职责清单
+
+整个系统贯彻了**三权分立与低耦合插拔设计**。Pi SDK（`@earendil-works/pi-coding-agent` 与 `@earendil-works/pi-ai`）**完全只存在于后端**，前端一滴 Pi 的依赖都没有。
+
+Pi SDK 并非漫山遍野乱飞，而是**高度集中收敛在后端的 4 个核心“接线端子”文件中**。其他文件全部是纯粹的业务领域代码：
+
+| 模块分类 | 文件绝对路径 | 核心职责与设计模式 | 是否直接调用 Pi SDK？ |
+| :--- | :--- | :--- | :--- |
+| **Pi 核心接线**<br>*(智能体引擎端子)* | [`backend/src/session.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/session.ts) | **会话总装车间 (Session Factory)**：调用 `createAgentSession`，把模型运行时、受控资源加载器与白名单工具组装成真实的 Pi 会话实例。 | **✅ 核心入口** (`createAgentSession`, `SessionManager`) |
+| | [`backend/src/model.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/model.ts) | **模型运行时接线 (Model Runtime)**：维护模型注册表、认证凭据（API Key / BaseURL）、接口协议转换，支持独立配置与环境变量注入。 | **✅ 核心调用** (`ModelRuntime`, `InMemoryCredentialStore`) |
+| | [`backend/src/resources.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/resources.ts) | **提示词与技能接线 (Resource Loader)**：管理 System Prompt 模板、加载受控业务 Skill（如 `ticket-triage`），向 Pi 注入任务依据。 | **✅ 核心调用** (`DefaultResourceLoader`, `SettingsManager`) |
+| | [`backend/src/app.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/app.ts) | **业务总控与流式心脏 (App Hub)**：驱动 `session.prompt()`，拦截 `session.subscribe()` 捕获单字 Token，挂载业务工具，调度 `RunGuard` 熔断。 | **✅ 核心调用** (`AgentSession`, `isContextOverflow`) |
+| **业务与领域计算**<br>*(智能体调用的工具)* | [`backend/src/tickets.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/tickets.ts) | **纯业务逻辑工具**：定义了 Pi 能调用的 3 个真实函数：工单检索 (`queryTickets`)、时效规则计算 (`evaluateTickets`)、报表提议 (`prepareReport`)。 | ❌ 无关（纯业务算法） |
+| | [`backend/src/datasets.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/datasets.ts) | **数据源版本管理**：维护工单文件的物理挂载，给数据打上 `sourceRef`（版本指纹），**防止大模型跨版本串味或幻觉**。 | ❌ 无关（数据安全防线） |
+| | [`backend/src/reports.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/reports.ts) | **人工确认写盘**：实现 Human-in-the-loop。只有人类点击确认后，才将报告正式落盘为物理 Markdown 文件。 | ❌ 无关（写操作隔离） |
+| **工程底座与网络**<br>*(通信与可靠性)* | [`backend/src/server.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/server.ts) | **HTTP/SSE 路由服务器**：REST 接口、静态前端资源分发、SSE 长连接挂接。单端口 5179 托管全栈服务。 | ❌ 无关（Node 原生 HTTP） |
+| | [`backend/src/events.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/events.ts) | **单向 SSE 事件总线**：负责将状态机变更、单字流式增量（`message.delta`）推送到前端浏览器。 | ❌ 无关（SSE 协议实现） |
+| | [`backend/src/access.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/access.ts) | **本地安全边界**：生成 Session Token，执行严格的 Origin、Host 和 `x-pi-bootstrap` 防跨站防劫持握手。 | ❌ 无关（网络防护） |
+| | [`backend/src/storage.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/storage.ts) | **原子持久化**：将当前会话状态、报告草稿存入 `storage.json`，提供只读恢复能力。 | ❌ 无关（状态机存储） |
+| | [`backend/src/contracts.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/backend/src/contracts.ts) | **契约守门员**：全系统入参校验、格式断言（`assert`、`exactKeys`）、错误码枚举字典。 | ❌ 无关（防御性契约） |
+
+> 💡 **架构真理**：Pi SDK 仅仅作为 **“会话决策脑核”** 嵌入在后端中；外界所有的工单数据过滤、文件存储、网络通信全部是业务代码。**即使明天把 Pi 拔掉，换成别的 Agent 框架，整套业务骨架依然分毫不变！这就是工业级解耦！**
+
+---
+
+### 5.2 前端展示与流式输出揭秘：组件是现成的还是手写的？
+
+**答案：100% 是我们自己手搓出来的！前端甚至零三方 UI 库依赖！**
+
+打开 [`frontend/package.json`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/frontend/package.json)，里面连 React / Vue / AntD 都没有，只有原生 TypeScript 和 Vite 构建器：
+- [`frontend/src/api.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/frontend/src/api.ts)：手写了 `SseParser`，负责按 `\n\n` 切分流式 chunk、过滤心跳注释、校验 `serverEpoch` 序列号连续性；
+- [`frontend/src/runtime.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/frontend/src/runtime.ts)：前端单向状态机，维护当前数据源选中态、请求生命周期与历史消息缓冲池；
+- [`frontend/src/main.ts`](file:///Users/lijiaxin/PyCharmMiscProject/ai-research/pi-agent-study/02-labs/milestones/part4-spec-app/Pi工单问答助手-学员版/frontend/src/main.ts)：约 1200 行纯原生 DOM 交互渲染，负责消息列表、打字机滚动、工具调用步进时间线、人工审批弹窗。
+
+#### 全链路 7 步推流机制（Token 接力赛）
+
+从大模型吐出第一个字，到浏览器屏幕上跳出字符，底层经历了一场毫秒级接力：
+
+```text
+[大语言模型 (LLM)]
+       │ (1) 逐字生成 Token 流
+       ▼
+[Pi SDK AgentSession 内核]
+       │ (2) 触发 message_update 事件，包裹 assistantMessageEvent.delta
+       ▼
+[backend/src/app.ts]
+       │ (3) 监听 session.subscribe()，捕获 text_delta：
+       │     message.text += update.delta;
+       │     this.events.publish('message.delta', { messageId, delta }, requestId);
+       ▼
+[backend/src/events.ts (SSE 事件总线)]
+       │ (4) 打包为标准 SSE 单向事件帧：
+       │     "event: message.delta\ndata: {\"messageId\":\"...\",\"delta\":\"工\"}\n\n"
+       ▼
+[HTTP 长连接通道 (GET /api/events)]
+       ▼
+[frontend/src/api.ts (SseParser)]
+       │ (5) 前端按行解析 SSE 帧，提取 JSON 负载，按 seq 校验防乱序
+       ▼
+[frontend/src/runtime.ts (状态机)]
+       │ (6) case 'message.delta': 找到消息实例追加文本，触发 requestAnimationFrame
+       ▼
+[frontend/src/main.ts (DOM 树)]
+       │ (7) 动态追加到 DOM 节点，打字机光标自动跟随并滚屏！
+```
+
+---
+
+## 6. 第五章：灵魂拷问——Pi 官方 WebUI 能用吗？SDK 能完全替代 CLI 吗？
+
+### 6.1 Pi 不是有 `@kkkiio/pi-web-ui` 吗？生产应用为什么不用它？
+
+在 Part 2 课件中，我们接触过一个扩展包 `@kkkiio/pi-web-ui`（在终端打 `/webui` 会在 3001 端口弹出网页）。很多同学就会问：**“既然有现成的 WebUI，为什么 Part 4 我们还要辛辛苦苦自己手写前端？”**
+
+因为二者的**根本定位、业务形态与安全边界完全是两码事**：
+
+| 维度 | `@kkkiio/pi-web-ui` (Part 2) | Part 4 生产级工单助手 (全栈应用) |
+| :--- | :--- | :--- |
+| **定位范式** | **单人本地终端的“浏览器镜像”**（Mirror View） | **面向多角色用户的“独立企业 Web 应用”** |
+| **启动方式** | 必须由开发者在终端敲 `pi` 命令，再输入 `/webui` 触发 | 独立的守护后台进程，浏览器直接开箱即用访问 `http://127.0.0.1:5179` |
+| **界面内容** | 通用 Coding Agent 调试面板（会话树、Compact 压缩、原生代码块） | **业务定制界面**：数据源下拉框、SLA 风险标签、工单卡片、报告审批条 |
+| **业务状态机** | 无业务逻辑，只做通用 Prompt/Response 显示 | **强状态机**：`sourceRef` 绑定校验、分析依据追踪、10分钟审批倒计时 |
+| **安全与权限** | **极度危险**：拥有本地 Shell 与完整文件读写权限（能跑 `rm -rf`） | **绝对安全**：封杀所有系统命令，仅提供受控的 3 个只读/提议业务工具 |
+| **审批流** | ❌ 无 Human-in-the-loop 机制 | **✅ 工业级三权分立**：模型只准提议草稿，落盘必须经由人类批准 |
+
+> ⚠️ **老王排毒大白话**：`pi-web-ui` 是给程序员自己开小差摸鱼用的**调试投影仪**；而 Part 4 是给业务部门销售、运维人员用的**严肃商业软件**！把一个能随意删库改代码的调试投影仪扔给业务部门当工单助手，第二天运维总监就把你头拧下来！
+
+---
+
+### 6.2 Pi SDK 能达到 Pi CLI 的所有能力吗？它们是统一的吗？
+
+**结论：100% 具备！因为 Pi CLI 本身就是用 Pi SDK 写出来的！**
+
+我们直接看源码底座架构：
+在 Pi 的官方源码单体仓库中，架构分为清晰的三层：
+1. **统一模型基座 (`@earendil-works/pi-ai`)**：封装 OpenAI、Anthropic、DeepSeek、GLM 等所有大模型的协议抹平；
+2. **智能体内核 SDK (`@earendil-works/pi-coding-agent`)**：**这就是 Pi SDK 的本体！** 里面封装了 Agent 核心循环、Tool Calling 调度、SessionManager 会话持久化、Skill 动态展开、上下文智能压缩（Compact）；
+3. **上层宿主外壳（Host Shells）**：
+   - **外壳 A：`pi` (即 Pi CLI)** ➔ 用 Node.js 的 `readline`/终端字符流把 SDK 包裹成一个**命令行终端交互器**；
+   - **外壳 B：`Pi工单问答助手` (即 Part 4 应用)** ➔ 用 HTTP / SSE 把同一个 SDK 包裹成一个**企业级 Web 服务**！
+
+#### 能力对齐与对比矩阵
+
+| 核心能力项 | Pi CLI (终端模式) | Pi SDK (全栈应用模式) | 统一性证明 |
+| :--- | :--- | :--- | :--- |
+| **多模型与中转适配** | 支持 (`models.json`) | 100% 支持 (`ModelRuntime`) | 底层共用 `@earendil-works/pi-ai` 注册表与 API Key 凭据存储 |
+| **Tool Calling 工具决策** | 支持内置与扩展工具 | 100% 支持受控工具 | 底层共用 `ToolDefinition` 与 TypeBox 参数 Schema |
+| **Thinking 深度思考链** | 终端显示 `<thinking>` | 100% 支持 (`thinking_delta`) | 底层事件流完全一致，可精准抓取流式思考过程 |
+| **受控 Skill 技能扩展** | 支持加载 `SKILL.md` | 100% 支持 (`skillBody` 注入) | 共用 `DefaultResourceLoader` 动态编译提示词 |
+| **上下文持久化与分支** | 存入 `~/.pi/agent/sessions/` | 100% 支持 (`SessionManager`) | 会话格式完全一致，支持断点恢复与历史回溯 |
+| **业务安全与权限裁剪** | 默认全部放开，较难精准隔离 | **超越 CLI**：支持白名单硬阻断 | SDK 支持传入 `noTools: 'builtin'`，彻底拔除危险命令 |
+| **执行监控与死循环熔断** | 依赖终端人眼看 | **超越 CLI**：代码级 `RunGuard` | SDK 支持用看门狗代码限制最大步数与超时，异常自动 abort |
+
+**一句话总结：Pi SDK 不仅拥有 Pi CLI 的 100% 原生脑力，更具备 CLI 所没有的企业级防爆、沙盒裁剪与状态机集成能力！**
+
+---
+
+## 7. 第六章：三权分立与责任边界（谁负责什么？四问法）
 
 在生产级智能体系统中，最可怕的就是“权限越界”和“职责混淆”。
 
-### 5.1 架构三权分立原则
+### 7.1 架构三权分立原则
 
-```mermaid
-flowchart TD
-    subgraph Agent["1. 大语言模型 (LLM)"]
-        A1["自然语言理解"]
-        A2["参数抽取与意图识别"]
-        A3["仅负责【决策】是否调用 Tool<br/>(只出嘴，不动手)"]
-    end
+![生产级智能体系统三权分立原则](../../assets/architecture/part4-05-tripartite.png)
 
-    subgraph Host["2. 业务后端服务 (Backend)"]
-        H1["租户与数据源鉴权 (Datasets.bound)"]
-        H2["工具物理执行 (查库/过滤)"]
-        H3["异常熔断与会话持久化"]
-        H4["限制只读权限，绝不直接写盘"]
-    end
+> 🔗 **三权分立交互与矢量资产**: [查看交互式三权分立架构图 (HTML)](../../assets/architecture/part4-05-tripartite.html) · [查看高清矢量图 (SVG)](../../assets/architecture/part4-05-tripartite.svg)
 
-    subgraph Human["3. 人类审批防线 (Human-in-the-loop)"]
-        U1["查看前端左侧报告草稿"]
-        U2["核验右侧物理工单事实卡"]
-        U3["手动点击【确认归档】<br/>(只有人类授权，才准持久化写盘！)"]
-    end
-
-    Agent -->|决策调用| Host
-    Host -->|渲染草稿| Human
-```
-
-### 5.2 企业级“四问法”划分系统边界
+### 7.2 企业级“四问法”划分系统边界
 
 当你要把一套 Agent 接入已有的企业业务系统时，千万别一股脑把所有东西塞进 Prompt。问自己这四个问题：
 
@@ -283,16 +462,16 @@ flowchart TD
 
 ---
 
-## 6. 第五章到第六章：可靠性判断与自有系统架构迁移
+## 8. 第七章：可靠性判断与自有系统架构迁移
 
-### 6.1 连续三步法判定 Agent 输出是否可靠
+### 8.1 连续三步法判定 Agent 输出是否可靠
 1. **选中（Selected）**：用户在界面上是否明确勾选了物理数据源？
 2. **绑定（Bound）**：当前请求是否携带了精确匹配当前物理文件哈希的 `sourceRef`？
 3. **使用（Used）**：模型的分析结果是否一一映射到工具返回的真实记录 ID（如 T01, T04, T06）？
 
 只要这三步链路中任何一环断裂，当前回答立刻判定为不可信！
 
-### 6.2 将工单助手范式迁移至自有生产平台 (如 `ai-agent-platform`)
+### 8.2 将工单助手范式迁移至自有生产平台 (如 `ai-agent-platform`)
 
 | 工单问答助手的模块设计 | 迁移到生产平台时的标准映射 |
 |---|---|
@@ -303,7 +482,7 @@ flowchart TD
 
 ---
 
-## 7. Part 4 全量技术事实核对表 (Zero-Loss Fact Sheet)
+## 9. Part 4 全量技术事实核对表 (Zero-Loss Fact Sheet)
 
 | 核心组件 / 规范 | 物理代码载体 | 底层机制与关键技术事实 | 对应课件原材料 |
 |---|---|---|---|
